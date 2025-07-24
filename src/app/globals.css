@@ -22,12 +22,12 @@
 
 @layer utilities {
     /* login page background Gray color */
-    .bg-gray-100 { background-color: var(--color-gray-100); }
+    .bg-login-100 { background-color: var(--color-gray-100); }
 
     /* background Navy color */
-    .bg-navy-100 { background-color: var(--color-navy-100); }
-    .bg-navy-500 { background-color: var(--color-navy-500); }
-    .bg-navy-900 { background-color: var(--color-navy-900); }
+    .bg-main-100 { background-color: var(--color-navy-100); }
+    .bg-main-500 { background-color: var(--color-navy-500); }
+    .bg-main-900 { background-color: var(--color-navy-900); }
 
     /* 장비 상태 color */
     /* text일 때 */
