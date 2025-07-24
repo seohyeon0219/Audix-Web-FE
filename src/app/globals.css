@@ -4,8 +4,10 @@
     :root {
         /* login page background Gray color */
         --color-gray-100: #F2F2F2;
+        /* login page box Navy color */
+        --color-navy-400: #212E59;
         
-        /* background Navy color */
+        /* Navy color */
         --color-navy-100: #303957;
         --color-navy-500: #21273E;
         --color-navy-900: #141B32;
@@ -22,9 +24,11 @@
 
 @layer utilities {
     /* login page background Gray color */
-    .bg-login-100 { background-color: var(--color-gray-100); }
+    .bg-login-gray { background-color: var(--color-gray-100); }
+    /* login page box Navy color */
+    .bg-login-navy { background-color: var(--color-navy-400);}
 
-    /* background Navy color */
+    /* main page background Navy color */
     .bg-main-100 { background-color: var(--color-navy-100); }
     .bg-main-500 { background-color: var(--color-navy-500); }
     .bg-main-900 { background-color: var(--color-navy-900); }
