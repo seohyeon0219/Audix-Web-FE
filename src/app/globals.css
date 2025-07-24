@@ -2,12 +2,15 @@
 
 @layer base {
     :root {
-        /* background 테마 Navy 컬러 */
+        /* login page background Gray color */
+        --color-gray-100: #F2F2F2;
+        
+        /* background Navy color */
         --color-navy-100: #303957;
         --color-navy-500: #21273E;
         --color-navy-900: #141B32;
 
-        /* 장비 상태 컬러 */
+        /* 장비 상태 color */
         --color-equipment-dangers: #FF2F16; /* 빨강 (위험) */
         --color-equipment-check: #FFC525; /* 노랑 (안전점검) */
         --color-equipment-safe: #1CAA00; /* 초록 (안전) */
@@ -18,30 +21,33 @@
 }
 
 @layer utilities {
-    /* background 테마 Navy 컬러 */
+    /* login page background Gray color */
+    .bg-gray-100 { background-color: var(--color-gray-100); }
+
+    /* background Navy color */
     .bg-navy-100 { background-color: var(--color-navy-100); }
     .bg-navy-500 { background-color: var(--color-navy-500); }
     .bg-navy-900 { background-color: var(--color-navy-900); }
 
-    /* 장비 상태 컬러 */
+    /* 장비 상태 color */
     /* text일 때 */
-    .text-status-red { color: var(--color-equipment-dangers); }
-    .text-status-yellow { color: var(--color-equipment-check); }
-    .text-status-green { color: var(--color-equipment-safe); }
-    .text-status-repair { color: var(--color-equipment-repair); }
-    .text-status-offline { color: var(--color-equipment-offline); }
+    .text-danger { color: var(--color-equipment-dangers); }
+    .text-warning { color: var(--color-equipment-check); }
+    .text-safe { color: var(--color-equipment-safe); }
+    .text-repair { color: var(--color-equipment-repair); }
+    .text-offline { color: var(--color-equipment-offline); }
 
     /* border일 때 */
-    .border-status-red { border-color: var(--color-equipment-dangers); }
-    .border-status-yellow { border-color: var(--color-equipment-check); }
-    .border-status-green { border-color: var(--color-equipment-safe); }
-    .border-status-repair { border-color: var(--color-equipment-repair); }
-    .border-status-offline { border-color: var(--color-equipment-offline); }
+    .border-danger { border-color: var(--color-equipment-dangers); }
+    .border-warning { border-color: var(--color-equipment-check); }
+    .border-safe { border-color: var(--color-equipment-safe); }
+    .border-repair { border-color: var(--color-equipment-repair); }
+    .border-offline { border-color: var(--color-equipment-offline); }
 
     /* bg일 때 */
-    .bg-status-red { background-color: var(--color-equipment-dangers); }
-    .bg-status-yellow { background-color: var(--color-equipment-check); }
-    .bg-status-green { background-color: var(--color-equipment-safe); }
-    .bg-status-repair { background-color: var(--color-equipment-repair); }
-    .bg-status-offline { background-color: var(--color-equipment-offline); }
+    .bg-danger { background-color: var(--color-equipment-dangers); }
+    .bg-warning { background-color: var(--color-equipment-check); }
+    .bg-safe { background-color: var(--color-equipment-safe); }
+    .bg-repair { background-color: var(--color-equipment-repair); }
+    .bg-offline { background-color: var(--color-equipment-offline); }
 }
