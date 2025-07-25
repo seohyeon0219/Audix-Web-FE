@@ -1,7 +1,18 @@
+'use client';
+
+import { useRouter } from "next/navigation";
+
 import LoginForm from "../../components/auth/loginForm";
 import Button from "../../components/auth/button";
 
 export default function LoginPage() {
+    const router = useRouter();
+
+    const handleLogin= () => {
+        // 로그인 로직
+        console.log("로그인 버튼 클릭")
+        router.push('/area')
+    }
     return (
         <div className="min-h-screen flex justify-center items-center bg-login-gray">
             <div className="flex w-[700px] h-[500px] bg-white rounded-3xl">
@@ -46,7 +57,9 @@ export default function LoginPage() {
                             iconname="lock"
                         />
                     </div>
-                    <Button>로그인</Button>
+                    <Button onClick={handleLogin}>
+                        로그인
+                    </Button>
                 </div>
             </div>
         </div>
