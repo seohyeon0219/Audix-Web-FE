@@ -31,7 +31,7 @@ export default function LoginForm({
                     />
                 <input 
                     type="text"
-                    placeholder="사원번호를 입력하세요."
+                    placeholder={placeholder}
                     className="pl-2 border-login-gray placeholder:text-login-gray placeholder:text-xs focus:outline-0 focus:ring-0 focus:border-transparent"
                 >
                 </input>
