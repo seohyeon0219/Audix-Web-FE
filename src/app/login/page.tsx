@@ -1,5 +1,5 @@
-import LoginForm from "../../components/ui/auth/loginForm";
-import Button from "../../components/ui/auth/button";
+import LoginForm from "../../components/auth/loginForm";
+import Button from "../../components/auth/button";
 
 export default function LoginPage() {
     return (
