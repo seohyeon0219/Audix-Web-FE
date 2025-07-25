@@ -2,13 +2,10 @@
 
 @layer base {
     :root {
-        /* login page background Gray color */
+        /* login page color */
         --color-gray-100: #F2F2F2;
-        /* login page box Navy color */
-        --color-navy-400: #212E59;
-        /* login page input Gray color */
         --color-gray-300: #808080;
-        /* login page button Gray color */
+        --color-navy-400: #212E59;
         --color-equipment-offline: #515151;
 
         /* Navy color */
@@ -27,14 +24,15 @@
 }
 
 @layer utilities {
-    /* login page background Gray color */
+    /* login page color */
+    /* background Gray color */
     .bg-login-gray { background-color: var(--color-gray-100); }
-    /* login page box Navy color */
+    /* Navy color */
     .bg-login-navy { background-color: var(--color-navy-400);}
-    /* login page input Gray color */
+    /* input Gray color */
     .text-login-gray { color: var(--color-gray-300); }
     .border-login-gray { color: var(--color-gray-300); }
-    /* login page button Gray color */
+    /* button Gray color */
     .btn-login-gray { background-color: var(--color-equipment-offline); }
 
     /* main page background Navy color */
