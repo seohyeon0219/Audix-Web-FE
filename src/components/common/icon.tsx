@@ -7,14 +7,14 @@ type IconProps = {
     className?: string;
 };
 
-const Icon = ({ 
+export default function Icon ({ 
     iconname, 
     size = 18, 
     color = "#B9B9B9", 
     weight = 400, 
     fill = 0, 
     className = ''
-}: IconProps) => {
+}: IconProps) {
     return (
         <span 
             className={`material-symbols-outlined ${className}`} 
@@ -28,5 +28,3 @@ const Icon = ({
         </span>
     )
 }
-
-export default Icon;
