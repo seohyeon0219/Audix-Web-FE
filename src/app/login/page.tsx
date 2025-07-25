@@ -6,7 +6,7 @@ export default function LoginPage() {
         <div className="min-h-screen flex justify-center items-center bg-login-gray">
             <div className="flex w-[700px] h-[500px] bg-white rounded-3xl">
                 {/* 왼쪽 네이비 박스 */}
-                <div className="w-[300px] h-[500px] bg-login-navy rounded-l-3xl flex flex-col p-6">
+                <div className="w-[300px] h-[500px] bg-login-navy rounded-l-3xl flex flex-col p-6 pt-10">
                     {/* 상단 로고 + 간단한 설명 */}
                     <div className="flex flex-col items-end">
                         <img src="../../../logos/logoWhite.png" alt="흰색 로고" width={150}></img>
