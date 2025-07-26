@@ -1,16 +1,16 @@
 import Link from "next/link";
 
-interface SidebarMenuProps {
+interface SidebarItemProps {
     children: React.ReactNode;
     className?: string;
     href: string;
 }
 
-export default function SidebarMenu({
+export default function SidebarItem({
     children,
     className = "",
     href
-}: SidebarMenuProps) {
+}: SidebarItemProps) {
     return (
         <Link 
             href={href}

@@ -1,4 +1,4 @@
-import SidebarMenu from "../../components/common/sidebarMenu";
+import SidebarItem from "../../components/common/sidebarItem";
 
 export default function AreaLayout({
     children,
@@ -25,33 +25,33 @@ export default function AreaLayout({
                 <nav className="flex-1 mt-8">
                     <ul className="space-y-10">
                         <li>
-                            <SidebarMenu
+                            <SidebarItem
                                 href="/area"
-                            >홈</SidebarMenu>
+                            >홈</SidebarItem>
                         </li>
                         <li>
-                            <SidebarMenu
+                            <SidebarItem
                                 href="/"
-                            >마이크 확인</SidebarMenu>
+                            >마이크 확인</SidebarItem>
                         </li>
                         <li>
-                            <SidebarMenu
+                            <SidebarItem
                                 href="/"
-                            >문의하기</SidebarMenu>
+                            >문의하기</SidebarItem>
                         </li>
                         <li>
-                            <SidebarMenu
+                            <SidebarItem
                                 href="/"
-                            >마이페이지</SidebarMenu>
+                            >마이페이지</SidebarItem>
                         </li>
                     </ul>
                 </nav>
                 {/* 로그아웃 버튼 */}
                 <div className="h-0.5 w-full bg-white"></div>
                 <div>
-                    <SidebarMenu 
+                    <SidebarItem 
                         href="/login"
-                    className="border-1 border-white">LOGOUT</SidebarMenu>
+                    className="border-1 border-white">LOGOUT</SidebarItem>
                 </div>
             </aside>
             {/* 메인 컨텐츠 */}
