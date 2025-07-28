@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from "next/navigation";
+
 type AreaStatus = 'danger' | 'warning' | 'safe' | 'offline' | 'repair';
 
 interface AreaCardData {
@@ -13,6 +15,7 @@ interface AreaCardData {
 
 interface AreaCardProps {
     data: AreaCardData;
+    index: number;
     onClick?: (areaId: number) => void;
 }
 
@@ -20,31 +23,31 @@ interface AreaCardProps {
 export const mockAreaCardData: AreaCardData[] = [
     {
         id: 1,
-        name: 'A-1구역',
-        location: '인하대학교 5호관 동',
-        manager: '김서현',
-        status: 'danger'
-    },
-    {
-        id: 2,
         name: 'A-2구역',
         location: '인하대학교 5호관 남',
         manager: '이하은',
         status: 'warning'
     },
-    {
-        id: 3,
-        name: 'A-3구역',
-        location: '인하대학교 5호관 서',
-        manager: '김재걸',
-        status: 'warning'
+        {
+        id: 2,
+        name: 'A-1구역',
+        location: '인하대학교 5호관 동',
+        manager: '김서현',
+        status: 'danger'
     },
-    {
-        id: 4,
+        {
+        id: 3,
         name: 'B-1구역',
         location: '인하대학교 5호관 서',
         manager: '김현민',
         status: 'safe',
+    },
+    {
+        id: 4,
+        name: 'A-3구역',
+        location: '인하대학교 5호관 서',
+        manager: '김재걸',
+        status: 'warning'
     },
     {
         id: 5,
@@ -66,6 +69,13 @@ export const mockAreaCardData: AreaCardData[] = [
         location: '인하대학교 6호관 2층',
         manager: '이하은',
         status: 'repair'
+    },
+    {
+        id: 8,
+        name: 'C-1구역',
+        location: '인하대학교 5호관 북',
+        manager: '김재걸',
+        status: 'safe'
     }
 ];
 
@@ -100,19 +110,20 @@ const getStatusStyles = (status: AreaStatus) => {
             return {
                 bgColor: 'bg-offline',
                 textColor: 'text-offline',
-                label: '마이크 X'
+                label: '미연결'
             }
     }
 }
 
 export default function AreaCard ({ 
     data, 
-    onClick 
+    index
 }: AreaCardProps) {
+    const router = useRouter();
     const statusStyles = getStatusStyles(data.status);
 
     const handleClick = () => {
-        onClick?.(data.id);
+        router.push(`/area/${index + 1}`);
     };
 
     return (
