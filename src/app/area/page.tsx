@@ -1,6 +1,8 @@
 import { getStatusFromValue, getStatusColor } from "../../constants/status";
 
 import SearchBar from "../../components/common/searchBar";
+// import AreaCard from "../../components/areaMonitoring/areaCard";
+import AreaList from "../../components/areaMonitoring/areaList";
 
 // 최근 10일 대시보드
 interface RecentDashboardData {
@@ -31,7 +33,7 @@ interface DataAlarmCount {
 }
 
 // mock data
-const dateAlarmCounts: DataAlarmCount = {
+const mockDateAlarmCounts: DataAlarmCount = {
     danger: 1,
     warning: 5
 }
@@ -40,14 +42,14 @@ const alarms = [
     {
         key: 'danger' as DateAlarmType,
         label: '위험',
-        count: dateAlarmCounts.danger,
+        count: mockDateAlarmCounts.danger,
         textColor: 'text-danger',
         borderColor: 'border-danger'
     },
     {
         key: 'warning' as DateAlarmType,
         label: '점검\n요망',
-        count: dateAlarmCounts.warning,
+        count: mockDateAlarmCounts.warning,
         textColor: 'text-warning',
         borderColor: 'border-warning'
     }
@@ -105,13 +107,15 @@ export default function AreaPage() {
             {/* 아랫 부분 (전 구역 모니터링) */}
             <div className="flex-1 bg-main-500 p-8 border border-t-white">
                 {/* 전 구역 모니터링 + 서치 바 */}
-                <div className="flex justify-between">
+                <div className="flex justify-between mb-8">
                     <h1 className="text-2xl font-bold text-white">전 구역 모니터링</h1>
                     <SearchBar
                         placeholder="구역을 검색하세요."
                         iconname="search"
                     />
                 </div>
+                {/* 구역 카드 리스트 */}
+                <AreaList />
             </div>
         </div>
     )
