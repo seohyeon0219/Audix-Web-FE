@@ -8,7 +8,7 @@ export default function AreaLayout({
     return (
         <div className="flex min-h-screen bg-main-900">
             {/* side bar */}
-            <aside className="flex flex-col items-center gap-8 min-h-screen w-56 bg-main-100 py-6">
+            <aside className="flex flex-col items-center gap-8 min-h-screen w-52 bg-main-100 py-6">
                 {/* 상단 영역 : 로고 + 사용자 정보 */}
                 <img 
                     src="../../../../logos/logoWhite.png" 
