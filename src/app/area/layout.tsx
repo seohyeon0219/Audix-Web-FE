@@ -51,7 +51,7 @@ export default function AreaLayout({
                 <div>
                     <SidebarItem 
                         href="/login"
-                    className="border-1 border-white">LOGOUT</SidebarItem>
+                    className="border border-white">LOGOUT</SidebarItem>
                 </div>
             </aside>
             {/* 메인 컨텐츠 */}
