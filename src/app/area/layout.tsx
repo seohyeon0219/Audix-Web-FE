@@ -55,7 +55,9 @@ export default function AreaLayout({
                 </div>
             </aside>
             {/* 메인 컨텐츠 */}
-            <main>{children}</main>
+            <main className="flex-1 p-10">
+                {children}
+            </main>
         </div>
     )
 }
