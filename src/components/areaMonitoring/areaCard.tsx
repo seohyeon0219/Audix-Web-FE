@@ -128,7 +128,7 @@ export default function AreaCard ({
 
     return (
         <div
-            className="w-60 h-40 bg-main-100 rounded-lg cursor-pointer border-1 border-black p-6"
+            className="w-60 h-40 bg-main-100 cursor-pointer border-1 border-black p-6"
             onClick={handleClick}
         >
             {/* 상단 : 구역명 + 상태 */}
