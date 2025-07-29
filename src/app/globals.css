@@ -2,18 +2,12 @@
 
 @layer base {
     :root {
-        /* login page color */
         --color-gray-100: #F2F2F2;
         --color-gray-300: #808080;
         --color-navy-400: #212E59;
-        --color-equipment-offline: #515151;
-
-        /* Navy color */
         --color-navy-100: #303957;
         --color-navy-500: #21273E;
         --color-navy-900: #141B32;
-
-        /* 장비 상태 color */
         --color-equipment-dangers: #FF2F16; /* 빨강 (위험) */
         --color-equipment-check: #FFC525; /* 노랑 (안전점검) */
         --color-equipment-safe: #1CAA00; /* 초록 (안전) */
@@ -24,18 +18,14 @@
 }
 
 @layer utilities {
-    /* login page color */
-    /* background Gray color */
+    /* Gray color */
     .bg-login-gray { background-color: var(--color-gray-100); }
-    /* Navy color */
     .bg-login-navy { background-color: var(--color-navy-400);}
-    /* input Gray color */
     .text-login-gray { color: var(--color-gray-300); }
     .border-login-gray { color: var(--color-gray-300); }
-    /* button Gray color */
     .btn-login-gray { background-color: var(--color-equipment-offline); }
 
-    /* main page background Navy color */
+    /* Navy color */
     .bg-main-100 { background-color: var(--color-navy-100); }
     .bg-main-500 { background-color: var(--color-navy-500); }
     .bg-main-900 { background-color: var(--color-navy-900); }
