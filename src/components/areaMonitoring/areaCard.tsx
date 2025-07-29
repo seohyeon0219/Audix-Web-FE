@@ -123,7 +123,7 @@ export default function AreaCard ({
     const statusStyles = getStatusStyles(data.status);
 
     const handleClick = () => {
-        router.push(`/area/${index + 1}`);
+        router.push(`/area/${data.id}`);
     };
 
     return (
