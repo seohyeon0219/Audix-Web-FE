@@ -27,6 +27,7 @@
 
     /* Navy color */
     .bg-main-100 { background-color: var(--color-navy-100); }
+    .border-main-100 { border-color: var(--color-navy-100); }
     .bg-main-500 { background-color: var(--color-navy-500); }
     .bg-main-900 { background-color: var(--color-navy-900); }
 
