@@ -1,10 +1,6 @@
 import SidebarItem from "../../components/common/sidebarItem";
 
-export default function AreaLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function AreaLayout({ children } : { children: React.ReactNode; }) {
     return (
         <div className="flex min-h-screen bg-main-900">
             {/* side bar */}
