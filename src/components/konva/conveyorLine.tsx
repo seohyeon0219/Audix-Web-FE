@@ -18,7 +18,7 @@ export default function ConveyorLine ({ points, onHover, onLeave }: ConveyorLine
             points={points}
             stroke='white'
             strokeWidth={6}
-            lineCap='round'
+            lineCap='square'
             lineJoin='round'
             onMouseEnter = {(e) => {
                 const pos = e.target.getStage()?.getPointerPosition();
