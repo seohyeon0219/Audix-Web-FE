@@ -2,6 +2,7 @@
 
 // 전체 구역 지도 메인 컨테이너
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Stage, Layer } from 'react-konva';
 import MachineNode from '@/components/konva/machineNode';
@@ -16,6 +17,8 @@ interface AreaCanvasProps {
 }
 
 export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
+
+    const router = useRouter();
 
     // 마우스 호버 시 보여줄 툴팁 데이터
     const [tooltip, setTooltip] = useState<{
@@ -38,8 +41,10 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
     const conveyors = areaConfig.conveyors;
 
     // 장비 클릭 핸들러
-    const handleMachineClick = (id: string) => {
-        console.log('Machine clicked', id);
+    const handleMachineClick = (machineId: string) => {
+        console.log('Machine clicked', machineId);
+        console.log('Area ID', areaId)
+        router.push(`/area/${areaId}/machine/${machineId}`);
     };
 
     // 장비 호버 핸들러
