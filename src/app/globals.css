@@ -9,7 +9,7 @@
         --color-navy-500: #21273E;
         --color-navy-900: #141B32;
         --color-equipment-dangers: #FF2F16; /* 빨강 (위험) */
-        --color-equipment-check: #FFC525; /* 노랑 (안전점검) */
+        --color-equipment-check: #FFC525; /* 노랑 (점검요망) */
         --color-equipment-safe: #1CAA00; /* 초록 (안전) */
         --color-equipment-repair: #898989; /* 연한 회색 (수리 중) */
         --color-equipment-offline: #515151; /* 진한 회색 (마이크 미연결) */
