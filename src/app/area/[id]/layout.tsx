@@ -1,10 +1,11 @@
 'use client';
 
+import { use } from "react";
 import { mockAreaCardData } from "../../../components/areaMonitoring/areaCard";
 
 interface MapLayoutProps {
     children: React.ReactNode;
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 // id로 구역 이름 찾는 함수
@@ -14,7 +15,8 @@ const getAreaName = (id: string) => {
 }
 
 export default function MapLayout({ children, params }: MapLayoutProps) {
-    const areaName = getAreaName(params.id);
+    const { id } = use(params);
+    const areaName = getAreaName(id);
     return (
         <div>
             {/* 상단 구역명 */}
