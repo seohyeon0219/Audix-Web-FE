@@ -20,11 +20,11 @@ export default function MapLayout({ children, params }: MapLayoutProps) {
     return (
         <div>
             {/* 상단 구역명 */}
-            <header className="flex items-center w-4/5 h-20 border-2 border-main-100">
+            <header className="flex items-center w-full h-20 border-2 border-main-100">
                 <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{areaName} 구조도</h1>
             </header>
             {/* 하단 지도 */}
-            <main className="w-4/5 mt-6">
+            <main className="w-full mt-6">
                 {children}
             </main>
         </div>

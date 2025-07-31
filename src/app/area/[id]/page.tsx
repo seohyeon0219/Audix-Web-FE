@@ -9,8 +9,8 @@ import dynamic from "next/dynamic";
 const AreaCanvas = dynamic(() => import ("../../../components/konva/areaCanvas"), {
     ssr: false,
     loading: () => (
-        <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
-            <div className="text-gray-500">지도를 불러오는 중</div>
+        <div className="flex items-center justify-center h-96 rounded-lg">
+            <div className="text-white">지도를 불러오는 중</div>
         </div>
     )
 });
@@ -22,8 +22,8 @@ export default function MapPage() {
         <div>
             <AreaCanvas 
                 areaId={params.id as string}
-                width={800}
-                height={600}
+                width={1000}
+                height={500}
             />
         </div>
     )
