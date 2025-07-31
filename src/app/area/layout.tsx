@@ -1,6 +1,12 @@
+'use client';
+
+import { useRouter } from "next/navigation";
 import SidebarItem from "../../components/common/sidebarItem";
 
+
 export default function AreaLayout({ children } : { children: React.ReactNode; }) {
+    const router = useRouter();
+
     return (
         <div className="flex min-h-screen bg-main-900">
             {/* side bar */}
@@ -9,7 +15,9 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                 <img 
                     src="../../../../logos/logoWhite.png" 
                     alt="audix white logo" 
+                    className="cursor-pointer"
                     width={150}
+                    onClick={() => router.push("/area")}
                 >
                 </img>
                 {/* 로그인한 회원 정보 */}
