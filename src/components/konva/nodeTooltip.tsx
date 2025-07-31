@@ -27,7 +27,7 @@ export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
                 stroke="border-login-gray"
             />
             <Text 
-                text={`장비명: ${data.name}`}
+                text={`장비명: ${data.name}\n현재상태: ${data.status}`}
                 x={5}
                 y={5}
                 fontSize={12}
