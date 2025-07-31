@@ -28,7 +28,10 @@ export default function MachineNode({ id, x, y, status, name, onClick, onHover, 
                 y={-size/2 + 10}
                 fill={getStatusColor(status)}
                 onClick={() => onClick(id)}
-                onMouseEnter={(e) => onHover?.(id, e.target.x(), e.target.y())}
+                onMouseEnter={(e) => {
+                    const pos = e.target.getStage()?.getPointerPosition();
+                    if (pos) onHover?.(id, pos.x, pos.y);
+                }}
                 onMouseLeave={() => onLeave?.()}
             />
             <Text
