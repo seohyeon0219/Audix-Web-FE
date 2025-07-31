@@ -88,7 +88,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
     };
 
      return (
-        <div className='border '> 
+        <div className='border border-white'> 
             <Stage width={width} height={height}>
                 <Layer>
                     {/* 컨베이어 */}
