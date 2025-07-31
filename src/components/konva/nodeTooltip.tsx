@@ -14,11 +14,15 @@ interface NodeTooltipProps {
 }
 
 export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
+    const tooltipWidth = 150;
+    const tooltipHeight = 50;
+    const offset = 15; // 커서 ~ 툴팁 사이의 거리
+
     return (
-        <Group x={x + 10} y={y + 10}>
+        <Group x={x + offset} y={y + offset}>
             <Rect
-                width={150}
-                height={80}
+                width={tooltipWidth}
+                height={tooltipHeight}
                 fill="white"
                 stroke="border-login-gray"
             />
@@ -29,7 +33,6 @@ export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
                 fontSize={12}
                 fill="#333"
             />
-
         </Group>
     )
 }
