@@ -17,15 +17,16 @@ interface MachineNodeProps {
 }
 
 export default function MachineNode({ id, x, y, status, name, onClick, onHover, onLeave }: MachineNodeProps) {
-    const size = 20;
+    const width = 20;
+    const height = 20;
 
     return (
         <Group x={x} y={y}>
             <Circle
-                width={size}
-                height={size}
-                x={-size/2}
-                y={-size/2 + 10}
+                width={width}
+                height={height}
+                x={-width/2}
+                y={-height/2 + 10}
                 fill={getStatusColor(status)}
                 onClick={() => onClick(id)}
                 onMouseEnter={(e) => {
@@ -36,10 +37,15 @@ export default function MachineNode({ id, x, y, status, name, onClick, onHover, 
             />
             <Text
                 text={name}
-                fontSize={10}
-                y={size / 2 + 5}
+                fontSize={12}
+                x={width/2 + 10}
+                y={-height/2 - 10}
+                width={width + 100}
+                height={height}
+                align='start'
+                verticalAlign='middle'
                 offsetX={name.length * 3}
-                fill="black"
+                fill="white"
             />
         </Group>
     )
