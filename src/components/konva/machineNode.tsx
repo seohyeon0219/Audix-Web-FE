@@ -11,7 +11,6 @@ interface MachineNodeProps {
     y: number;
     status: StatusType;
     name: string;
-    // type: 'sensor' | 'machine' | 'equipment';
     onClick: (id: string) => void;
     onHover?: (id: string, x: number, y: number) => void;
     onLeave?: () => void;
@@ -22,16 +21,15 @@ export default function MachineNode({ id, x, y, status, name, onClick, onHover, 
 
     return (
         <Group x={x} y={y}>
-            <Rect
+            <Circle
                 width={size}
                 height={size}
-                z={-size/2}
-                y={-size/2}
+                x={-size/2}
+                y={-size/2 + 10}
                 fill={getStatusColor(status)}
                 onClick={() => onClick(id)}
                 onMouseEnter={(e) => onHover?.(id, e.target.x(), e.target.y())}
                 onMouseLeave={() => onLeave?.()}
-                cursor="pointer"
             />
             <Text
                 text={name}
