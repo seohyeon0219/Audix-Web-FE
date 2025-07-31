@@ -4,41 +4,16 @@
 import { useState } from 'react';
 
 import { Stage, Layer } from 'react-konva';
-import MachineNode from './machineNode';
-import ConveyorLine from './conveyorLine';
-import NodeTooltip from './nodeTooltip';
-// import StatusLegend from './statusLegend';
-import { StatusType } from '../../constants/statusColor';
+import MachineNode from '@/components/konva/machineNode';
+import ConveyorLine from '@/components/konva/conveyorLine';
+import NodeTooltip from '@/components/konva/nodeTooltip';
+import { getAreaConfig } from '@/constants/areaConfigs';
 
 interface AreaCanvasProps {
     areaId: string; // 어떤 구역인지 식별
-    width: number; // 캔버스 가로 크기
-    height: number; // 캔버스 세로 크기
+    width?: number; // 캔버스 가로 크기
+    height?: number; // 캔버스 세로 크기
 }
-
-// mock data - 장비
-const getMockMachines = (areaId: string) => {
-    return [
-        { id: '1', name: '기계A', x: 100, y: 100, status: 'safe' as StatusType },
-        { id: '2', name: '기계B', x: 200, y: 100, status: 'warning' as StatusType },
-        { id: '3', name: '기계C', x: 300, y: 100, status: 'danger' as StatusType },
-        { id: '4', name: '로봇팔A', x: 150, y: 200, status: 'safe' as StatusType },
-        { id: '5', name: '로봇팔B', x: 250, y: 200, status: 'offline' as StatusType },
-        { id: '6', name: '로봇팔C', x: 350, y: 200, status: 'repair' as StatusType },
-
-    ];
-}
-
-// mock data - 컨베이어 벨트
-const getMockConveyors = (areaId: string) => {
-    return [
-        { points: [100, 100, 200, 150]},
-        { points: [200, 150, 300, 200]},
-        { points: [150, 300, 250, 250]}
-
-    ]
-}
-
 
 export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
 
@@ -57,8 +32,10 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
         type: null
     });
 
-    const machines = getMockMachines(areaId);
-    const conveyors = getMockConveyors(areaId);
+    // areaConfig에서 mock data 불러오기
+    const areaConfig = getAreaConfig(areaId);
+    const machines = areaConfig.machines;
+    const conveyors = areaConfig.conveyors;
 
     // 장비 클릭 핸들러
     const handleMachineClick = (id: string) => {
@@ -72,8 +49,8 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
             if (machine) {
                 setTooltip({
                     visible: true,
-                    x,
-                    y,
+                    x: x,
+                    y: y,
                     type: 'machine',
                     data: {
                         name: machine.name,
@@ -106,7 +83,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
     };
 
      return (
-        <div className='border rounded-lg bg-gray-100'>
+        <div className='border '> 
             <Stage width={width} height={height}>
                 <Layer>
                     {/* 컨베이어 */}
