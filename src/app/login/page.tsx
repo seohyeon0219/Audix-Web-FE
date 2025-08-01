@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-import LoginForm from "../../components/auth/loginForm";
-import Button from "../../components/auth/button";
+import LoginForm from "@/components/auth/loginForm";
+import Button from "@/components/auth/button";
 
 export default function LoginPage() {
     const router = useRouter();

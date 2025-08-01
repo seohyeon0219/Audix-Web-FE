@@ -1,14 +1,13 @@
 'use client';
 
 import { useState, useEffect } from "react";
-// import AreaCanvas from "../../../components/konva/areaCanvas";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { mockAreaCardData } from "../../../components/areaMonitoring/areaCard";
+import { mockAreaCardData } from "@/components/areaMonitoring/areaCard";
 import { use } from "react";
 
 // 동적 import로 AreaCanvas 로드하기 (SSR 비활성화)
-const AreaCanvas = dynamic(() => import ("../../../components/konva/areaCanvas"), {
+const AreaCanvas = dynamic(() => import ("@/components/konva/areaCanvas"), {
     ssr: false,
     loading: () => (
         <div className="flex items-center justify-center h-96 rounded-lg">
