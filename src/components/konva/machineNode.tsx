@@ -37,9 +37,9 @@ export default function MachineNode({ id, x, y, status, name, onClick, onHover, 
             />
             <Text
                 text={name}
-                fontSize={12}
+                fontSize={15}
                 x={width/2 + 10}
-                y={-height/2 - 10}
+                y={-height/2 - 15}
                 width={width + 100}
                 height={height}
                 align='start'
