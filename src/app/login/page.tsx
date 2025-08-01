@@ -26,11 +26,11 @@ export default function LoginPage() {
                     {/* 가운데 로봇 사진 + 그레이 배경 */}
                     <div className="flex-1 relative">
                         {/* 어두운 그레이 배경 원 */}
-                        <img src="../../../images/darkGrayCircle.svg" alt="dark gray circle" className="absolute w-72 h-40 bottom-10 left-0 z-0"></img>
+                        <img src="/images/login/darkGrayCircle.svg" alt="dark gray circle" className="absolute w-72 h-40 bottom-10 left-0 z-0"></img>
                         {/* 밝은 그레이 배경 원 */}
-                        <img src="../../../images/lightGrayCircle.svg" alt="light gray circle" className="absolute w-52 h-24 bottom-10 left-10 z-10"></img>
+                        <img src="/images/login/lightGrayCircle.svg" alt="light gray circle" className="absolute w-52 h-24 bottom-10 left-10 z-10"></img>
                         {/* 로봇 이미지 */}
-                        <img src="../../../images/robot.png" alt="robot" className="absolute w-36 h-36 bottom-10 left-14 z-20"></img>
+                        <img src="/images/login/robot.png" alt="robot" className="absolute w-36 h-36 bottom-10 left-14 z-20"></img>
                     </div>
                     {/* 홍보웹 링크 */}
                     <div>
