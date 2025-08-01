@@ -7,7 +7,20 @@ export const STATUS_COLORS = {
     repair: "#898989" // 진한 회색 (마이크 미연결)
 } as const;
 
-export type StatusType = keyof typeof STATUS_COLORS;
+export type StatusType = 'safe' | 'warning' | 'danger' | 'offline' | 'repair';
+
+// 수치 기반 상태 판별 함수
+export const getStatusFromValue = (value: number): StatusType => {
+    if (value >= 0 && value < 0.3) {
+        return 'danger';
+    } else if (value >= 0.3 && value < 0.7) {
+        return 'warning';
+    } else if (value >= 0.7 && value <= 1.0) {
+        return 'safe';
+    } else {
+        return 'offline';
+    }
+}
 
 // 상태별 라벨
 export const STATUS_LABELS = {
