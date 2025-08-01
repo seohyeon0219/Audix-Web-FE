@@ -1,6 +1,6 @@
-import SearchBar from "../../components/common/searchBar";
-import AreaList from "../../components/areaMonitoring/areaList";
-import RecentDashboard from "../../components/areaMonitoring/recentDashboard";
+import SearchBar from "@/components/common/searchBar";
+import AreaList from "@/components/areaMonitoring/areaList";
+import RecentDashboard from "@/components/areaMonitoring/recentDashboard";
 import AlarmDashboard from "@/components/areaMonitoring/alarmDashboard";
 
 export default function AreaPage() {

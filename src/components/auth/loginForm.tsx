@@ -1,4 +1,4 @@
-import Icon from '../common/icon';
+import Icon from '@/components/common/icon';
 
 interface LoginFormProps {
     label: string;

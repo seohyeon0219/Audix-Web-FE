@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import SidebarItem from "../../components/common/sidebarItem";
+import SidebarItem from "@/components/common/sidebarItem";
 
 
 export default function AreaLayout({ children } : { children: React.ReactNode; }) {

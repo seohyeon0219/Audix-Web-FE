@@ -1,7 +1,7 @@
 'use client';
 
-import { mockAreaCardData } from "./areaCard";
-import AreaCard from "./areaCard";
+import { mockAreaCardData } from "@/components/areaMonitoring/areaCard";
+import AreaCard from "@/components/areaMonitoring/areaCard";
 
 export default function AreaList() {
     // 상태별 우선순위

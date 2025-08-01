@@ -1,4 +1,4 @@
-import { getStatusFromValue, getStatusColor } from "../../constants/status";
+import { getStatusFromValue, getStatusColor } from "@/constants/status";
 
 interface RecentDashboardData {
     date: string;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 
 // title : 브라우저 탭에 표시되는 제목, description : 검색 엔진, 소셜 미디어에서 보이는 설명 
 export const metadata: Metadata = {
