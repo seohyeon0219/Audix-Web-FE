@@ -8,7 +8,7 @@ import { Stage, Layer } from 'react-konva';
 import MachineNode from '@/components/konva/machineNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
-import { getAreaConfig } from '@/constants/areaConfigs';
+import { getAreaConfig, getMachineStatus } from '@/constants/areaConfigs';
 
 interface AreaCanvasProps {
     areaId: string; // 어떤 구역인지 식별
@@ -108,7 +108,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
                             name={machine.name}
                             x={machine.x}
                             y={machine.y}
-                            status={machine.status}
+                            status={getMachineStatus(machine)}
                             onClick={handleMachineClick}
                             onHover={handleMachineHover}
                             onLeave={handleTooltipHide}
