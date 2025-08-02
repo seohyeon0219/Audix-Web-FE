@@ -41,5 +41,17 @@ const getStatusColorFromValue = (value: number) => {
     return STATUS_STYLES.OFFLINE;
 }
 
+// 장비 배열에서 가장 낮은 value를 기준으로 구역 상태 결정
+const getStatusFromMachines = (machines: { value: number }[]) => {
+    if (!machines || machines.length === 0) {
+        return STATUS_STYLES.OFFLINE;
+    }
+
+    // 모든 장비의 value 중에서 최소값 찾기
+    const lowestValue = Math.min(...machines.map(machine => machine.value))
+    return getStatusColorFromValue(lowestValue);
+}
+
 
 export default getStatusColorFromValue;
+export { getStatusFromMachines };
