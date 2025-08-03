@@ -1,21 +1,17 @@
 'use client';
 
-import { mockAreaCardData } from "@/components/areaMonitoring/areaCard";
+import { mockAreaMachineData } from "@/mocks";
+import { getStatusFromMachines } from "@/utils/statusUtils";
 import AreaCard from "@/components/areaMonitoring/areaCard";
 
 export default function AreaList() {
-    // 상태별 우선순위
-    const statusPriority = {
-        'danger': 1,
-        'warning': 2,
-        'safe': 3,
-        'offline': 4,
-        'repair': 5
-    }
 
     // 상태별 정렬
-    const sortedAreas = [...mockAreaCardData].sort((a, b) => {
-        return statusPriority[a.status] - statusPriority[b.status];
+    const sortedAreas = [...mockAreaMachineData].sort((a, b) => {
+        const statusA = getStatusFromMachines(a.machines);
+        const statusB = getStatusFromMachines(b.machines);
+
+        return statusA.priority - statusB.priority;
     });
 
     return (
