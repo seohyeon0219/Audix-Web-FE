@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { mockAreaCardData } from "@/components/areaMonitoring/areaCard";
+import { mockAreaMachineData } from "@/mocks";
 import { use } from "react";
 
 // 동적 import로 AreaCanvas 로드하기 (SSR 비활성화)
@@ -18,7 +17,7 @@ const AreaCanvas = dynamic(() => import ("@/components/konva/areaCanvas"), {
 
 // id로 구역 이름 찾는 함수
 const getAreaName = (id: string) => {
-    const area = mockAreaCardData.find(area => area.id === parseInt(id));
+    const area = mockAreaMachineData.find(area => area.id === id);
     return area?.name;
 }
 
