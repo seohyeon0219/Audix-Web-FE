@@ -9,6 +9,7 @@ import MachineNode from '@/components/konva/machineNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
 import { getAreaConfig, getMachineStatus } from '@/constants/areaConfigs';
+import { StatusType } from "@/constants/statusColor";
 
 interface AreaCanvasProps {
     areaId: string; // 어떤 구역인지 식별
@@ -52,6 +53,21 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
         if (id) {
             const machine = machines.find(m => m.id === id);
             if (machine) {
+                const machineStatus = getMachineStatus(machine);
+
+                const getStatusLabel = (status: StatusType) => {
+                    switch (status) {
+                        case 'safe': return '안전';
+                        case 'warning': return '점검요망';
+                        case 'danger': return '위험';
+                        case 'offline': return '미연결';
+                        case 'repair': return '수리중';
+                        default: return '알 수 없음';
+                    }
+                }
+                // 기본 값 설정
+                const status = machine.status || 'offline';
+
                 setTooltip({
                     visible: true,
                     x: x,
@@ -59,7 +75,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
                     type: 'machine',
                     data: {
                         name: machine.name,
-                        status: machine.status,                        
+                        status: getStatusLabel(machineStatus),                        
                     }
                 });
             }
@@ -77,7 +93,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
             type: 'conveyor',
             data: {
                 name: "컨베이어 벨트",
-                status: "정상 작동 중"
+                // status: "정상 작동 중"
             }
         });
     };
