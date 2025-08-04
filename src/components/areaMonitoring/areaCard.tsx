@@ -33,9 +33,10 @@ export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
                 </div>
             </div>
             {/* 하단 : 담당자 */}
-            {/* <div>
+            <div>
+                <p className="text-white">{data.name}</p>
                 <p className="text-white">담당자 : {data.manager}</p>
-            </div> */}
+            </div>
         </div>
     )
 }
