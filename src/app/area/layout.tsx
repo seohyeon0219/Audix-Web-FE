@@ -16,7 +16,7 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                     src="../../../../logos/logoWhite.png" 
                     alt="audix white logo" 
                     className="cursor-pointer"
-                    width={130}
+                    width={100}
                     onClick={() => router.push("/area")}
                 >
                 </img>
@@ -55,11 +55,11 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                 <div>
                     <SidebarItem 
                         href="/login"
-                    className="border border-white">LOGOUT</SidebarItem>
+                    className="border-white">LOGOUT</SidebarItem>
                 </div>
             </aside>
             {/* 메인 컨텐츠 */}
-            <main className="flex-1 p-10">
+            <main className="flex-1 p-6">
                 {children}
             </main>
         </div>
