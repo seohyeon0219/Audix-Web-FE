@@ -27,13 +27,15 @@ interface MapPageProps {
 
 export default function MapPage({ params }: MapPageProps) {
     const { id } = use(params);
+    const area = mockAreaMachineData.find(area => area.id === id);
     const areaName = getAreaName(id);
+    const processName = area?.machines?.[0]?.location || '';
 
     return (
         <div>
             {/* 상단 구역명 */}
             <header className="flex items-center w-full h-20 border-2 border-main-100">
-                <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{areaName} 구조도</h1>
+                <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{areaName} {processName} 구조도</h1>
             </header>
             {/* 하단 지도 */}
             <div className="w-full mt-6">
