@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
+import { StatusType } from "@/constants/statusColor";
 
 type PeriodType = 'monthly' | 'yearly';
-type StatusType = 'danger' | 'warning';
+// type StatusType = 'danger' | 'warning';
 
 interface ChartDataPoint {
     period: string;
