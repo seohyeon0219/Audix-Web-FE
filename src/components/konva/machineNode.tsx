@@ -34,6 +34,7 @@ export default function MachineNode({ id, x, y, status, name, onClick, onHover, 
                     if (pos) onHover?.(id, pos.x, pos.y);
                 }}
                 onMouseLeave={() => onLeave?.()}
+                cursor="pointer"
             />
             <Text
                 text={name}
