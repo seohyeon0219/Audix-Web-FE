@@ -3,13 +3,7 @@
 import { useRouter } from "next/navigation";
 import { mockAreaMachineData } from '@/mocks/index';
 import getStatusColorFromValue, { getStatusFromMachines } from '@/utils/statusUtils';
-import { AreaData } from '@/types/areaMachineType';
-
-interface AreaCardProps {
-    data: AreaData;
-    index: number;
-    onClick?: (areaId: string) => void;
-}
+import { AreaData, AreaCardProps } from '@/types/areaMachineType';
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
     const router = useRouter();
@@ -32,9 +26,9 @@ export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
                     {statusStyles.label}
                 </div>
             </div>
-            {/* 하단 : 담당자 */}
+            {/* 하단 : 위치 + 담당자 */}
             <div>
-                <p className="text-white">{data.name}</p>
+                <p className="text-white">{data.location}</p>
                 <p className="text-white">담당자 : {data.manager}</p>
             </div>
         </div>
