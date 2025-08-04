@@ -15,7 +15,7 @@ export default function AreaList() {
     });
 
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-col-1 gap-4">
             {sortedAreas.map((area, index) => (
                 <AreaCard
                     key={area.id}
