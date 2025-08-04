@@ -1,6 +1,6 @@
 import { getStatusFromValue, getStatusColor } from "@/constants/status";
 
-import { mockRecentDashboardData } from '@/mocks/index';
+import { mockRecentDashboardData } from '@/mocks';
 
 export default function RecentDashboard() {
     return (

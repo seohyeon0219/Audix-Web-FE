@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { mockAreaMachineData } from '@/mocks/index';
+import { mockAreaMachineData } from '@/mocks';
 import getStatusColorFromValue, { getStatusFromMachines } from '@/utils/statusUtils';
 import { AreaData, AreaCardProps } from '@/types/areaMachineType';
 
