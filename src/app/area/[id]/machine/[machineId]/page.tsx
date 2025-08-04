@@ -24,16 +24,20 @@ export default function MachinePage({ params, searchParams }: MachinePageProps) 
                 <Info areaId={areaId} machineId={machineId} />
             </div>
             {/* 통계 섹션 */}
-            <div className='bg-main-500 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 mt-4'>
-                <MachinePieChart
-                    areaId={areaId}
-                    machineId={machineId}
-                    title="장비 정상도"
-                />
-                <AiText 
-                    areaId={areaId}
-                    machineId={machineId}
-                />
+            <div className='bg-main-500 flex gap-6 p-4 mt-4'>
+                <div className='flex-[3] min-w-0'>
+                    <MachinePieChart
+                        areaId={areaId}
+                        machineId={machineId}
+                        title="장비 정상도"
+                    />
+                </div>
+                <div className='flex-[7] min-w-0'>
+                    <AiText 
+                        areaId={areaId}
+                        machineId={machineId}
+                    />
+                </div>
             </div>
             {/* 선그래프 */}
             <div className='bg-main-500 p-4'>
