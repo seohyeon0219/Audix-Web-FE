@@ -14,10 +14,10 @@ export default function AreaPage() {
                 <AlarmDashboard />
             </div>
             {/* 아랫 부분 (전 구역 모니터링) */}
-            <div className="flex-1 bg-main-500 p-8 border border-t-white">
+            <div className="flex-1 bg-main-500 p-6 border border-t-white">
                 {/* 전 구역 모니터링 + 서치 바 */}
-                <div className="flex justify-between mb-8">
-                    <h1 className="text-2xl font-bold text-white">전 구역 모니터링</h1>
+                <div className="flex justify-between mb-6">
+                    <h1 className="text-white">전 구역 모니터링</h1>
                     <SearchBar
                         placeholder="구역을 검색하세요."
                         iconname="search"
