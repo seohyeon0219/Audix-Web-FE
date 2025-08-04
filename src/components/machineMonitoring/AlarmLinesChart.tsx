@@ -50,12 +50,12 @@ const periodButtons = [
     { key: 'yearly' as PeriodType, label: '년도별'},
 ]
 
-interface AlarmLineChartProps {
+interface AlarmLinesChartProps {
     title?: string;
 }
 
-const AlarmLineChart: React.FC<AlarmLineChartProps> = ({
-    title = '장비 정상도 그래프'
+const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
+    title = '알람 내역 그래프'
 }) => {
     const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('monthly');
 
@@ -169,4 +169,4 @@ const AlarmLineChart: React.FC<AlarmLineChartProps> = ({
     );
 };
 
-export default AlarmLineChart;
+export default AlarmLinesChart;
