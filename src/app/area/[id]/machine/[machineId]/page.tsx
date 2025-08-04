@@ -5,7 +5,8 @@ import { use } from 'react';
 import Info from "@/components/machineMonitoring/info";
 import MachinePieChart from "@/components/machineMonitoring/pieChart";
 import AiText from '@/components/machineMonitoring/aiText';
-import StatusLineChart from '@/components/machineMonitoring/linesChart';
+import AlarmLinesChart from '@/components/machineMonitoring/AlarmLinesChart';
+import ValueLineChart from '@/components/machineMonitoring/valueLineChart';
 
 interface MachinePageProps {
     params: Promise<{ machineId: string }>;
@@ -39,9 +40,13 @@ export default function MachinePage({ params, searchParams }: MachinePageProps) 
                     />
                 </div>
             </div>
-            {/* 선그래프 */}
+            {/* 정상도 선그래프 */}
             <div className='bg-main-500 p-4'>
-                <StatusLineChart />
+                <ValueLineChart />
+            </div>
+            {/* 알람 선그래프 */}
+            <div className='bg-main-500 p-4'>
+                <AlarmLinesChart />
             </div>
         </div>
     )
