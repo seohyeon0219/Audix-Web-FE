@@ -63,7 +63,7 @@ const MachinePieChart: React.FC<MachinePieChartProps> = ({
     const COLORS = [mainColor, "#F2F2F2"];
 
     return (
-        <div className='bg-main-100 p-6 rounded-lg'>
+        <div className='flex gap-10 bg-main-100 p-6 rounded-lg'>
             <h2 className='text-white text-lg font-medium mb-6'>
                 {title || `${machine.name} 정상도`}
             </h2>
