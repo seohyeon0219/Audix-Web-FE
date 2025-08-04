@@ -1,32 +1,4 @@
-type DateAlarmType = 'danger' | 'warning';
-
-interface DateAlarmCount {
-    danger: number;
-    warning: number;
-}
-
-// mock data
-const mockDateAlarmCounts: DateAlarmCount = {
-    danger: 1,
-    warning: 5
-}
-
-const alarms = [
-    {
-        key: "danger" as DateAlarmType,
-        label: "위험",
-        count: mockDateAlarmCounts.danger,
-        textColor: "text-danger",
-        borderColor: "border-danger"
-    },
-    {
-        key: "warning" as DateAlarmType,
-        label: "점검\n요망",
-        count: mockDateAlarmCounts.warning,
-        textColor: "text-warning",
-        borderColor: "border-warning"
-    }
-]
+import { alarms } from "@/mocks/data/alarmData";
 
 export default function AlarmDashboard() {
     return (
@@ -39,7 +11,7 @@ export default function AlarmDashboard() {
                 return (
                     <div key={index} className="flex items-center gap-3">
                         <div 
-                            className={`w-14 h-14 rounded-lg cursor-pointer border flex justify-center items-center text-sm whitespace-pre-line ${textColor} ${borderColor}`}
+                            className={`w-14 h-14 text-xs font-black rounded-lg cursor-pointer border flex justify-center items-center whitespace-pre-line ${textColor} ${borderColor}`}
                             title={`${data.label}: ${data.count}`}
                         >
                             {data.label}
