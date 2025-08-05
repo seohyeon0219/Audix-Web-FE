@@ -81,7 +81,7 @@ const ValueLineChart: React.FC<ValueLineChartProps> = ({
                                 className={`px-4 py-2 text-sm rounded transition-colors cursor-pointer ${
                                     selectedPeriod === key
                                         ? 'bg-main-500 text-white'
-                                        : 'text-white border border-white hover:bg-main-500 hover:text-white'
+                                        : 'text-white hover:bg-main-500 hover:text-white'
                                 }`}
                             >
                                 {label}
