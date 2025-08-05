@@ -56,14 +56,14 @@ export default function AiText({ areaId, machineId }: AiTextProps) {
     const statusStyle = getStatusStyle(aiResult.status);
 
     return (
-        <div className="bg-main-100 p-6 rounded-lg">
-            <div className="mb-4">
+        <div className="bg-main-100 p-6 rounded-lg h-full flex flex-col">
+            <div className="mb-4 flex-shrink-0">
                 <div className="flex items-center gap-2">
                     <span className="text-lg">{statusStyle.icon}</span>
                     <h3 className="text-white text-lg font-medium">AI 상태진단</h3>
                 </div>
             </div>
-            <div>
+            <div className="flex-1 overflow-y-auto">
                 <p className="text-white">{aiResult.message}</p>
             </div>
         </div>
