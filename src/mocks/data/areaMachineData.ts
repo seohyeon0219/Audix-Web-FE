@@ -1,324 +1,335 @@
-import { MachineData, AreaData } from '@/types/areaMachineType';
+import { DeviceData, AreaData } from '@/types/areaMachineType';
 
 // 구역별 장비 mock data
-const areaA1: AreaData = {
-    id: '1',
-    name: 'A-1구역',
-    location: '울산 제1공장',
-    manager: '김서현',
-    machines : [
-        {
-            id: 'A1-M001',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165F',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.85
-        },
-        {
-            id: 'A1-M002',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210F',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
-        },
-        {
-            id: 'A1-M003',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210L',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
-        },
-        {
-            id: 'A1-M004',
-            name: 'Robot Arm',
-            model: 'R-2000iC/100P',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.7
-        },
-        {
-            id: 'A1-M005',
-            name: 'Robot Arm',
-            model: 'R-2000iC/125L',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.9
-        },
-        {
-            id: 'A1-M006',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165R',
-            location: '프레스 공정 (Press Process)',
-            manager: '김재걸',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
-        }
-    ]
-}
+export const MockAreaData: AreaData[] = [
+    {
+        id: 1,
+        name: '3공장 프레스 구역',
+        address: '울산 현대자동차 31라인',
+        status: 'normal'
+    },
+    {
+        id: 2,
+        name: '차체 31라인',
+        address: '울산 현대자동차 31라인',
+        status: 'normal'
+    },
+    {
+        id: 3,
+        name: '도장 31라인',
+        address: '울산 현대자동차 31라인',
+        status: 'warning'
+    },
+    {
+        id: 4,
+        name: '의장 31라인',
+        address: '울산 현대자동차 31라인',
+        status: 'danger'
+    },
+]
 
-const areaA2: AreaData = {
-    id: '2',
-    name: 'A-2구역',
-    location: '울산 제1공장',
-    manager: '김재걸',
-    machines : [
-        {
-            id: 'A2-M001',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165F',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.7
+export const MockDeviceData: DeviceData[] = [
+    // 3공장 프레스 구역
+    {
+        areaId: 1,
+        deviceId: 1,
+        name: '프레스 머신',
+        deviceManager: '이하은',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A2-M002',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210F',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.9
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 1,
+        deviceId: 2,
+        name: '코일 언코일러',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A2-M003',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210L',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 1,
+        deviceId: 3,
+        name: '레벨러 & 피더',
+        deviceManager: '김재걸',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A2-M004',
-            name: 'Robot Arm',
-            model: 'R-2000iC/100P',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.9
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 1,
+        deviceId: 4,
+        name: '블랭킹 프레스',
+        deviceManager: '김재걸',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A2-M005',
-            name: 'Robot Arm',
-            model: 'R-2000iC/125L',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    // 차체 31라인
+    {
+        areaId: 2,
+        deviceId: 5,
+        name: '스폿 용접기',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A2-M006',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165R',
-            location: '차체 공정 (BIW Welding Process)',
-            manager: '이하은',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.9
-        }
-    ]
-}
-
-const areaA3: AreaData = {
-    id: '3',
-    name: 'A-3구역',
-    location: '울산 제3공장',
-    manager: '이하은',
-    machines : [
-        {
-            id: 'A3-M001',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165F',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.6
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 2,
+        deviceId: 6,
+        name: '스폿 용접기',
+        deviceManager: '이하은',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A3-M002',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210F',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.5
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 2,
+        deviceId: 7,
+        name: '용접 로봇',
+        deviceManager: '김서현',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A3-M003',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210L',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.6
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 2,
+        deviceId: 8,
+        name: '용접 로봇',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A3-M004',
-            name: 'Robot Arm',
-            model: 'R-2000iC/100P',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.5
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 2,
+        deviceId: 9,
+        name: '용접 로봇',
+        deviceManager: '김서현',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A3-M005',
-            name: 'Robot Arm',
-            model: 'R-2000iC/125L',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.6
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 2,
+        deviceId: 9,
+        name: '리프터 & 컨베이어',
+        deviceManager: '김서현',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A3-M006',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165R',
-            location: '도장 공정 (Painting Process)',
-            manager: '김현민',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.5
-        }
-    ]
-}
-
-const areaA4: AreaData = {
-    id: '4',
-    name: 'A-4구역',
-    location: '울산 제4공장',
-    manager: '김현민',
-    machines : [
-        {
-            id: 'A4-M001',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165F',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.6
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    // 도장 31라인
+    {
+        areaId: 3,
+        deviceId: 10,
+        name: '스프레이 로봇',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A4-M002',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210F',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.8
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 3,
+        deviceId: 11,
+        name: '스프레이 로봇',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A4-M003',
-            name: 'Robot Arm',
-            model: 'R-2000iC/210L',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.4
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 3,
+        deviceId: 12,
+        name: '전착 탱크',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A4-M004',
-            name: 'Robot Arm',
-            model: 'R-2000iC/100P',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.6
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 3,
+        deviceId: 13,
+        name: '건조로',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A4-M005',
-            name: 'Robot Arm',
-            model: 'R-2000iC/125L',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.5
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 3,
+        deviceId: 14,
+        name: '리프터 & 셔틀',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
         },
-        {
-            id: 'A4-M006',
-            name: 'Robot Arm',
-            model: 'R-2000iC/165R',
-            location: '조립공정 (Assembly Process)',
-            manager: '도종명',
-            parts: ['Pulse coder', 'moter'],
-            value: 0.5
-        }
-    ]
-}
-
-// const areaA5: AreaData = {
-//     id: '5',
-//     name: '울산 제5공장',
-//     manager: '도종명',
-//     machines : [
-//         {
-//             id: 'A5-M001',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/165F',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.85
-//         },
-//         {
-//             id: 'A5-M002',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/210F',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.25
-//         },
-//         {
-//             id: 'A5-M003',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/210L',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.35
-//         },
-//         {
-//             id: 'A5-M004',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/100P',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.7
-//         },
-//         {
-//             id: 'A5-M005',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/125L',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.1
-//         },
-//         {
-//             id: 'A5-M006',
-//             name: 'Robot Arm',
-//             model: 'R-2000iC/165R',
-//             location: '울산 제5공장 1층',
-//             manager: '김서현',
-//             parts: ['Pulse coder', 'moter'],
-//             value: 0.9
-//         }
-//     ]
-// }
-
-// 전체 구역 데이터 배열
-export const mockAreaMachineData: AreaData[] = [
-    areaA1,
-    areaA2,
-    areaA3,
-    areaA4
-];
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 3,
+        deviceId: 15,
+        name: '리프터 & 셔틀',
+        deviceManager: '김서현',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    // 의장 31라인
+    {
+        areaId: 4,
+        deviceId: 16,
+        name: '조립 로봇',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 17,
+        name: '체결 공구',
+        deviceManager: '김서현',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 18,
+        name: '체결 공구',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 19,
+        name: '체결 공구',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 20,
+        name: '체결 공구',
+        deviceManager: '도종명',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 21,
+        name: '컨베이어 시스템',
+        deviceManager: '김현민',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+    {
+        areaId: 4,
+        deviceId: 22,
+        name: '냉각수 및 윤활 설비',
+        deviceManager: '이하은',
+        parts: {
+            "gear" : 0.7,
+            "pan" : 0.3,
+            "bearing" : 0.5
+        },
+        normalScore: 0.85,
+        image: '/images/machines/roborArm1.png' 
+    },
+]
