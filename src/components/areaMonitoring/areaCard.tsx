@@ -1,14 +1,13 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { mockAreaMachineData } from '@/mocks';
-import getStatusColorFromValue, { getStatusFromMachines } from '@/utils/statusUtils';
 import { AreaData, AreaCardProps } from '@/types/areaMachineType';
+import { getStatusFromString } from '@/utils/statusUtils';
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
     const router = useRouter();
 
-    const statusStyles = getStatusFromMachines(data.machines);
+    const statusStyles = getStatusFromString((data.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline' | 'repair');
 
     const handleClick = () => {
         router.push(`/area/${data.id}`);
@@ -26,10 +25,10 @@ export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
                     {statusStyles.label}
                 </div>
             </div>
-            {/* 하단 : 위치 + 담당자 */}
+            {/* 하단 : 위치 + 장비수 */}
             <div>
-                <p className="text-white">{data.location}</p>
-                <p className="text-white">담당자 : {data.manager}</p>
+                <p className="text-white text-sm">{data.address}</p>
+                {/* <p className="text-white">담당자 : {data.manager}</p> */}
             </div>
         </div>
     )

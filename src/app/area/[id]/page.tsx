@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { mockAreaMachineData } from "@/mocks";
+import { MockAreaData, MockDeviceData } from "@/mocks";
 import { use } from "react";
 
 // 동적 import로 AreaCanvas 로드하기 (SSR 비활성화)
@@ -15,27 +15,33 @@ const AreaCanvas = dynamic(() => import ("@/components/konva/areaCanvas"), {
     )
 });
 
-// id로 구역 이름 찾는 함수
-const getAreaName = (id: string) => {
-    const area = mockAreaMachineData.find(area => area.id === id);
-    return area?.name;
-}
-
 interface MapPageProps {
     params: Promise<{ id: string }>;
 }
 
 export default function MapPage({ params }: MapPageProps) {
     const { id } = use(params);
-    const area = mockAreaMachineData.find(area => area.id === id);
-    const areaName = getAreaName(id);
-    const processName = area?.machines?.[0]?.location || '';
+    // 구역 정보들 찾기
+    const area = MockAreaData.find(area => area.id === parseInt(id));
+
+    // 해당 구역의 장비들 찾기
+    const devices = MockDeviceData.filter(device => device.areaId === parseInt(id));
+
+    if (!area) {
+        return (
+            <div className="container mx-auto px-4 py-6">
+                <div className="text-white text-center">
+                    <h1 className="text-2xl mb-4">구역을 찾을 수 없습니다.</h1>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div>
             {/* 상단 구역명 */}
             <header className="flex items-center w-full h-20 border-2 border-main-100">
-                <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{areaName} {processName} 구조도</h1>
+                <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{area.name}</h1>
             </header>
             {/* 하단 지도 */}
             <div className="w-full mt-6">
