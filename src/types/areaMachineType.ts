@@ -1,21 +1,20 @@
 // 구역 타입 정의
 export interface AreaData {
-    id: string;
-    name: string;
-    location: string;
-    manager: string;
-    machines: MachineData[];
+    id: number;
+    name: string; // 3공장 프레스 구역
+    address: string; // 울산 현대자동차 31라인
+    status: string;
 }
 
 // 장비 타입 정의
-export interface MachineData {
-    id: string;
+export interface DeviceData {
+    deviceId: number;
+    areaId: number;
     name: string;
-    model: string;
-    location: string;
-    manager: string;
-    parts: string[]; // 부품 목록
-    value: number; // 정상도
+    deviceManager: string;
+    parts: object; // 부품 목록
+    normalScore: number; // 정상도
+    image?: string;
 }
 
 // 구역 카드 props 타입 정의
