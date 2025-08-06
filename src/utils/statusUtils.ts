@@ -4,25 +4,36 @@ export const STATUS_STYLES = {
         bgColor: 'bg-danger',
         textColor: 'text-danger',
         label: '위험',
+        status: 'danger',
         priority: 1
     },
     WARNING: {
         bgColor: 'bg-warning',
         textColor: 'text-warning',
         label: '점검요망',
+        status: 'warning',
         priority: 2
     },
     NORMAL: {
-        bgColor: 'bg-safe',
-        textColor: 'text-safe',
+        bgColor: 'bg-normal',
+        textColor: 'text-normal',
         label: '안전',
+        status: 'normal',
         priority: 3
     },
-    OFFLINE: {
-        bgColor: 'bg-danger',
-        textColor: 'text-danger',
-        label: '위험',
+    REPAIR: {
+        bgColor: 'bg-repair',
+        textColor: 'text-repair',
+        label: '수리중',
+        status: 'repair',
         priority: 4
+    },
+    OFFLINE: {
+        bgColor: 'bg-offline',
+        textColor: 'text-offline',
+        label: '미연결',
+        status: 'offline',
+        priority: 5
     },
 
 }
@@ -65,7 +76,8 @@ export const getStatusFromString = (status: 'normal' | 'warning' | 'danger' | 'o
         case 'danger':
             return STATUS_STYLES.DANGER;
         case 'offline':
-        default:
             return STATUS_STYLES.OFFLINE;
+        case 'repair':
+            return STATUS_STYLES.REPAIR;
     }
 }
