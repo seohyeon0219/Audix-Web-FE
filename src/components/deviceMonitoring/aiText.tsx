@@ -1,34 +1,35 @@
+import { MockDeviceData } from "@/mocks";
+
 interface AiTextProps {
     areaId: string;
     deviceId: string;
-    // status: 'warning' | 'danger' | 'normal';
-    // message: string;
-    // icon: string;
 }
 
 interface AiTextResult {
-    status: 'warning' | 'danger' | 'normal';
+    status: 'warning' | 'danger' | 'normal' | 'repair' | 'offline';
     message: string;
 }
 
 // mock data
-const AI_DATA: Record<string, AiTextResult> = {
-    '1-1': {
-        status: 'normal',
-        message: '정상 작동 중입니다. 모든 센서 값이 안정 범위 내에 있습니다.'
-    },
-    '1-2': {
-        status: 'warning',
-        message: '비정상적인 소음이 감지되었습니다. 점검 요망합니다.'
-    },
-    '1-3': {
-        status: 'danger',
-        message: '위험 수준의 센서 값이 확인되었습니다. 작동을 중지하고 점검 바랍니다.'
+const AI_DATA = (status: string, deviceName: string): string => {
+    switch(status) {
+        case 'normal':
+            return '정상 작동 중인 장비입니다.'
+        case 'warning':
+            return '점검 요망인 장비입니다.'
+        case 'danger':
+            return '위험 장비입니다.'
+        case 'offline':
+            return '마이크 미연결 장비입니다.'
+        case 'repair':
+            return '수리 중인 장비입니다.'
+        default:
+            return 'AI 진단 데이터를 불러올 수 없습니다.'
     }
 }
 
 // 상태별 스타일링 설정
-const getStatusStyle = (status: AiTextResult['status']) => {
+const getStatusStyle = (status: AiTextResult['status']): { icon: string } => {
     switch(status) {
         case 'danger':
             return {
@@ -42,18 +43,58 @@ const getStatusStyle = (status: AiTextResult['status']) => {
             return {
                 icon: '✅'
             };
+        case 'offline' :
+            return {
+                icon: '🔌'
+            };
+        case 'repair' :
+            return {
+                icon: '❓'
+            };
+        default:
+            return {
+                icon: '❓'
+            };
     }
 }
 
 
 export default function AiText({ areaId, deviceId }: AiTextProps) {
-    // 함수 호출
-    const deviceKey = `${areaId}-${deviceId}`
-    const aiResult = AI_DATA[deviceKey] || {
-        status: 'warning' as const,
-        message: 'AI 진단 데이터를 불러올 수 없습니다.'
+    // mockDeviceData에서 해당 장비 찾기
+    const device = MockDeviceData.find(d => 
+        d.areaId === parseInt(areaId) &&
+        d.deviceId === parseInt(deviceId)
+    );
+
+    // 장비를 찾지 못한 경우 기본값 설정
+    if (!device) {
+        const defaultResult: AiTextResult = {
+            status: 'offline',
+            message: '해당 장비를 찾을 수 없습니다.'
+        }
+        const statusStyle = getStatusStyle(defaultResult.status);
+
+        return (
+            <div className="bg-main-100 p-6 rounded-lg h-full flex flex-col">
+                <div className="mb-4 flex-shrink-0">
+                    <div className="flex items-center gap-2">
+                        <span className="text-lg">{statusStyle.icon}</span>
+                        <h3 className="text-white text-lg font-medium">AI 상태진단</h3>
+                    </div>
+                </div>
+                <div className="flex-1 overflow-y-auto">
+                    <p className="text-white">{defaultResult.message}</p>
+                </div>
+            </div>
+        );
     }
-    const statusStyle = getStatusStyle(aiResult.status);
+    // 장비를 찾은 경우 mock data로 결과 생성
+    const result: AiTextResult = {
+        status: device.status as AiTextResult['status'],
+        message: AI_DATA(device.status || 'normal', device.name)
+    };
+    
+    const statusStyle = getStatusStyle(result.status);
 
     return (
         <div className="bg-main-100 p-6 rounded-lg h-full flex flex-col">
@@ -64,7 +105,7 @@ export default function AiText({ areaId, deviceId }: AiTextProps) {
                 </div>
             </div>
             <div className="flex-1 overflow-y-auto">
-                <p className="text-white">{aiResult.message}</p>
+                <p className="text-white">{result.message}</p>
             </div>
         </div>
     )
