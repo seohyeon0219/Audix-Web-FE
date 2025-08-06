@@ -1,4 +1,3 @@
-import { getAreaConfig } from "@/constants/areaConfigs";
 import { MockAreaData, MockDeviceData } from "@/mocks";
 import { AreaData } from "@/types/areaType";
 import { DeviceData } from '@/types/deviceType';
@@ -56,9 +55,14 @@ export default function Info({ areaId, machineId, area: propsArea, device: props
                 <table className="w-full text-sm">
                     <tbody>
                         <tr>
+                            <td className="text-white p-1">모델</td>
+                            <td className="text-white p-1">{device.model}</td>
+                        </tr>
+                        <tr>
                             <td className="text-white p-1">구역</td>
                             <td className="text-white p-1">{area.name}</td>
                         </tr>
+
                         <tr>
                             <td className="text-white p-1">위치</td>
                             <td className="text-white p-1">{area.address}</td>
@@ -69,7 +73,7 @@ export default function Info({ areaId, machineId, area: propsArea, device: props
                         </tr>
                         <tr>
                             <td className="text-white p-1">부품</td>
-                            <td className="text-white p-1">{Object.keys(device.parts).join(', ')}</td>
+                            <td className="text-white p-1">{device.parts ? Object.keys(device.parts).join(', ') : '부품 정보가 없습니다.'}</td>
                         </tr>
                     </tbody>
                 </table>
