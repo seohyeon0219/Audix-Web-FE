@@ -18,8 +18,8 @@
         --color-navy-500: #21273E;
         --color-navy-900: #141B32;
         --color-equipment-dangers: #FF2F16; /* 빨강 (위험) */
-        --color-equipment-check: #FFC525; /* 노랑 (점검요망) */
-        --color-equipment-safe: #1CAA00; /* 초록 (안전) */
+        --color-equipment-warning: #FFC525; /* 노랑 (점검요망) */
+        --color-equipment-normal: #1CAA00; /* 초록 (안전) */
         --color-equipment-repair: #898989; /* 연한 회색 (수리 중) */
         --color-equipment-offline: #515151; /* 진한 회색 (마이크 미연결) */
 
@@ -43,22 +43,22 @@
     /* 장비 상태 color */
     /* text일 때 */
     .text-danger { color: var(--color-equipment-dangers); }
-    .text-warning { color: var(--color-equipment-check); }
-    .text-safe { color: var(--color-equipment-safe); }
+    .text-warning { color: var(--color-equipment-warning); }
+    .text-normal { color: var(--color-equipment-normal); }
     .text-repair { color: var(--color-equipment-repair); }
     .text-offline { color: var(--color-equipment-offline); }
 
     /* border일 때 */
     .border-danger { border-color: var(--color-equipment-dangers); }
-    .border-warning { border-color: var(--color-equipment-check); }
-    .border-safe { border-color: var(--color-equipment-safe); }
+    .border-warning { border-color: var(--color-equipment-warning); }
+    .border-normal { border-color: var(--color-equipment-normal); }
     .border-repair { border-color: var(--color-equipment-repair); }
     .border-offline { border-color: var(--color-equipment-offline); }
 
     /* bg일 때 */
     .bg-danger { background-color: var(--color-equipment-dangers); }
-    .bg-warning { background-color: var(--color-equipment-check); }
-    .bg-safe { background-color: var(--color-equipment-safe); }
+    .bg-warning { background-color: var(--color-equipment-warning); }
+    .bg-normal { background-color: var(--color-equipment-normal); }
     .bg-repair { background-color: var(--color-equipment-repair); }
     .bg-offline { background-color: var(--color-equipment-offline); }
 }

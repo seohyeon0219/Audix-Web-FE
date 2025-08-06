@@ -135,14 +135,14 @@ const ValueLineChart: React.FC<ValueLineChartProps> = ({
                             <Line
                                 type='monotone'
                                 dataKey="value"
-                                stroke={STATUS_COLORS.safe}
+                                stroke={STATUS_COLORS.normal}
                                 strokeWidth={3}
-                                dot={{ fill: STATUS_COLORS.safe, strokeWidth: 2, r: 5 }}
+                                dot={{ fill: STATUS_COLORS.normal, strokeWidth: 2, r: 5 }}
                                 name="정상도"
                                 activeDot={{
                                     r: 7,
-                                    fill: STATUS_COLORS.safe,
-                                    stroke: STATUS_COLORS.safe,
+                                    fill: STATUS_COLORS.normal,
+                                    stroke: STATUS_COLORS.normal,
                                     strokeWidth: 2
                                 }}
                             />

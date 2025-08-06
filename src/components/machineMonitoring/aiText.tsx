@@ -1,20 +1,20 @@
 interface AiTextProps {
     areaId: string;
     machineId: string;
-    // status: 'warning' | 'danger' | 'safe';
+    // status: 'warning' | 'danger' | 'normal';
     // message: string;
     // icon: string;
 }
 
 interface AiTextResult {
-    status: 'warning' | 'danger' | 'safe';
+    status: 'warning' | 'danger' | 'normal';
     message: string;
 }
 
 // mock data
 const AI_DATA: Record<string, AiTextResult> = {
     '1-1': {
-        status: 'safe',
+        status: 'normal',
         message: '정상 작동 중입니다. 모든 센서 값이 안정 범위 내에 있습니다.'
     },
     '1-2': {
@@ -38,7 +38,7 @@ const getStatusStyle = (status: AiTextResult['status']) => {
             return {
                 icon: '⚠️'
             };
-        case 'safe':
+        case 'normal':
             return {
                 icon: '✅'
             };

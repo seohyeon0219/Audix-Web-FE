@@ -57,7 +57,7 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
 
                 const getStatusLabel = (status: StatusType) => {
                     switch (status) {
-                        case 'safe': return '안전';
+                        case 'normal': return '안전';
                         case 'warning': return '점검요망';
                         case 'danger': return '위험';
                         case 'offline': return '미연결';
