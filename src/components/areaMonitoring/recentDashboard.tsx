@@ -1,5 +1,4 @@
-import { getStatusColorFromValue } from "@/utils/statusUtils";
-
+import { getStatusStyleFromString, STATUS_STYLES } from "@/utils/statusUtils";
 import { mockRecentDashboardData } from '@/mocks';
 
 export default function RecentDashboard() {
@@ -8,13 +7,13 @@ export default function RecentDashboard() {
             <h3 className="text-white pb-1 mb-4 border-b border-white">최근 10일 대시보드</h3>
             <div className="flex gap-3">
                 {mockRecentDashboardData.map((data, index) => {
-                    const statusStyle = getStatusColorFromValue(data.value);
+                    const statusStyle = getStatusStyleFromString(data.status);
 
                     return (
                         <div 
                             key={index}
                             className={`w-6 h-6 rounded cursor-pointer ${statusStyle.bgColor}`}
-                            title={`${data.date}: ${data.value} (${statusStyle.label})`}
+                            title={`${data.date}: ${data.status} (${statusStyle.label})`}
                         />
                     )
                 })}

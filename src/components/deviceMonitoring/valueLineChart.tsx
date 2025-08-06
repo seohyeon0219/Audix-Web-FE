@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { STATUS_COLORS, STATUS_LABELS } from "@/constants/statusColor";
+import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
 
 type PeriodType = 'monthly' | 'yearly';
 
@@ -135,14 +135,14 @@ const ValueLineChart: React.FC<ValueLineChartProps> = ({
                             <Line
                                 type='monotone'
                                 dataKey="value"
-                                stroke={STATUS_COLORS.normal}
+                                stroke={STATUS_STYLES.NORMAL.hexColor}
                                 strokeWidth={3}
-                                dot={{ fill: STATUS_COLORS.normal, strokeWidth: 2, r: 5 }}
+                                dot={{ fill: STATUS_STYLES.NORMAL.hexColor, strokeWidth: 2, r: 5 }}
                                 name="정상도"
                                 activeDot={{
                                     r: 7,
-                                    fill: STATUS_COLORS.normal,
-                                    stroke: STATUS_COLORS.normal,
+                                    fill: STATUS_STYLES.NORMAL.hexColor,
+                                    stroke: STATUS_STYLES.NORMAL.hexColor,
                                     strokeWidth: 2
                                 }}
                             />

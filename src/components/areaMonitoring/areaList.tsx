@@ -1,15 +1,15 @@
 'use client';
 
 import { MockAreaData } from "@/mocks";
-import { getStatusFromString } from "@/utils/statusUtils";
+import { getStatusStyleFromString } from "@/utils/statusUtils";
 import AreaCard from "@/components/areaMonitoring/areaCard";
 
 export default function AreaList() {
 
     // 상태별 정렬
     const sortedAreas = [...MockAreaData].sort((a, b) => {
-        const statusA = getStatusFromString((a.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline');
-        const statusB = getStatusFromString((b.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline');
+        const statusA = getStatusStyleFromString((a.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline');
+        const statusB = getStatusStyleFromString((b.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline');
 
         return statusA.priority - statusB.priority;
     });

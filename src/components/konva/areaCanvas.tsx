@@ -8,13 +8,8 @@ import { Stage, Layer } from 'react-konva';
 import DeviceNode from '@/components/konva/deviceNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
-
-// mock data
 import { MockDeviceData } from '@/mocks';
-// layout 정보 import 
 import { getAreaLayout } from '@/constants/devicePosition';
-import { getStatusColorFromValue } from '@/utils/statusUtils';
-import { StatusType } from '@/constants/statusColor';
 
 interface AreaCanvasProps {
     areaId: string; // 어떤 구역인지 식별
@@ -58,26 +53,8 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
         }
     });
 
-    // 장비 상태 결정 함수 
-    const getDeviceStatus = (device: any): StatusType => {
-        // device.status가 있으면 우선 사용
-        if (device.status) {
-            return device.status as StatusType;
-        }
-        const statusInfo = getStatusColorFromValue(device.normalScore);
-        return statusInfo.status as StatusType;
-    }
-
-    // 상태 라벨 함수
-    const getStatusLabel = (device: any) => {
-        const statusInfo = getStatusColorFromValue(device.normalScore);
-        return statusInfo.label || '알 수 없음';
-    }
-
     // 장비 클릭 핸들러
     const handleDeviceClick = (deviceId: string) => {
-        console.log('Device clicked', deviceId);
-        console.log('Area ID', areaId)
         router.push(`/area/${areaId}/device/${deviceId}`);
     };
 
@@ -89,7 +66,7 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
             y: y,
             data: {
                 name: device.name,
-                status: getStatusLabel(device),
+                status: device.status,
                 manager: device.deviceManager                    
             }
         });
@@ -123,7 +100,7 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
                             name={device.name}
                             x={device.x}
                             y={device.y}
-                            status={getDeviceStatus(device)}
+                            status={device.status}
                             onClick={handleDeviceClick}
                             onHover={handleDeviceHover}
                             onLeave={handleDeviceLeave}
@@ -131,7 +108,12 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
                     ))}
                     {/* 툴팁 */}
                     {tooltip.visible && (
-                        <NodeTooltip x={tooltip.x} y={tooltip.y} visible={tooltip.visible} data={tooltip.data} ></NodeTooltip>
+                        <NodeTooltip
+                         x={tooltip.x} 
+                         y={tooltip.y} 
+                         visible={tooltip.visible} 
+                         data={tooltip.data} 
+                    ></NodeTooltip>
                     )}
                 </Layer>
             </Stage>

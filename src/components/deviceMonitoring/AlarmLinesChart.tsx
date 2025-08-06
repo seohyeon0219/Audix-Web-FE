@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { STATUS_COLORS, STATUS_LABELS } from "@/constants/statusColor";
+import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
 
 type PeriodType = 'monthly' | 'yearly';
 
@@ -136,14 +136,14 @@ const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
                         <Line
                             type='monotone'
                             dataKey="danger"
-                            stroke={STATUS_COLORS.danger}
+                            stroke={STATUS_STYLES.DANGER.hexColor}
                             strokeWidth={3}
-                            dot={{ fill: STATUS_COLORS.danger, strokeWidth: 2, r: 5 }}
-                            name={STATUS_LABELS.danger}
+                            dot={{ fill: STATUS_STYLES.DANGER.hexColor, strokeWidth: 2, r: 5 }}
+                            name={STATUS_STYLES.DANGER.label}
                             activeDot={{
                                 r: 7,
-                                fill: STATUS_COLORS.danger,
-                                stroke: STATUS_COLORS.danger,
+                                fill: STATUS_STYLES.DANGER.hexColor,
+                                stroke: STATUS_STYLES.DANGER.hexColor,
                                 strokeWidth: 2
                             }}
                         />
@@ -151,14 +151,14 @@ const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
                         <Line
                             type='monotone'
                             dataKey="warning"
-                            stroke={STATUS_COLORS.warning}
+                            stroke={STATUS_STYLES.WARNING.hexColor}
                             strokeWidth={3}
-                            dot={{ fill: STATUS_COLORS.warning, strokeWidth: 2, r: 5 }}
-                            name={STATUS_LABELS.warning}
+                            dot={{ fill: STATUS_STYLES.WARNING.hexColor, strokeWidth: 2, r: 5 }}
+                            name={STATUS_STYLES.WARNING.label}
                             activeDot={{
                                 r: 7,
-                                fill: STATUS_COLORS.warning,
-                                stroke: STATUS_COLORS.warning,
+                                fill: STATUS_STYLES.WARNING.hexColor,
+                                stroke: STATUS_STYLES.WARNING.hexColor,
                                 strokeWidth: 2
                             }}
                         />

@@ -1,15 +1,14 @@
 'use client';
 
 // 장비 노드
-import { Circle, Text, Group, Rect } from 'react-konva';
-
-import { getStatusColor, type StatusType } from '../../constants/statusColor';
+import {Text, Group, Rect } from 'react-konva';
+import { getStatusStyleFromString } from '@/utils/statusUtils';
 
 interface DeviceNodeProps {
     id: string;
     x: number;
     y: number;
-    status: StatusType;
+    status: string;
     name: string;
     onClick: (id: string) => void;
     onHover?: (id: string, x: number, y: number) => void;
@@ -20,6 +19,8 @@ export default function DeviceNode({ id, x, y, status, name, onClick, onHover, o
     const width = 60;
     const height = 40;
 
+    const statusStyle = getStatusStyleFromString(status);
+
     return (
         <Group x={x} y={y}>
             <Rect
@@ -27,7 +28,7 @@ export default function DeviceNode({ id, x, y, status, name, onClick, onHover, o
                 height={height}
                 x={-width/2}
                 y={-height/2}
-                fill={getStatusColor(status)}
+                fill={statusStyle.hexColor}
                 strokeWidth={2}
                 cornerRadius={5}
                 onClick={() => onClick(id)}
