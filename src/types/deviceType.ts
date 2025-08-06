@@ -8,6 +8,6 @@ export interface DeviceData {
     parts?: object; // 부품 목록
     normalScore?: number; // 정상도
     image?: string;
-    status?: string;
+    status: string;
 }
 
