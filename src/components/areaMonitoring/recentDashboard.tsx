@@ -14,7 +14,7 @@ export default function RecentDashboard() {
                         <div 
                             key={index}
                             className={`w-6 h-6 rounded cursor-pointer ${statusStyle.bgColor}`}
-                            title={`${data.date}: ${data.value} (${status})`}
+                            title={`${data.date}: ${data.value} (${statusStyle.label})`}
                         />
                     )
                 })}
