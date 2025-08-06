@@ -1,26 +1,25 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { getAreaConfig } from '@/constants/areaConfigs';
+import { MockDeviceData } from '@/mocks/data/deviceData';
 
-interface MachinePieChartProps {
+interface DevicePieChartProps {
     areaId: string;
-    machineId: string;
+    deviceId: string;
     title?: string;
 }
 
-const MachinePieChart: React.FC<MachinePieChartProps> = ({
+const MachinePieChart: React.FC<DevicePieChartProps> = ({
     areaId,
-    machineId,
+    deviceId,
     title
 }) => {
-    // 구역 설정
-    const areaConfig = getAreaConfig(areaId);
-
     // 특정 장비 찾기
-    const machine = areaConfig.machines.find(m => m.id === machineId);
+    const device = MockDeviceData.find(d =>
+        d.areaId === parseInt(areaId) && d.deviceId === parseInt(deviceId)
+    );
 
     // machine이 없는 경우 처리
-    if (!machine) {
+    if (!device) {
         return (
             <div className='bg-main-100 p-6 rounded-lg'>
                 <h2 className='text-white text-lg font-medium mb-6'>
@@ -31,12 +30,12 @@ const MachinePieChart: React.FC<MachinePieChartProps> = ({
         )
     }
 
-    // machine.value가 없는 경우 처리
-    if (machine.value === undefined) {
+    // device.value가 없는 경우 처리
+    if (device.normalScore === undefined) {
         return (
             <div className='bg-main-100 p-6 rounded-lg'>
                 <h2 className='text-white text-lg rounded-lg'>
-                    {title || `${machine.name} 정상도`}
+                    {title || `${device.name} 정상도`}
                 </h2>
                 <p className='text-white'>데이터가 없습니다.</p>
             </div>
@@ -44,7 +43,7 @@ const MachinePieChart: React.FC<MachinePieChartProps> = ({
     }
 
     // value를 percentage로 변환
-    const percentage = Math.round(machine.value * 100);
+    const percentage = Math.round(device.normalScore * 100);
 
     // completed : percentage, remaining : 남은 부분
     const data = [
@@ -65,7 +64,7 @@ const MachinePieChart: React.FC<MachinePieChartProps> = ({
     return (
         <div className='flex gap-10 bg-main-100 p-6 rounded-lg'>
             <h2 className='text-white text-lg font-medium mb-6'>
-                {title || `${machine.name} 정상도`}
+                {title || `${device.name} 정상도`}
             </h2>
             <div className='flex'>
                 <div className='relative w-32 h-32'>
