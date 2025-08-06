@@ -1,6 +1,6 @@
 interface AiTextProps {
     areaId: string;
-    machineId: string;
+    deviceId: string;
     // status: 'warning' | 'danger' | 'normal';
     // message: string;
     // icon: string;
@@ -46,10 +46,10 @@ const getStatusStyle = (status: AiTextResult['status']) => {
 }
 
 
-export default function AiText({ areaId, machineId }: AiTextProps) {
+export default function AiText({ areaId, deviceId }: AiTextProps) {
     // 함수 호출
-    const machineKey = `${areaId}-${machineId}`
-    const aiResult = AI_DATA[machineKey] || {
+    const deviceKey = `${areaId}-${deviceId}`
+    const aiResult = AI_DATA[deviceKey] || {
         status: 'warning' as const,
         message: 'AI 진단 데이터를 불러올 수 없습니다.'
     }

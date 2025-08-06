@@ -2,31 +2,31 @@ import { MockAreaData, MockDeviceData } from "@/mocks";
 import { AreaData } from "@/types/areaType";
 import { DeviceData } from '@/types/deviceType';
 
-interface MachineInfoProps {
+interface DeviceInfoProps {
     areaId: string;
-    machineId: string;
+    deviceId: string;
     area?: AreaData;
     device?: DeviceData;
 }
 
 // areaId, machindId로 장비 데이터 찾기
-const getMachineData = (areaId: string, machineId: string) => {
+const getDeviceData = (areaId: string, deviceId: string) => {
     // 구역 정보 찾기
     const area = MockAreaData.find(area => area.id === parseInt(areaId));
 
     // 장비 정보 찾기
     const device = MockDeviceData.find(device => 
         device.areaId === parseInt(areaId) && 
-        device.deviceId === parseInt(machineId)
+        device.deviceId === parseInt(deviceId)
     );
 
     return { area, device };
 }
 
-export default function Info({ areaId, machineId, area: propsArea, device: propsDevice }: MachineInfoProps) {
+export default function Info({ areaId, deviceId, area: propsArea, device: propsDevice }: DeviceInfoProps) {
     const { area, device } = propsArea && propsDevice
         ? { area: propsArea, device: propsDevice }
-        : getMachineData(areaId, machineId);
+        : getDeviceData(areaId, deviceId);
 
     if (!area || !device) {
         return (

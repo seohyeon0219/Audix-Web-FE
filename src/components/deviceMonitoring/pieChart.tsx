@@ -8,7 +8,7 @@ interface DevicePieChartProps {
     title?: string;
 }
 
-const MachinePieChart: React.FC<DevicePieChartProps> = ({
+const DevicePieChart: React.FC<DevicePieChartProps> = ({
     areaId,
     deviceId,
     title
@@ -18,7 +18,7 @@ const MachinePieChart: React.FC<DevicePieChartProps> = ({
         d.areaId === parseInt(areaId) && d.deviceId === parseInt(deviceId)
     );
 
-    // machine이 없는 경우 처리
+    // device이 없는 경우 처리
     if (!device) {
         return (
             <div className='bg-main-100 p-6 rounded-lg'>
@@ -98,4 +98,4 @@ const MachinePieChart: React.FC<DevicePieChartProps> = ({
     )
 }
 
-export default MachinePieChart;
+export default DevicePieChart;

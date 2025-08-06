@@ -2,18 +2,18 @@
 
 import { use } from 'react';
 import { MockAreaData, MockDeviceData } from '@/mocks';
-import Info from "@/components/machineMonitoring/info";
-import MachinePieChart from "@/components/machineMonitoring/pieChart";
-import AiText from '@/components/machineMonitoring/aiText';
-import AlarmLinesChart from '@/components/machineMonitoring/AlarmLinesChart';
-import ValueLineChart from '@/components/machineMonitoring/valueLineChart';
+import Info from "@/components/deviceMonitoring/info";
+import DevicePieChart from "@/components/deviceMonitoring/pieChart";
+import AiText from '@/components/deviceMonitoring/aiText';
+import AlarmLinesChart from '@/components/deviceMonitoring/AlarmLinesChart';
+import ValueLineChart from '@/components/deviceMonitoring/valueLineChart';
 
-interface MachinePageProps {
-    params: Promise<{ id: string, machineId: string }>;
+interface DevicePageProps {
+    params: Promise<{ id: string, deviceId: string }>;
 }
 
-export default function MachinePage({ params }: MachinePageProps) {
-    const { id: areaId, machineId } = use(params);
+export default function DevicePage({ params }: DevicePageProps) {
+    const { id: areaId, deviceId } = use(params);
 
     // 구역 정보 찾기
     const area = MockAreaData.find(area => area.id === parseInt(areaId));
@@ -21,29 +21,29 @@ export default function MachinePage({ params }: MachinePageProps) {
     // 장비 정보 찾기
     const device = MockDeviceData.find(device => 
         device.areaId === parseInt(areaId) && 
-        device.deviceId === parseInt(machineId)
+        device.deviceId === parseInt(deviceId)
     )
 
     return (
         <div>
             {/* 장비 정보 */}
             <div>
-                <Info areaId={areaId} machineId={machineId} />
+                <Info areaId={areaId} deviceId={deviceId} />
             </div>
             {/* 통계 섹션 */}
             <div className='bg-main-500 gap-3 mt-4'>
                 <div className='flex gap-6 p-4 items-stretch h-52'>
                     <div className='flex-[2.5] min-w-0'>
-                        <MachinePieChart
+                        <DevicePieChart
                             areaId={areaId}
-                            machineId={machineId}
+                            deviceId={deviceId}
                             title="장비 정상도"
                         />
                     </div>
                     <div className='flex-[7.5] min-w-0'>
                         <AiText 
                             areaId={areaId}
-                            machineId={machineId}
+                            deviceId={deviceId}
                         />
                     </div>
                 </div>
