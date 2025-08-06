@@ -14,7 +14,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -28,9 +28,9 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal'
+        normalScore: 0.55,
+        image: '/images/devices/robotArm2.png',
+        status: 'warning'
     },
     {
         areaId: 1,
@@ -44,7 +44,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -59,7 +59,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal' 
     },
     // 차체 31라인
@@ -74,9 +74,9 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal'
+        normalScore: 0.55,
+        image: '/images/devices/robotArm2.png',
+        status: 'warning'
     },
     {
         areaId: 2,
@@ -89,9 +89,8 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal' 
+        image: '/images/devices/robotArm2.png',
+        status: 'offline' 
     },
     {
         areaId: 2,
@@ -105,7 +104,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -120,7 +119,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -135,7 +134,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -150,7 +149,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     // 도장 31라인
@@ -165,9 +164,8 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal'
+        image: '/images/devices/robotArm2.png',
+        status: 'repair'
     },
     {
         areaId: 3,
@@ -181,7 +179,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm2.png',
         status: 'normal'
     },
     {
@@ -196,7 +194,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -211,7 +209,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -225,9 +223,9 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal'
+        normalScore: 0.3,
+        image: '/images/devices/robotArm3.png',
+        status: 'danger'
     },
     {
         areaId: 3,
@@ -241,7 +239,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     // 의장 31라인
@@ -257,7 +255,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -272,7 +270,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -287,7 +285,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -302,7 +300,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -317,7 +315,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
     {
@@ -331,9 +329,8 @@ export const MockDeviceData: DeviceData[] = [
             "pan" : 0.3,
             "bearing" : 0.5
         },
-        normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
-        status: 'normal'
+        image: '/images/devices/robotArm3.png',
+        status: 'offline'
     },
     {
         areaId: 4,
@@ -347,7 +344,7 @@ export const MockDeviceData: DeviceData[] = [
             "bearing" : 0.5
         },
         normalScore: 0.85,
-        image: '/images/devices/roborArm1.png',
+        image: '/images/devices/robotArm3.png',
         status: 'normal'
     },
 ]
