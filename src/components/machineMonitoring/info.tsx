@@ -1,6 +1,7 @@
 import { getAreaConfig } from "@/constants/areaConfigs";
 import { MockAreaData, MockDeviceData } from "@/mocks";
-import { AreaData, DeviceData } from "@/types/areaMachineType";
+import { AreaData } from "@/types/areaType";
+import { DeviceData } from '@/types/deviceType';
 
 interface MachineInfoProps {
     areaId: string;

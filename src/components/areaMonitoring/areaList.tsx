@@ -1,6 +1,6 @@
 'use client';
 
-import { MockAreaData, MockDeviceData } from "@/mocks";
+import { MockAreaData } from "@/mocks";
 import { getStatusFromString } from "@/utils/statusUtils";
 import AreaCard from "@/components/areaMonitoring/areaCard";
 

@@ -6,21 +6,9 @@ export interface AreaData {
     status: string;
 }
 
-// 장비 타입 정의
-export interface DeviceData {
-    deviceId: number;
-    areaId: number;
-    name: string;
-    deviceManager: string;
-    parts: object; // 부품 목록
-    normalScore: number; // 정상도
-    image?: string;
-}
-
 // 구역 카드 props 타입 정의
 export interface AreaCardProps {
     data: AreaData;
     index: number;
     onClick?: (areaId: string) => void;
 }
-

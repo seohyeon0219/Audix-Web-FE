@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { AreaData, AreaCardProps } from '@/types/areaMachineType';
+import { AreaCardProps } from '@/types/areaType';
 import { getStatusFromString } from '@/utils/statusUtils';
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
