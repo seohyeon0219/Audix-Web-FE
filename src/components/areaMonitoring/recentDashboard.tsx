@@ -1,20 +1,19 @@
-import { getStatusFromValue, getStatusColor } from "@/constants/status";
+import { getStatusColorFromValue } from "@/utils/statusUtils";
 
 import { mockRecentDashboardData } from '@/mocks';
 
 export default function RecentDashboard() {
     return (
-        <div className="bg-main-100 min-w-96 w-fit rounded-lg px-6 py-4 border border-t-white">
-            <h3 className="text-white pb-2 mb-4 border-b border-white">최근 10일 대시보드</h3>
+        <div className="bg-main-100 min-w-96 w-fit rounded-lg px-6 py-3 h-full">
+            <h3 className="text-white pb-1 mb-4 border-b border-white">최근 10일 대시보드</h3>
             <div className="flex gap-3">
                 {mockRecentDashboardData.map((data, index) => {
-                    const status = getStatusFromValue(data.value);
-                    const colorClass = getStatusColor(status);
+                    const statusStyle = getStatusColorFromValue(data.value);
 
                     return (
                         <div 
                             key={index}
-                            className={`w-6 h-6 rounded cursor-pointer ${colorClass}`}
+                            className={`w-6 h-6 rounded cursor-pointer ${statusStyle.bgColor}`}
                             title={`${data.date}: ${data.value} (${status})`}
                         />
                     )
