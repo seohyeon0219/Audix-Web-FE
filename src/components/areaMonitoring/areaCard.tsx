@@ -1,15 +1,21 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { AreaCardProps } from '@/types/areaType';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
+import { AreaData } from "@/types/mocks";
+
+// 구역 카드 props 타입 정의
+export interface AreaCardProps {
+    data: AreaData;
+    index: number;
+    onClick?: (areaId: string) => void;
+}
+
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
     const router = useRouter();
 
-    // const statusStyles = getStatusStyleFromString((data.status || 'offline') as 'normal' | 'warning' | 'danger' | 'offline' | 'repair');
     const statusStyle = getStatusStyleFromString(data.status);
-
 
     const handleClick = () => {
         router.push(`/area/${data.id}`);

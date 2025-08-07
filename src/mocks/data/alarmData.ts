@@ -1,4 +1,4 @@
-import { AlarmDataType, AlarmDataCount } from "@/types/alarmDataType";
+import { AlarmDataType, AlarmDataCount } from "@/types/mocks";
 
 // 이번 달 알림 건수 mock data
 export const mockAlarmDataCounts: AlarmDataCount = {
