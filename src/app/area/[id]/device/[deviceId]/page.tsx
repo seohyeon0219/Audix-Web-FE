@@ -3,10 +3,10 @@
 import { use } from 'react';
 import { MockAreaData, MockDeviceData } from '@/mocks';
 import Info from "@/components/deviceMonitoring/info";
-import DevicePieChart from "@/components/deviceMonitoring/pieChart";
+import DevicePieChart from "@/components/recharts/pieChart";
 import AiText from '@/components/deviceMonitoring/aiText';
-import AlarmLinesChart from '@/components/deviceMonitoring/AlarmLinesChart';
-import ValueLineChart from '@/components/deviceMonitoring/valueLineChart';
+import AlarmLinesChart from '@/components/recharts/AlarmLinesChart';
+import ValueLineChart from '@/components/recharts/valueLineChart';
 
 interface DevicePageProps {
     params: Promise<{ id: string, deviceId: string }>;

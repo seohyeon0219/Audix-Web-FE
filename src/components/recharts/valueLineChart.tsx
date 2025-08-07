@@ -2,47 +2,8 @@ import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
 import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
 import { PeriodType, ValueChartDataPoint } from "@/types/deviceMonitoring";
-
-
-// mock data (2025년 월별)
-const generateMonthlyData2025 = (): ValueChartDataPoint[] => {
-    return [
-        { period: '1월', value: 0.8 },
-        { period: '2월', value: 0.9 },
-        { period: '3월', value: 0.86 },
-        { period: '4월', value: 0.7 },
-        { period: '5월', value: 0.98 },
-        { period: '6월', value: 0.87 },
-        { period: '7월', value: 0.85 },
-        { period: '8월', value: 0.99 },
-        { period: '9월', value: 0.98 },
-        { period: '10월', value: 0.87 },
-        { period: '11월', value: 0.85 },
-        { period: '12월', value: 0.99 },
-    ]
-}
-
-// mock data (2021~2025 년도별)
-const generateYearlyData = (): ValueChartDataPoint[] => {
-    return [
-        { period: '2021', value: 0.9 },
-        { period: '2022', value: 0.8 },
-        { period: '2023', value: 0.97 },
-        { period: '2024', value: 0.89 },
-        { period: '2025', value: 0.9 },
-    ]
-}
-
-const dataDenerators = {
-    monthly: generateMonthlyData2025,
-    yearly: generateYearlyData
-}
-
-// 기간 선택 버튼
-const periodButtons = [
-    { key: 'monthly' as PeriodType, label: '월별' },
-    { key: 'yearly' as PeriodType, label: '년도별' }
-]
+import { PERIOD_BUTTONS } from "@/lib/recharts/config";
+import { generateValueChartData } from "@/lib/recharts/utils";
 
 interface ValueLineChartProps {
     title?: string;
@@ -55,7 +16,7 @@ const ValueLineChart: React.FC<ValueLineChartProps> = ({
 
     // 선택한 기간에 따른 데이터 생성
     const chartData = useMemo(() => {
-        return dataDenerators[selectedPeriod]();
+        return generateValueChartData(selectedPeriod);
     }, [selectedPeriod]);
 
     const handlePeriodChange = (period: PeriodType) => {
@@ -69,7 +30,7 @@ const ValueLineChart: React.FC<ValueLineChartProps> = ({
                         <h3 className="text-white text-lg font-medium">정상도 그래프</h3>
                     </div>
                     <div className="flex gap-2">
-                        {periodButtons.map(({ key, label }) => (
+                        {PERIOD_BUTTONS.map(({ key, label }) => (
                             <button
                                 key={key}
                                 onClick={() => handlePeriodChange(key)}
