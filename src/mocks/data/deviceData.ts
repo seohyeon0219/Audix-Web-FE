@@ -215,7 +215,7 @@ export const MockDeviceData: DeviceData[] = [
     {
         areaId: 3,
         deviceId: 15,
-        name: '리프터 & 셔틀',
+        name: '리프트 & 셔틀',
         model: 'model',
         deviceManager: '도종명',
         parts: {
@@ -230,7 +230,7 @@ export const MockDeviceData: DeviceData[] = [
     {
         areaId: 3,
         deviceId: 16,
-        name: '리프터 & 셔틀',
+        name: '리프트 & 셔틀',
         model: 'model',
         deviceManager: '김서현',
         parts: {
