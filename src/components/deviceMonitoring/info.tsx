@@ -57,8 +57,8 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
                         </tr>
 
                         <tr>
-                            <td className="text-white p-1">위치</td>
-                            <td className="text-white p-1">{area.address}</td>
+                            <td className="text-white p-1">장비 상세 위치</td>
+                            <td className="text-white p-1">{device.address}</td>
                         </tr>
                         <tr>
                             <td className="text-white p-1">담당자</td>

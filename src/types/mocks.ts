@@ -22,6 +22,7 @@ export interface DeviceData {
     deviceId: number;
     name: string;
     model: string;
+    address: string;
     deviceManager: string;
     parts?: object; // 부품 목록
     normalScore?: number; // 정상도

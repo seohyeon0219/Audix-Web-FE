@@ -6,7 +6,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 1,
         deviceId: 1,
         name: '프레스 머신',
-        model: 'model',
+        model: 'model명',
+        address: '3공장 프레스 구역 -1',
         deviceManager: '이하은',
         parts: {
             "gear" : 0.7,
@@ -21,7 +22,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 1,
         deviceId: 2,
         name: '코일 언코일러',
-        model: 'model',
+        model: 'model명',
+        address: '3공장 프레스 구역 -2',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -36,7 +38,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 1,
         deviceId: 3,
         name: '레벨러 & 피더',
-        model: 'model',
+        model: 'model명',
+        address: '3공장 프레스 구역 -3',
         deviceManager: '김재걸',
         parts: {
             "gear" : 0.7,
@@ -51,7 +54,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 1,
         deviceId: 4,
         name: '블랭킹 프레스',
-        model: 'model',
+        model: 'model명',
+        address: '3공장 프레스 구역 -4',
         deviceManager: '김재걸',
         parts: {
             "gear" : 0.7,
@@ -67,7 +71,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 5,
         name: '스폿 용접기',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -1',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -82,7 +87,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 6,
         name: '스폿 용접기',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -2',
         deviceManager: '이하은',
         parts: {
             "gear" : 0.7,
@@ -96,7 +102,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 7,
         name: '용접 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -3',
         deviceManager: '김서현',
         parts: {
             "gear" : 0.7,
@@ -111,7 +118,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 8,
         name: '용접 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -4',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -126,7 +134,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 9,
         name: '용접 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -5',
         deviceManager: '김서현',
         parts: {
             "gear" : 0.7,
@@ -141,7 +150,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 2,
         deviceId: 10,
         name: '리프터 & 컨베이어',
-        model: 'model',
+        model: 'model명',
+        address: '차체 31라인 -6',
         deviceManager: '김서현',
         parts: {
             "gear" : 0.7,
@@ -157,7 +167,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 11,
         name: '스프레이 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -1',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -171,7 +182,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 12,
         name: '스프레이 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -2',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -186,7 +198,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 13,
         name: '전착 탱크',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -3',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -201,7 +214,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 14,
         name: '건조로',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -4',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -216,7 +230,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 15,
         name: '리프트 & 셔틀',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -5',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -231,7 +246,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 3,
         deviceId: 16,
         name: '리프트 & 셔틀',
-        model: 'model',
+        model: 'model명',
+        address: '도장 31라인 -6',
         deviceManager: '김서현',
         parts: {
             "gear" : 0.7,
@@ -247,7 +263,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 17,
         name: '조립 로봇',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -1',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -262,7 +279,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 18,
         name: '체결 공구',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -2',
         deviceManager: '김서현',
         parts: {
             "gear" : 0.7,
@@ -277,7 +295,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 19,
         name: '체결 공구',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -3',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -292,7 +311,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 20,
         name: '체결 공구',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -4',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -307,7 +327,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 21,
         name: '체결 공구',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -5',
         deviceManager: '도종명',
         parts: {
             "gear" : 0.7,
@@ -322,7 +343,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 22,
         name: '컨베이어 시스템',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -6',
         deviceManager: '김현민',
         parts: {
             "gear" : 0.7,
@@ -336,7 +358,8 @@ export const MockDeviceData: DeviceData[] = [
         areaId: 4,
         deviceId: 23,
         name: '냉각수 및 윤활 설비',
-        model: 'model',
+        model: 'model명',
+        address: '의장 31라인 -7',
         deviceManager: '이하은',
         parts: {
             "gear" : 0.7,
