@@ -1,4 +1,4 @@
-import { DeviceData } from "@/types/deviceType";
+import { DeviceData } from "@/types/mocks";
 
 export const MockDeviceData: DeviceData[] = [
     // 3공장 프레스 구역
