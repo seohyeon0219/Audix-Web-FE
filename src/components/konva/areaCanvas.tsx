@@ -53,17 +53,20 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
     };
 
     // 장비 호버 핸들러
-    const handleDeviceHover = (device: any, x: number, y: number) => {
-        setTooltip({
+    const handleDeviceHover = (deviceId: string, x: number, y: number) => {
+        const device = MockDeviceData.find(d => d.deviceId === parseInt(deviceId));
+        if (device) {
+            setTooltip({
             visible: true,
             x: x,
             y: y,
             data: {
                 name: device.name,
-                status: device.status,
-                manager: device.deviceManager                    
+                model: device.model,
+                status: device.status                    
             }
         });
+        }
     };
 
     const handleDeviceLeave = () => {

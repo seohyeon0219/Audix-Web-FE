@@ -16,7 +16,7 @@ export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
                 stroke="#ccc"
             />
             <Text 
-                text={`장비명: ${data.name}\n현재상태: ${data.status}`}
+                text={`장비명: ${data.name}\n모델명: ${data.model}\n상태: ${data.status}`}
                 x={5}
                 y={5}
                 fontSize={12}

@@ -76,6 +76,7 @@ export interface NodeTooltipProps {
     visible: boolean;
     data: {
         name: string;
+        model: string;
         status: string;
     }
 }
