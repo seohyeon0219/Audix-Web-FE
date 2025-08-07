@@ -1,17 +1,9 @@
 'use client';
 
+import { NodeTooltipProps } from '@/types/deviceMonitoring';
+
 // 호버 시 툴팁 표시
 import { Group, Rect, Text } from 'react-konva';
-
-interface NodeTooltipProps {
-    x: number;
-    y: number;
-    visible: boolean;
-    data: {
-        name: string;
-        status: string;
-    }
-}
 
 export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
 

@@ -3,17 +3,7 @@
 // 장비 노드
 import {Text, Group, Rect } from 'react-konva';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
-
-interface DeviceNodeProps {
-    id: string;
-    x: number;
-    y: number;
-    status: string;
-    name: string;
-    onClick: (id: string) => void;
-    onHover?: (id: string, x: number, y: number) => void;
-    onLeave?: () => void;
-}
+import { DeviceNodeProps } from '@/types/deviceMonitoring';
 
 export default function DeviceNode({ id, x, y, status, name, onClick, onHover, onLeave }: DeviceNodeProps) {
     const width = 60;
@@ -46,7 +36,9 @@ export default function DeviceNode({ id, x, y, status, name, onClick, onHover, o
                 x={0}
                 y={6}
                 align='center'
+                justify='center'
                 offsetX={id.length * 3}
+                offsetY={15 / 2}
                 fill="white"
                 fontStyle='bold'
             />

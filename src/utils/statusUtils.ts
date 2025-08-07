@@ -1,3 +1,7 @@
+import { AiTextResult } from '@/types/deviceMonitoring';
+import { MockAreaData } from "@/mocks";
+
+
 // 상태 스타일을 상수로 정의
 export const STATUS_STYLES = {
     DANGER: {
@@ -60,3 +64,44 @@ export const getStatusStyleFromString = (status: string) => {
             return STATUS_STYLES.NORMAL;
     }
 }
+
+// 상태 별 아이콘 설정
+export const getStatusStyle = (status: AiTextResult['status']): { icon: string } => {
+    switch(status) {
+        case 'danger':
+            return {
+                icon: '🚨'
+            };
+        case 'warning':
+            return {
+                icon: '⚠️'
+            };
+        case 'normal':
+            return {
+                icon: '✅'
+            };
+        case 'offline' :
+            return {
+                icon: '🔌'
+            };
+        case 'repair' :
+            return {
+                icon: '❓'
+            };
+        default:
+            return {
+                icon: '❓'
+            };
+    }
+}
+
+// 상태별 정렬
+export const sortedAreas = [...MockAreaData].sort((a, b) => {
+    const statusA = a.status || 'offline';
+    const statusB = b.status || 'offline';
+
+    // STATUS_STYLES에서 priority 찾기
+    const priorityA = Object.values(STATUS_STYLES).find(style => style.status === statusA)?.priority || 999;
+    const priorityB = Object.values(STATUS_STYLES).find(style => style.status === statusB)?.priority || 999;
+    return priorityA - priorityB;
+});

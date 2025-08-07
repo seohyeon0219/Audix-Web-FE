@@ -3,19 +3,13 @@
 // 전체 구역 지도 메인 컨테이너
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
 import { Stage, Layer } from 'react-konva';
 import DeviceNode from '@/components/konva/deviceNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
 import { MockDeviceData } from '@/mocks';
 import { getAreaLayout } from '@/lib/konva/utils';
-
-interface AreaCanvasProps {
-    areaId: string; // 어떤 구역인지 식별
-    width?: number; // 캔버스 가로 크기
-    height?: number; // 캔버스 세로 크기
-}
+import { AreaCanvasProps } from '@/types/areaMonitoring';
 
 export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCanvasProps) {
 
