@@ -1,54 +1,7 @@
 import { MockDeviceData } from "@/mocks";
 import { AiTextProps, AiTextResult } from '@/types/deviceMonitoring';
-
-// mock data
-const AI_DATA = (status: string, deviceName: string): string => {
-    switch(status) {
-        case 'normal':
-            return '정상 작동 중인 장비입니다.'
-        case 'warning':
-            return '점검 요망인 장비입니다.'
-        case 'danger':
-            return '위험 장비입니다.'
-        case 'offline':
-            return '마이크 미연결 장비입니다.'
-        case 'repair':
-            return '수리 중인 장비입니다.'
-        default:
-            return 'AI 진단 데이터를 불러올 수 없습니다.'
-    }
-}
-
-// 상태별 스타일링 설정
-const getStatusStyle = (status: AiTextResult['status']): { icon: string } => {
-    switch(status) {
-        case 'danger':
-            return {
-                icon: '🚨'
-            };
-        case 'warning':
-            return {
-                icon: '⚠️'
-            };
-        case 'normal':
-            return {
-                icon: '✅'
-            };
-        case 'offline' :
-            return {
-                icon: '🔌'
-            };
-        case 'repair' :
-            return {
-                icon: '❓'
-            };
-        default:
-            return {
-                icon: '❓'
-            };
-    }
-}
-
+import { AI_DATA } from "@/mocks/";
+import { getStatusStyle } from '@/utils/statusUtils';
 
 export default function AiText({ areaId, deviceId }: AiTextProps) {
     // mockDeviceData에서 해당 장비 찾기
