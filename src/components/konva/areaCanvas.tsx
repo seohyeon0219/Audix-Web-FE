@@ -9,7 +9,7 @@ import DeviceNode from '@/components/konva/deviceNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
 import { MockDeviceData } from '@/mocks';
-import { getAreaLayout } from '@/constants/devicePosition';
+import { getAreaLayout } from '@/lib/konva/utils';
 
 interface AreaCanvasProps {
     areaId: string; // 어떤 구역인지 식별
