@@ -1,16 +1,11 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
 import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
+import { PeriodType, ValueChartDataPoint } from "@/types/deviceMonitoring";
 
-type PeriodType = 'monthly' | 'yearly';
-
-interface ChartDataPoint {
-    period: string;
-    value: number;
-}
 
 // mock data (2025년 월별)
-const generateMonthlyData2025 = (): ChartDataPoint[] => {
+const generateMonthlyData2025 = (): ValueChartDataPoint[] => {
     return [
         { period: '1월', value: 0.8 },
         { period: '2월', value: 0.9 },
@@ -28,7 +23,7 @@ const generateMonthlyData2025 = (): ChartDataPoint[] => {
 }
 
 // mock data (2021~2025 년도별)
-const generateYearlyData = (): ChartDataPoint[] => {
+const generateYearlyData = (): ValueChartDataPoint[] => {
     return [
         { period: '2021', value: 0.9 },
         { period: '2022', value: 0.8 },
