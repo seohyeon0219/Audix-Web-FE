@@ -1,14 +1,5 @@
 import Icon from '@/components/common/icon';
-
-interface LoginFormProps {
-    label: string;
-    placeholder: string;
-    iconname: string;
-    type?: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    className?: string;
-}
+import { LoginFormProps } from '@/types/auth';
 
 export default function LoginForm({
     label,

@@ -6,6 +6,7 @@ export interface AlarmDataCount {
     warning: number;
 }
 
+
 // areaType
 export interface AreaData {
     id: number;
@@ -13,6 +14,7 @@ export interface AreaData {
     address: string; // 울산 현대자동차 31라인
     status: string;
 }
+
 
 // deviceType
 export interface DeviceData {
@@ -26,6 +28,7 @@ export interface DeviceData {
     image?: string;
     status: string;
 }
+
 
 // recentDashboardType
 export interface RecentDashboardData {

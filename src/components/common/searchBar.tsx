@@ -1,9 +1,5 @@
 import Icon from '../common/icon';
-
-interface SearchBarProps {
-    placeholder: string;
-    iconname: string;
-}
+import { SearchBarProps } from '@/types/common';
 
 export default function SearchBar({ 
     placeholder, 

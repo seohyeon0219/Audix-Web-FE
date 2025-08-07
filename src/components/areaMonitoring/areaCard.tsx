@@ -3,14 +3,7 @@
 import { useRouter } from "next/navigation";
 import { getStatusStyleFromString } from '@/utils/statusUtils';
 import { AreaData } from "@/types/mocks";
-
-// 구역 카드 props 타입 정의
-export interface AreaCardProps {
-    data: AreaData;
-    index: number;
-    onClick?: (areaId: string) => void;
-}
-
+import { AreaCardProps } from "@/types/areaMonitoring";
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
     const router = useRouter();

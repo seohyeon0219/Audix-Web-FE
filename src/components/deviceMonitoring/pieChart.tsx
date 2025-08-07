@@ -1,12 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { MockDeviceData } from '@/mocks/data/deviceData';
-
-interface DevicePieChartProps {
-    areaId: string;
-    deviceId: string;
-    title?: string;
-}
+import { DevicePieChartProps } from '@/types/deviceMonitoring';
 
 const DevicePieChart: React.FC<DevicePieChartProps> = ({
     areaId,

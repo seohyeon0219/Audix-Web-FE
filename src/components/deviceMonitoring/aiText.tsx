@@ -1,14 +1,5 @@
 import { MockDeviceData } from "@/mocks";
-
-interface AiTextProps {
-    areaId: string;
-    deviceId: string;
-}
-
-interface AiTextResult {
-    status: 'warning' | 'danger' | 'normal' | 'repair' | 'offline';
-    message: string;
-}
+import { AiTextProps, AiTextResult } from '@/types/deviceMonitoring';
 
 // mock data
 const AI_DATA = (status: string, deviceName: string): string => {

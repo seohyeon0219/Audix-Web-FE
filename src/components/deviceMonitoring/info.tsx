@@ -1,13 +1,6 @@
 import { MockAreaData, MockDeviceData } from "@/mocks";
-import { AreaData } from "@/types/areaType";
-import { DeviceData } from '@/types/deviceType';
 
-interface DeviceInfoProps {
-    areaId: string;
-    deviceId: string;
-    area?: AreaData;
-    device?: DeviceData;
-}
+import { DeviceInfoProps } from "@/types/deviceMonitoring";
 
 // areaId, machindId로 장비 데이터 찾기
 const getDeviceData = (areaId: string, deviceId: string) => {

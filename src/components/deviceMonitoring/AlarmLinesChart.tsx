@@ -1,17 +1,11 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
 import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
+import { PeriodType, AlarmChartDataPoint, AlarmLinesChartProps } from "@/types/deviceMonitoring";
 
-type PeriodType = 'monthly' | 'yearly';
-
-interface ChartDataPoint {
-    period: string;
-    danger: number;
-    warning: number;
-}
 
 // mock data (2025년 월별)
-const generateMonthlyData2025 = (): ChartDataPoint[] => {
+const generateMonthlyData2025 = (): AlarmChartDataPoint[] => {
   return [
     { period: '1월', danger: 2, warning: 3 },
     { period: '2월', danger: 0, warning: 4 },
@@ -29,7 +23,7 @@ const generateMonthlyData2025 = (): ChartDataPoint[] => {
 };
 
 // mock data (2021~2025 년도별)
-const generateYearlyData = (): ChartDataPoint[] => {
+const generateYearlyData = (): AlarmChartDataPoint[] => {
     return [
         { period: '2021', danger: 5, warning: 13},
         { period: '2022', danger: 2, warning: 15},
@@ -50,9 +44,7 @@ const periodButtons = [
     { key: 'yearly' as PeriodType, label: '년도별'},
 ]
 
-interface AlarmLinesChartProps {
-    title?: string;
-}
+
 
 const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
     title = '알람 내역 그래프'

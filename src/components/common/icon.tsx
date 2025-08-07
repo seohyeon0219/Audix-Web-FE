@@ -1,11 +1,4 @@
-type IconProps = {
-    iconname: string;
-    size?: string | number;
-    color?: string;
-    weight?: number;
-    fill?: 0 | 1;
-    className?: string;
-};
+import { IconProps } from "@/types/common"
 
 export default function Icon ({ 
     iconname, 

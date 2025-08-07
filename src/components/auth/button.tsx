@@ -1,8 +1,4 @@
-interface ButtonProps {
-    children: React.ReactNode;
-    className?: string;
-    onClick?: () => void;
-}
+import { ButtonProps } from "@/types/auth"
 
 export default function Button({
     children,

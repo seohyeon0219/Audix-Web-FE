@@ -1,10 +1,5 @@
 import Link from "next/link";
-
-interface SidebarItemProps {
-    children: React.ReactNode;
-    className?: string;
-    href: string;
-}
+import { SidebarItemProps } from "@/types/common";
 
 export default function SidebarItem({
     children,
