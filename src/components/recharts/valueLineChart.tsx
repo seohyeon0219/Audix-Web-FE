@@ -1,16 +1,16 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
-import { PeriodType, ValueChartDataPoint, LinesChartProps } from "@/lib/recharts/types";
-import { generateValueChartData } from "@/lib/recharts/utils";
-import { PERIOD_BUTTONS, BUTTON_STYLES, CHART_STYLES, CHART_LABELS, CHART_DOMAINS, CHART_CONTAINER, RESPONSIVE_CONTAINER } from "@/lib/recharts/config";
-import { useChartPeriod, useValueChartData } from "@/hooks/useRecharts";
+import { LinesChartProps } from "@/types/recharts/common";
+import { PERIOD_BUTTONS, BUTTON_STYLES, CHART_STYLES, CHART_DOMAINS, CHART_CONTAINER, RESPONSIVE_CONTAINER, VALUE_LINE_CHART_LABELS } from "@/config/recharts";
+import { useChartPeriod, useValueLineChartData } from "@/hooks/recharts";
+import { PeriodButtons } from "@/types/recharts/common";
+import { STATUS_STYLES } from "@/constants/status";
 
 const ValueLineChart: React.FC<LinesChartProps> = ({
-    title = CHART_LABELS.value.title
+    title = VALUE_LINE_CHART_LABELS.value.title
 }) => {
     const { selectedPeriod, handlePeriodChange } = useChartPeriod();
-    const chartData = useValueChartData(selectedPeriod);
+    const chartData = useValueLineChartData(selectedPeriod);
 
     return (
         <div className={CHART_CONTAINER.wrapper}>
@@ -19,7 +19,7 @@ const ValueLineChart: React.FC<LinesChartProps> = ({
                     <h3 className={CHART_CONTAINER.titleStyle}>정상도 그래프</h3>
                 </div>
                 <div className={CHART_CONTAINER.buttonWrapper}>
-                    {PERIOD_BUTTONS.map(({ key, label }) => (
+                    {PERIOD_BUTTONS.map(({ key, label }: PeriodButtons) => (
                         <button
                             key={key}
                             onClick={() => handlePeriodChange(key)}
@@ -57,7 +57,7 @@ const ValueLineChart: React.FC<LinesChartProps> = ({
                                 axisLine={CHART_STYLES.axis.axisLine}
                                 tickLine={CHART_STYLES.axis.tickLine}
                                 tick={CHART_STYLES.axis.tick}
-                                tickFormatter={CHART_LABELS.value.yAxisFormatter}
+                                tickFormatter={VALUE_LINE_CHART_LABELS.value.yAxisFormatter}
                                 domain={CHART_DOMAINS.value}
                                 className={CHART_STYLES.axis.className}
                             />
@@ -78,7 +78,7 @@ const ValueLineChart: React.FC<LinesChartProps> = ({
                                     strokeWidth: CHART_STYLES.line.dot.strokeWidth,
                                     r: CHART_STYLES.line.dot.r
                                 }}
-                                name={CHART_LABELS.value.lineName}
+                                name={VALUE_LINE_CHART_LABELS.value.lineName}
                                 activeDot={{
                                     r: CHART_STYLES.line.dot.r,
                                     fill: STATUS_STYLES.NORMAL.hexColor,

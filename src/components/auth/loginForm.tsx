@@ -1,5 +1,5 @@
 import Icon from '@/components/common/icon';
-import { LoginFormProps } from '@/types/auth';
+import { FormProps } from '@/types/props/form';
 
 export default function LoginForm({
     label,
@@ -9,7 +9,7 @@ export default function LoginForm({
     value,
     onChange,
     className = ""
-}: LoginFormProps) {
+}: FormProps) {
     return (
         <div className={`flex flex-col gap-1 ${className}`}>
             <label className="text-xs text-login-gray">{label}</label>

@@ -1,17 +1,18 @@
-import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
-import { PeriodType, AlarmChartDataPoint, LinesChartProps } from "@/lib/recharts/types";
-import { generateAlarmChartData } from "@/lib/recharts/utils";
-import { PERIOD_BUTTONS, BUTTON_STYLES, CHART_STYLES, CHART_LABELS, CHART_DOMAINS, CHART_CONTAINER, RESPONSIVE_CONTAINER } from "@/lib/recharts/config";
-import { useAlarmChartData, useChartPeriod } from "@/hooks/useRecharts";
+import { LinesChartProps } from "@/types/recharts/common";
+import { PERIOD_BUTTONS, BUTTON_STYLES, CHART_STYLES, CHART_DOMAINS, CHART_CONTAINER, RESPONSIVE_CONTAINER } from "@/config/recharts";
+import { ALARM_LINES_CHART_LABELS } from "@/config/recharts";
+import { useChartPeriod } from "@/hooks/recharts";
+import { useAlarmLineChartData } from "@/hooks/recharts";
+import { PeriodButtons } from "@/types/recharts/common";
+import { STATUS_STYLES } from "@/constants/status";
 
 const AlarmLinesChart: React.FC<LinesChartProps> = ({
-    title = CHART_LABELS.alarm.title
+    title = ALARM_LINES_CHART_LABELS.alarm.title
 }) => {
     const { selectedPeriod, handlePeriodChange } = useChartPeriod();
-    const chartData = useAlarmChartData(selectedPeriod);
-    
+    const chartData = useAlarmLineChartData(selectedPeriod);
+
     return (
         <div className={CHART_CONTAINER.wrapper}>
             <div className={CHART_CONTAINER.headerWrapper}>
@@ -19,7 +20,7 @@ const AlarmLinesChart: React.FC<LinesChartProps> = ({
                     <h3 className={CHART_CONTAINER.titleStyle}>알람 내역 그래프</h3>
                 </div>
                 <div className={CHART_CONTAINER.buttonWrapper}>
-                    {PERIOD_BUTTONS.map(({ key, label }) => (
+                    {PERIOD_BUTTONS.map(({ key, label }: PeriodButtons) => (
                         <button
                             key={key}
                             onClick={() => handlePeriodChange(key)}
@@ -57,7 +58,7 @@ const AlarmLinesChart: React.FC<LinesChartProps> = ({
                             axisLine={CHART_STYLES.axis.axisLine}
                             tickLine={CHART_STYLES.axis.tickLine}
                             tick={CHART_STYLES.axis.tick}
-                            tickFormatter={CHART_LABELS.alarm.yAxisFormatter}
+                            tickFormatter={ALARM_LINES_CHART_LABELS.alarm.yAxisFormatter}
                             domain={CHART_DOMAINS.value}
                             className={CHART_STYLES.axis.className}
                         />
@@ -78,7 +79,7 @@ const AlarmLinesChart: React.FC<LinesChartProps> = ({
                                 strokeWidth: CHART_STYLES.line.dot.strokeWidth,
                                 r: CHART_STYLES.line.dot.r
                             }}
-                            name={CHART_LABELS.alarm.dangerLineName}
+                            name={ALARM_LINES_CHART_LABELS.alarm.dangerLineName}
                             activeDot={{
                                 r: CHART_STYLES.line.dot.r,
                                 fill: STATUS_STYLES.DANGER.hexColor,
@@ -97,7 +98,7 @@ const AlarmLinesChart: React.FC<LinesChartProps> = ({
                                 strokeWidth: CHART_STYLES.line.dot.strokeWidth,
                                 r: CHART_STYLES.line.dot.r
                             }}
-                            name={CHART_LABELS.alarm.warningLineName}
+                            name={ALARM_LINES_CHART_LABELS.alarm.warningLineName}
                             activeDot={{
                                 r: CHART_STYLES.line.dot.r,
                                 fill: STATUS_STYLES.WARNING.hexColor,

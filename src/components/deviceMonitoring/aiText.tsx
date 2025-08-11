@@ -1,5 +1,5 @@
-import { AiTextProps, AiTextResult } from '@/types/deviceMonitoring';
-import { useAiText } from "@/hooks/useDevice";
+import { AiTextProps } from "@/types/props/aiText";
+import { useAiText } from "@/hooks";
 
 export default function AiText({ areaId, deviceId }: AiTextProps) {
     

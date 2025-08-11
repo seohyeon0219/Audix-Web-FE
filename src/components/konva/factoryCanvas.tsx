@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Stage, Layer, Group, Rect, Text, Arrow } from 'react-konva';
-import { ProcessNode, FactoryCanvasProps } from "@/lib/konva/types";
-import { useFactoryNodeHandlers, useFactoryTooltip } from "@/hooks/useKonva";
-import { factoryConnections } from "@/lib/konva/mockData";
-import { getNodeStyle } from "@/lib/konva/utils";
-import { layoutNodes, processNodes } from "@/lib/konva/mockData";
+import { ProcessNode, FactoryCanvasProps } from "@/types/konva/index";
+import { useFactoryNodeRouter, useFactoryTooltip } from "@/hooks/konva";
+import { factoryConnections } from "@/mocks/konva/index";
+import { getNodeStyle } from "@/utils/konva/index";
+import { layoutNodes, processNodes } from "@/mocks/konva/index";
 
 
 export default function FactoryCanvas({
@@ -15,7 +15,7 @@ export default function FactoryCanvas({
     const router = useRouter();
 
     const { tooltip, showTooltip, hideTooltip } = useFactoryTooltip();
-    const { handleNodeClick, handleNodeHover, handleMouseEnter } = useFactoryNodeHandlers();
+    const { handleNodeClick, handleNodeHover, handleMouseEnter } = useFactoryNodeRouter();
 
     const onNodeHover = (node: ProcessNode, x: number, y: number) => {
         handleNodeHover(node, x, y, showTooltip);

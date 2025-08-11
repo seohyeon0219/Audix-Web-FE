@@ -3,15 +3,15 @@
 // 장비 노드
 import {Text, Group, Rect } from 'react-konva';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
-import { DeviceNodeProps } from '@/lib/konva/types';
-import { useHandlers } from '@/hooks/useKonva';
+import { DeviceNodeProps } from '@/types/konva/index';
+import { useDeviceInteraction } from '@/hooks/konva';
 
 export default function DeviceNode({ id, x, y, status, name, areaId, onClick, onHover, onLeave }: DeviceNodeProps) {
     const width = 60;
     const height = 40;
 
     const statusStyle = getStatusStyleFromString(status);
-    const { handleClick, handleMouseEnter, handleMouseLeave} = useHandlers(areaId.toString());
+    const { handleClick, handleMouseEnter, handleMouseLeave} = useDeviceInteraction(areaId.toString());
 
     return (
         <Group x={x} y={y}>

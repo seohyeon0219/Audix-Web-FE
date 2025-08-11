@@ -1,12 +1,12 @@
 'use client';
 
-import { ConveyorLineProps } from '@/lib/konva/types';
-import { CONVEYOR_CONFIG } from '@/lib/konva/config';
-import { useConveyorHandlers } from '@/hooks/useKonva';
+import { ConveyorLineProps } from '@/types/konva/index';
+import { CONVEYOR_CONFIG } from '@/config/konva/index';
+import { useConveyorTooltip } from '@/hooks/konva/index';
 import { Line } from 'react-konva';
 
 export default function ConveyorLine ({ points, onHover, onLeave }: ConveyorLineProps) {
-    const { handleMouseEnter, handleMouseLeave } = useConveyorHandlers();
+    const { handleMouseEnter, handleMouseLeave } = useConveyorTooltip();
 
     return (
         <Line

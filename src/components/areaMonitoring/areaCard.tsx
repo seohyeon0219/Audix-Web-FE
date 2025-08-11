@@ -1,7 +1,7 @@
 'use client';
 
-import { useAreaCard } from "@/hooks/useArea";
-import { AreaCardProps } from "@/types/areaMonitoring";
+import { useAreaCard } from "@/hooks/useAreaCard";
+import { AreaCardProps } from "@/types/props/areaCard";
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
     const { statusStyle, handleClick } = useAreaCard(data);

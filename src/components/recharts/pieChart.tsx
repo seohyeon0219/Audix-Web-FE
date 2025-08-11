@@ -1,9 +1,9 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { MockDeviceData } from '@/mocks/data/deviceData';
-import { DevicePieChartProps } from '@/lib/recharts/types';
-import { useDevicePieChart } from '@/hooks/useRecharts';
-import { RESPONSIVE_CONTAINER } from '@/lib/recharts/config';
+import { MockDeviceData } from '@/mocks/deviceData';
+import { DevicePieChartProps } from '@/types/recharts/pieChart';
+import { useDevicePieChart } from '@/hooks/recharts';
+import { RESPONSIVE_CONTAINER } from '@/config/recharts';
 
 const DevicePieChart: React.FC<DevicePieChartProps> = ({
     areaId,

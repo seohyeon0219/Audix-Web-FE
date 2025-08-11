@@ -1,4 +1,4 @@
-import { alarms } from "@/mocks/data/alarmData";
+import { alarms } from "@/mocks/alarmData";
 
 export default function AlarmDashboard() {
     return (

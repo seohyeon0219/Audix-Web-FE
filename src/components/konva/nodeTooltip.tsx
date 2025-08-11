@@ -1,6 +1,6 @@
 'use client';
 
-import { NodeTooltipProps } from '@/lib/konva/types';
+import { NodeTooltipProps } from '@/types/konva/index';
 
 // 호버 시 툴팁 표시
 import { Group, Rect, Text } from 'react-konva';

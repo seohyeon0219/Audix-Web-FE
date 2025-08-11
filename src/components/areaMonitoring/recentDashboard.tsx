@@ -1,4 +1,4 @@
-import { getStatusStyleFromString, STATUS_STYLES } from "@/utils/statusUtils";
+import { getStatusStyleFromString } from "@/utils/statusUtils";
 import { mockRecentDashboardData } from '@/mocks';
 
 export default function RecentDashboard() {

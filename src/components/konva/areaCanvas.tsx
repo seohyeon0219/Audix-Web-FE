@@ -1,23 +1,20 @@
 'use client';
 
 // 전체 구역 지도 메인 컨테이너
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Stage, Layer } from 'react-konva';
 import DeviceNode from '@/components/konva/deviceNode';
 import ConveyorLine from '@/components/konva/conveyorLine';
 import NodeTooltip from '@/components/konva/nodeTooltip';
-import { MockDeviceData } from '@/mocks';
-import { getAreaLayout } from '@/lib/konva/utils';
-import { AreaCanvasProps } from '@/types/areaMonitoring';
-import { CANVAS_CONFIG } from '@/lib/konva/config';
-import { useHandlers, useTooltip, useAreaData } from '@/hooks/useKonva';
-import { useEffect } from 'react';
+import { AREA_CANVAS_CONFIG } from '@/config/konva/index';
+import { useDeviceInteraction } from '@/hooks/konva';
+import { useAreaData } from '@/hooks/konva';
+import { useAreaTooltip } from '@/hooks/konva';
+import { AreaCanvasProps } from '@/types/props/areaCanvas';
 
-export default function AreaCanvas({ areaId, width = CANVAS_CONFIG.defaultWidth, height = CANVAS_CONFIG.defaultHeight }: AreaCanvasProps) {
+export default function AreaCanvas({ areaId, width = AREA_CANVAS_CONFIG.defaultWidth, height = AREA_CANVAS_CONFIG.defaultHeight }: AreaCanvasProps) {
 
-    const { tooltip, showTooltip, hideTooltip } = useTooltip();
-    const { handleClick, handleHover } = useHandlers(areaId);
+    const { tooltip, showTooltip, hideTooltip } = useAreaTooltip();
+    const { handleClick, handleHover } = useDeviceInteraction(areaId);
     const { devicesWithPositions, areaLayout } = useAreaData(areaId);
 
     const onDeviceHover = (deviceId: string, x: number, y: number) => {
