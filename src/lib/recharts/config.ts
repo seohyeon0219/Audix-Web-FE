@@ -93,7 +93,7 @@ export const CHART_CONTAINER = {
     headerWrapper: 'felx items-center justify-between mb-6',
     titleWrapper: 'div',
     titleStyle: 'text-white text-lg font-medium',
-    buttonWrapper: 'flex gap-2',
+    buttonWrapper: 'flex gap-2 mt-4',
     chartWrapper: 'h-80',
     container: {
         backgrounded: 'bg-main-100',

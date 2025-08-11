@@ -6,12 +6,12 @@ import { getStatusStyleFromString } from '@/utils/statusUtils';
 import { DeviceNodeProps } from '@/lib/konva/types';
 import { useHandlers } from '@/hooks/useKonva';
 
-export default function DeviceNode({ id, x, y, status, name, onClick, onHover, onLeave }: DeviceNodeProps) {
+export default function DeviceNode({ id, x, y, status, name, areaId, onClick, onHover, onLeave }: DeviceNodeProps) {
     const width = 60;
     const height = 40;
 
     const statusStyle = getStatusStyleFromString(status);
-    const { handleClick, handleMouseEnter, handleMouseLeave} = useHandlers(id);
+    const { handleClick, handleMouseEnter, handleMouseLeave} = useHandlers(areaId.toString());
 
     return (
         <Group x={x} y={y}>

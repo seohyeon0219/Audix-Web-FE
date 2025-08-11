@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Stage, Layer, Group, Rect, Text, Arrow } from 'react-konva';
 import { ProcessNode, FactoryCanvasProps } from "@/lib/konva/types";
-import { useFactoryTooltip } from "@/hooks/useKonva";
-import { factoryConnections, factoryNodes } from "@/lib/konva/mockData";
+import { useFactoryNodeHandlers, useFactoryTooltip } from "@/hooks/useKonva";
+import { factoryConnections } from "@/lib/konva/mockData";
+import { getNodeStyle } from "@/lib/konva/utils";
+import { layoutNodes, processNodes } from "@/lib/konva/mockData";
 
 
 export default function FactoryCanvas({
@@ -13,77 +15,14 @@ export default function FactoryCanvas({
     const router = useRouter();
 
     const { tooltip, showTooltip, hideTooltip } = useFactoryTooltip();
+    const { handleNodeClick, handleNodeHover, handleMouseEnter } = useFactoryNodeHandlers();
 
-
-
-    // 레벨별 스타일 정의 함수 추가
-    const getNodeStyle = (level: ProcessNode['level']) => {
-        switch (level) {
-            case 'factory':
-                return {
-                    fill: '#303957',
-                    stroke: '#ffffff',
-                    strokeWidth: 2,
-                    textColor: '#ffffff'
-                };
-            case 'line':
-                return {
-                    fill: '#212E59',
-                    stroke: '#ffffff',
-                    strokeWidth: 2,
-                    textColor: '#ffffff'
-                };
-            case 'process':
-                return {
-                    fill: '#ffffff',
-                    stroke: '#333333',
-                    strokeWidth: 1,
-                    textColor: '#333333'
-                };
-            case 'material':
-                return {
-                    fill: '#f0f0f0',
-                    stroke: '#666666',
-                    strokeWidth: 1,
-                    textColor: '#333333'
-                }
-            default:
-                return {
-                    fill: '#ffffff',
-                    stroke: '#333333',
-                    strokeWidth: 1,
-                    textColor: '#333333'
-                };
-        };
+    const onNodeHover = (node: ProcessNode, x: number, y: number) => {
+        handleNodeHover(node, x, y, showTooltip);
     }
 
-    // 노드 클릭 핸들러
-    const handleNodeClick = (nodeId: string) => {
-        if (nodeId === 'process') {
-            router.push('/area/1');
-        } else if (nodeId === 'material') {
-            router.push('/area/2')
-        } else if (nodeId === 'painting') {
-            router.push('/area/3')
-        } else if (nodeId === 'assembly') {
-            router.push('/area/4')
-        }
-    };
-
-    // 노드 호버 핸들러
-    const handleNodeHover = (node: ProcessNode, x: number, y: number) => {
-        const levelLabel = {
-            factory: '공장',
-            line: '라인',
-            process: '공정',
-            material: '차체'
-        }[node.level];
-
-        showTooltip(node.name, levelLabel || '알 수 없음', x, y);
-    };
-
     return (
-        <div className="border border-white rounded-lg bg-main-900">
+        <div className="bg-gray-400">
             <Stage width={width} height={height}>
                 <Layer>
                     {/* 화살표 */}
@@ -103,8 +42,40 @@ export default function FactoryCanvas({
                             pointerWidth={8}
                         />
                     ))}
-                    {/* 노드들 */}
-                    {factoryNodes.map((node) => {
+                    {/* 레이아웃 노드들 */}
+                    {layoutNodes.map((node) => {
+                        const style = getNodeStyle(node.level);
+
+                        return (
+                            <Group key={node.id}>
+                                <Rect
+                                    x={node.x}
+                                    y={node.y}
+                                    width={node.width}
+                                    height={node.height}
+                                    fill={style.fill}
+                                    stroke={style.stroke}
+                                    strokeWidth={style.strokeWidth}
+                                    cursor="default"
+                                    />
+
+                                    <Text
+                                        x={node.x + node.width / 2}
+                                        y={node.y + node.height / 2}
+                                        text={node.name}
+                                        fontSize={node.level === 'process' ? 14 : 16}
+                                        fontStyle={node.level !== 'process' ? 'bold' : 'normal'}
+                                        fill={style.textColor}
+                                        align="center"
+                                        verticalAlign="middle"
+                                        offsetX={node.name.length * (node.level === 'process' ? 7 : 8)}
+                                        offsetY={7}
+                                    />
+                            </Group>
+                        )
+                    })}
+                    {/* 프로세스 노드들 */}
+                    {processNodes.map((node) => {
                         const style = getNodeStyle(node.level);
 
                         return (
@@ -120,16 +91,13 @@ export default function FactoryCanvas({
                                     // cornerRadius={8}
                                     cursor={node.level === 'process' ? 'pointer' : 'default'}
                                     onClick={() => handleNodeClick(node.id)}
-                                    onMouseEnter={(e) => {
-                                        const pos = e.target.getStage()?.getPointerPosition();
-                                        if (pos) handleNodeHover(node, pos.x, pos.y);
-                                    }}
+                                    onMouseEnter={(e) => handleMouseEnter(e, node, onNodeHover)}
                                     onMouseLeave={() => hideTooltip()}
                                     />
 
                                     <Text
                                         x={node.x + node.width / 2}
-                                        y={node.y + (node.level === 'factory' || node.level === 'line' ? 20 : node.height / 2)}
+                                        y={node.y + node.height / 2}
                                         text={node.name}
                                         fontSize={node.level === 'process' ? 14 : 16}
                                         fontStyle={node.level !== 'process' ? 'bold' : 'normal'}

@@ -13,6 +13,7 @@ export interface DeviceNodeProps {
     x: number;
     y: number;
     status: string;
+    areaId: number;
     name: string;
     onClick: (id: string) => void;
     onHover?: (id: string, x: number, y: number) => void;
@@ -66,6 +67,9 @@ export interface ConveyorLineProps {
 }
 
 // factoryCanvas
+export type NodeLevel = 'factory' | 'line' | 'process';
+export type StatusType = 'normal' | 'warning' | 'danger';
+
 export interface ProcessNode {
     id: string;
     name: string;
@@ -73,8 +77,22 @@ export interface ProcessNode {
     y: number;
     width: number;
     height: number;
-    level: 'factory' | 'line' | 'process' | 'material';
+    level: 'factory' | 'process';
+    areaId: number;
+    address: string;
+    status: StatusType;
 }
+
+export interface LayoutNode {
+    id: string;
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    level: 'factory' | 'process';
+}
+
 
 export interface FactoryCanvasProps {
     width?: number;

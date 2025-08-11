@@ -12,6 +12,7 @@ import { getAreaLayout } from '@/lib/konva/utils';
 import { AreaCanvasProps } from '@/types/areaMonitoring';
 import { CANVAS_CONFIG } from '@/lib/konva/config';
 import { useHandlers, useTooltip, useAreaData } from '@/hooks/useKonva';
+import { useEffect } from 'react';
 
 export default function AreaCanvas({ areaId, width = CANVAS_CONFIG.defaultWidth, height = CANVAS_CONFIG.defaultHeight }: AreaCanvasProps) {
 
@@ -42,6 +43,7 @@ export default function AreaCanvas({ areaId, width = CANVAS_CONFIG.defaultWidth,
                             name={device.name}
                             x={device.x}
                             y={device.y}
+                            areaId={parseInt(areaId)}
                             status={device.status}
                             onClick={handleClick}
                             onHover={onDeviceHover}

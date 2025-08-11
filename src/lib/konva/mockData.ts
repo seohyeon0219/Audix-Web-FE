@@ -1,5 +1,5 @@
 import { AreaLayout } from '@/lib/konva/config';
-import { ProcessNode, Connection } from './types';
+import { ProcessNode, LayoutNode, Connection } from './types';
 
 // 공정별 레이아웃 데이터
 export const DEVICE_POSITIONS: AreaLayout[] = [
@@ -74,9 +74,10 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
 
 
 // factoryCanvas
-export const factoryNodes: ProcessNode[] = [
+// 레이아웃 노드
+export const layoutNodes: LayoutNode[] = [
     {
-        id: 'factory3',
+        id: 'layout1',
         name: '3공장',
         x: 50,
         y: 50,
@@ -85,51 +86,68 @@ export const factoryNodes: ProcessNode[] = [
         level: 'factory'
     },
     {
-        id: 'process',
-        name: '프레스동',
-        x: 70,
-        y: 100,
-        width: 140,
-        height: 200,
-        level: 'process'
-    },
-    {
-        id: 'line31',
+        id: 'layout2',
         name: '3-1라인',
         x: 300,
         y: 50,
         width: 450,
         height: 300,
-        level: 'line'
+        level: 'factory'
+    }
+];
+
+// 프로세스 노드
+export const processNodes: ProcessNode[] = [
+    {
+        id: 'process1',
+        name: '프레스동',
+        x: 70,
+        y: 100,
+        width: 140,
+        height: 200,
+        level: 'process',
+        areaId: 1,
+        address: '울산 현대자동차 31라인',
+        status: 'normal'
     },
     {
-        id: 'material',
-        name: '차제동',
+        id: 'process2',
+        name: '차체동',
         x: 320,
         y: 100,
-        width: 120,
+        width: 140,
         height: 200,
-        level: 'process'
+        level: 'process',
+        areaId: 2,
+        address: '울산 현대자동차 31라인',
+        status: 'normal'
     },
     {
-        id: 'painting',
+        id: 'process3',
         name: '도장공정',
         x: 460,
         y: 100,
-        width: 120,
+        width: 140,
         height: 200,
-        level: 'process'
+        level: 'process',
+        areaId: 3,
+        address: '울산 현대자동차 31라인',
+        status: 'warning'
     },
     {
-        id: 'assembly',
+        id: 'process4',
         name: '의장공정',
         x: 600,
         y: 100,
-        width: 120,
+        width: 140,
         height: 200,
-        level: 'process'
+        level: 'process',
+        areaId: 4,
+        address: '울산 현대자동차 31라인',
+        status: 'danger'
     },
 ]
+
 
 
 export const factoryConnections: Connection[] = [

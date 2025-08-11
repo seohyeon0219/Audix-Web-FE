@@ -3,6 +3,7 @@ import { AiTextProps, AiTextResult } from "@/types/deviceMonitoring"
 import { getStatusStyle, getStatusStyleFromString } from "@/utils/statusUtils";
 import { useMemo } from "react"
 import { DeviceInfoProps } from "@/types/deviceMonitoring";
+import { useRef } from "react";
 
 // aiText
 export const useAiText = ({ areaId, deviceId }: AiTextProps) => {
@@ -61,3 +62,4 @@ export const useInfo = ({ areaId, deviceId }: DeviceInfoProps) => {
         deviceStatus
     };
 }
+
