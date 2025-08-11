@@ -1,18 +1,10 @@
 'use client';
 
-import { useRouter } from "next/navigation";
-import { getStatusStyleFromString } from '@/utils/statusUtils';
-import { AreaData } from "@/types/mocks";
+import { useAreaCard } from "@/hooks/useArea";
 import { AreaCardProps } from "@/types/areaMonitoring";
 
 export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
-    const router = useRouter();
-
-    const statusStyle = getStatusStyleFromString(data.status);
-
-    const handleClick = () => {
-        router.push(`/area/${data.id}`);
-    };
+    const { statusStyle, handleClick } = useAreaCard(data);
 
     return (
         <div

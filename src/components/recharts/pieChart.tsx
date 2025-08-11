@@ -1,17 +1,16 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { MockDeviceData } from '@/mocks/data/deviceData';
-import { DevicePieChartProps } from '@/types/deviceMonitoring';
+import { DevicePieChartProps } from '@/lib/recharts/types';
+import { useDevicePieChart } from '@/hooks/useRecharts';
+import { RESPONSIVE_CONTAINER } from '@/lib/recharts/config';
 
 const DevicePieChart: React.FC<DevicePieChartProps> = ({
     areaId,
     deviceId,
     title
 }) => {
-    // 특정 장비 찾기
-    const device = MockDeviceData.find(d =>
-        d.areaId === parseInt(areaId) && d.deviceId === parseInt(deviceId)
-    );
+    const { device, chartData } = useDevicePieChart(areaId, deviceId);
 
     // device이 없는 경우 처리
     if (!device) {
@@ -37,24 +36,7 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
         )
     }
 
-    // value를 percentage로 변환
-    const percentage = Math.round(device.normalScore * 100);
-
-    // completed : percentage, remaining : 남은 부분
-    const data = [
-        { name: 'completed', value: percentage },
-        { name: 'remaining', value: 100 - percentage }
-    ];
-
-    // 상태에 따른 색상
-    const getColorByValue = (value: number) => {
-        if (value >= 80) return "#1CAA00";
-        if (value >= 40) return "#FFC525";
-        return "#FF2F16";
-    };
-
-    const mainColor = getColorByValue(percentage);
-    const COLORS = [mainColor, "#F2F2F2"];
+    const { data, colors, percentage } = chartData!;
 
     return (
         <div className='flex gap-10 bg-main-100 p-6 rounded-lg'>
@@ -63,7 +45,7 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
             </h2>
             <div className='flex'>
                 <div className='relative w-32 h-32'>
-                    <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width={RESPONSIVE_CONTAINER.width} height={RESPONSIVE_CONTAINER.height}>
                         <PieChart>
                             <Pie
                                 data={data}
@@ -79,7 +61,7 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
                                 animationDuration={800}
                             >
                                 {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index]} />
+                                    <Cell key={`cell-${index}`} fill={colors[index]} />
                                 ))}
                             </Pie>
                         </PieChart>

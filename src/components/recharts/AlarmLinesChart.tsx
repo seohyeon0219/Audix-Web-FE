@@ -1,39 +1,32 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
 import { STATUS_STYLES, getStatusStyleFromString } from "@/utils/statusUtils";
-import { PeriodType, AlarmChartDataPoint, AlarmLinesChartProps } from "@/types/deviceMonitoring";
+import { PeriodType, AlarmChartDataPoint, LinesChartProps } from "@/lib/recharts/types";
 import { generateAlarmChartData } from "@/lib/recharts/utils";
-import { PERIOD_BUTTONS } from "@/lib/recharts/config";
+import { PERIOD_BUTTONS, BUTTON_STYLES, CHART_STYLES, CHART_LABELS, CHART_DOMAINS, CHART_CONTAINER, RESPONSIVE_CONTAINER } from "@/lib/recharts/config";
+import { useAlarmChartData, useChartPeriod } from "@/hooks/useRecharts";
 
-const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
-    title = '알람 내역 그래프'
+const AlarmLinesChart: React.FC<LinesChartProps> = ({
+    title = CHART_LABELS.alarm.title
 }) => {
-    const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('monthly');
-
-    // 선택한 기간에 따른 데이터 생성
-    const chartData = useMemo(() => {
-        return generateAlarmChartData(selectedPeriod);
-    }, [selectedPeriod]);
-
-    const handlePeriodChange = (period: PeriodType) => {
-        setSelectedPeriod(period);
-    };
-
+    const { selectedPeriod, handlePeriodChange } = useChartPeriod();
+    const chartData = useAlarmChartData(selectedPeriod);
+    
     return (
-        <div className="bg-main-100 p-6 rounded-lg">
-            <div className="flex items-center justify-between mb-6">
+        <div className={CHART_CONTAINER.wrapper}>
+            <div className={CHART_CONTAINER.headerWrapper}>
                 <div>
-                    <h3 className="text-white text-lg font-medium">알람 내역 그래프</h3>
+                    <h3 className={CHART_CONTAINER.titleStyle}>알람 내역 그래프</h3>
                 </div>
-                <div className="flex gap-2">
+                <div className={CHART_CONTAINER.buttonWrapper}>
                     {PERIOD_BUTTONS.map(({ key, label }) => (
                         <button
                             key={key}
                             onClick={() => handlePeriodChange(key)}
-                            className={`px-4 py-2 text-sm rounded transition-colors cursor-pointer ${
+                            className={`${BUTTON_STYLES.base} ${
                                 selectedPeriod === key
-                                    ? 'bg-main-500 text-white'
-                                    : 'text-white hover:bg-main-500 hover:text-white'
+                                    ? BUTTON_STYLES.active
+                                    : BUTTON_STYLES.inactive
                             }`}
                         >
                             {label}
@@ -41,76 +34,75 @@ const AlarmLinesChart: React.FC<AlarmLinesChartProps> = ({
                     ))}
                 </div>
             </div>
-            <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
+            <div className={CHART_CONTAINER.chartWrapper}>
+                <ResponsiveContainer width={RESPONSIVE_CONTAINER.width} height={RESPONSIVE_CONTAINER.height}>
                     <LineChart
                         data={chartData}
-                        margin={{ top: 20, right: 30, left: 20, bottom: 20}}
+                        margin={CHART_STYLES.margin}
                     >
                         <CartesianGrid
-                            strokeDasharray="3 3"
-                            stroke="#808080"
-                            horizontal={true}
-                            vertical={false}
+                            strokeDasharray={CHART_STYLES.grid.strokeDasharray}
+                            stroke={CHART_STYLES.grid.stroke}
+                            horizontal={CHART_STYLES.grid.horizontal}
+                            vertical={CHART_STYLES.grid.vertical}
                         />
                         <XAxis
                             dataKey="period"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{
-                                fill: "#9CA3AF",
-                                fontSize: 12
-                            }}
-                            className="text-xs"
+                            axisLine={CHART_STYLES.axis.axisLine}
+                            tickLine={CHART_STYLES.axis.tickLine}
+                            tick={CHART_STYLES.axis.tick}
+                            className={CHART_STYLES.axis.className}
                         />
                         <YAxis
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{
-                                fill: "#9CA3AF",
-                                fontSize: 12
-                            }}
-                            tickFormatter={(value) => `${value}건`}
-                            domain={[0, 'dataMax']}
-                            className="text-xs"
+                            axisLine={CHART_STYLES.axis.axisLine}
+                            tickLine={CHART_STYLES.axis.tickLine}
+                            tick={CHART_STYLES.axis.tick}
+                            tickFormatter={CHART_LABELS.alarm.yAxisFormatter}
+                            domain={CHART_DOMAINS.value}
+                            className={CHART_STYLES.axis.className}
                         />
                         <Legend
-                            verticalAlign="top"
-                            height={40}
-                            iconType="circle"
-                            wrapperStyle={{
-                                color: "#9CA3AF",
-                                paddingBottom: '20px'
-                            }}
+                            verticalAlign={CHART_STYLES.legend.verticalAlign}
+                            height={CHART_STYLES.legend.height}
+                            iconType={CHART_STYLES.legend.iconType}
+                            wrapperStyle={CHART_STYLES.legend.wrapperStyle}
                         />
                         {/* 위험 라인 */}
                         <Line
-                            type='monotone'
+                            type={CHART_STYLES.line.type}
                             dataKey="danger"
                             stroke={STATUS_STYLES.DANGER.hexColor}
-                            strokeWidth={3}
-                            dot={{ fill: STATUS_STYLES.DANGER.hexColor, strokeWidth: 2, r: 5 }}
-                            name={STATUS_STYLES.DANGER.label}
+                            strokeWidth={CHART_STYLES.line.strokeWidth}
+                            dot={{ 
+                                fill: STATUS_STYLES.DANGER.hexColor, 
+                                strokeWidth: CHART_STYLES.line.dot.strokeWidth,
+                                r: CHART_STYLES.line.dot.r
+                            }}
+                            name={CHART_LABELS.alarm.dangerLineName}
                             activeDot={{
-                                r: 7,
+                                r: CHART_STYLES.line.dot.r,
                                 fill: STATUS_STYLES.DANGER.hexColor,
                                 stroke: STATUS_STYLES.DANGER.hexColor,
-                                strokeWidth: 2
+                                strokeWidth: CHART_STYLES.line.activeDot.strokeWidth,
                             }}
                         />
                         {/* 점검요망 라인 */}
                         <Line
-                            type='monotone'
+                            type={CHART_STYLES.line.type}
                             dataKey="warning"
                             stroke={STATUS_STYLES.WARNING.hexColor}
-                            strokeWidth={3}
-                            dot={{ fill: STATUS_STYLES.WARNING.hexColor, strokeWidth: 2, r: 5 }}
-                            name={STATUS_STYLES.WARNING.label}
+                            strokeWidth={CHART_STYLES.line.strokeWidth}
+                            dot={{ 
+                                fill: STATUS_STYLES.WARNING.hexColor, 
+                                strokeWidth: CHART_STYLES.line.dot.strokeWidth,
+                                r: CHART_STYLES.line.dot.r
+                            }}
+                            name={CHART_LABELS.alarm.warningLineName}
                             activeDot={{
-                                r: 7,
+                                r: CHART_STYLES.line.dot.r,
                                 fill: STATUS_STYLES.WARNING.hexColor,
                                 stroke: STATUS_STYLES.WARNING.hexColor,
-                                strokeWidth: 2
+                                strokeWidth: CHART_STYLES.line.activeDot.strokeWidth,
                             }}
                         />
                     </LineChart>
