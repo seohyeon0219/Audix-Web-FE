@@ -1,4 +1,4 @@
-import { ValueChartDataPoint, AlarmChartDataPoint } from "@/types/deviceMonitoring";
+import { ValueChartDataPoint, AlarmChartDataPoint } from "@/lib/recharts/types";
 
 // common
 
