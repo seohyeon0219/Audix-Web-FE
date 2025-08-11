@@ -1,4 +1,5 @@
 import { AreaLayout } from '@/lib/konva/config';
+import { ProcessNode, Connection } from './types';
 
 // 공정별 레이아웃 데이터
 export const DEVICE_POSITIONS: AreaLayout[] = [
@@ -69,4 +70,71 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
             { points: [300, 350, 950, 350 ] },
         ]
     },
+]
+
+
+// factoryCanvas
+export const factoryNodes: ProcessNode[] = [
+    {
+        id: 'factory3',
+        name: '3공장',
+        x: 50,
+        y: 50,
+        width: 180,
+        height: 300,
+        level: 'factory'
+    },
+    {
+        id: 'process',
+        name: '프레스동',
+        x: 70,
+        y: 100,
+        width: 140,
+        height: 200,
+        level: 'process'
+    },
+    {
+        id: 'line31',
+        name: '3-1라인',
+        x: 300,
+        y: 50,
+        width: 450,
+        height: 300,
+        level: 'line'
+    },
+    {
+        id: 'material',
+        name: '차제동',
+        x: 320,
+        y: 100,
+        width: 120,
+        height: 200,
+        level: 'process'
+    },
+    {
+        id: 'painting',
+        name: '도장공정',
+        x: 460,
+        y: 100,
+        width: 120,
+        height: 200,
+        level: 'process'
+    },
+    {
+        id: 'assembly',
+        name: '의장공정',
+        x: 600,
+        y: 100,
+        width: 120,
+        height: 200,
+        level: 'process'
+    },
+]
+
+
+export const factoryConnections: Connection[] = [
+    {
+        from: { x: 230, y: 140 },
+        to: { x: 295, y: 140 }
+    }
 ]

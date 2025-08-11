@@ -3,13 +3,15 @@
 // 장비 노드
 import {Text, Group, Rect } from 'react-konva';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
-import { DeviceNodeProps } from '@/types/deviceMonitoring';
+import { DeviceNodeProps } from '@/lib/konva/types';
+import { useHandlers } from '@/hooks/useKonva';
 
 export default function DeviceNode({ id, x, y, status, name, onClick, onHover, onLeave }: DeviceNodeProps) {
     const width = 60;
     const height = 40;
 
     const statusStyle = getStatusStyleFromString(status);
+    const { handleClick, handleMouseEnter, handleMouseLeave} = useHandlers(id);
 
     return (
         <Group x={x} y={y}>
@@ -21,12 +23,9 @@ export default function DeviceNode({ id, x, y, status, name, onClick, onHover, o
                 fill={statusStyle.hexColor}
                 strokeWidth={2}
                 cornerRadius={5}
-                onClick={() => onClick(id)}
-                onMouseEnter={(e) => {
-                    const pos = e.target.getStage()?.getPointerPosition();
-                    if (pos && onHover) onHover?.(id, pos.x, pos.y);
-                }}
-                onMouseLeave={() => onLeave?.()}
+                onClick={() => handleClick(id)}
+                onMouseEnter={(e) => handleMouseEnter(e, id, onHover)}
+                onMouseLeave={() => handleMouseLeave(onLeave)}
                 style={{ cursor: 'pointer' }}
             />
             {/*  사각형 안에 장비 ID 표시 */}

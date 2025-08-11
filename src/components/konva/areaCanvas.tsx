@@ -10,74 +10,19 @@ import NodeTooltip from '@/components/konva/nodeTooltip';
 import { MockDeviceData } from '@/mocks';
 import { getAreaLayout } from '@/lib/konva/utils';
 import { AreaCanvasProps } from '@/types/areaMonitoring';
+import { CANVAS_CONFIG } from '@/lib/konva/config';
+import { useHandlers, useTooltip, useAreaData } from '@/hooks/useKonva';
 
-export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCanvasProps) {
+export default function AreaCanvas({ areaId, width = CANVAS_CONFIG.defaultWidth, height = CANVAS_CONFIG.defaultHeight }: AreaCanvasProps) {
 
-    const router = useRouter();
-    const areaIdNum = parseInt(areaId);
+    const { tooltip, showTooltip, hideTooltip } = useTooltip();
+    const { handleClick, handleHover } = useHandlers(areaId);
+    const { devicesWithPositions, areaLayout } = useAreaData(areaId);
 
-    // 마우스 호버 시 보여줄 툴팁 데이터
-    const [tooltip, setTooltip] = useState<{
-        visible: boolean;
-        x: number;
-        y: number;
-        data: any;
-        type?: 'device' | 'conveyor' | null;
-    }>({
-        visible: false,
-        x: 0,
-        y: 0,
-        data: null,
-        type: null
-    });
-
-    // 1. 해당 구역의 mock data 가져오기
-    const areaDevices = MockDeviceData.filter(device => device.areaId === areaIdNum);
-
-    // 2. 해당 구역의 layout 정보 가져오기
-    const areaLayout = getAreaLayout(areaIdNum);
-
-    // 3. 장비 데이터와 좌표 정보 결합
-    const devicesWithPositions = areaDevices.map(device => {
-        const position = areaLayout?.devices.find(d => d.deviceId === device.deviceId);
-        return {
-            ...device,
-            x: position?.x || 0,
-            y: position?.y || 0
-        }
-    });
-
-    // 장비 클릭 핸들러
-    const handleDeviceClick = (deviceId: string) => {
-        router.push(`/area/${areaId}/device/${deviceId}`);
-    };
-
-    // 장비 호버 핸들러
-    const handleDeviceHover = (deviceId: string, x: number, y: number) => {
-        const device = MockDeviceData.find(d => d.deviceId === parseInt(deviceId));
-        if (device) {
-            setTooltip({
-            visible: true,
-            x: x,
-            y: y,
-            data: {
-                name: device.name,
-                model: device.model,
-                status: device.status                    
-            }
-        });
-        }
-    };
-
-    const handleDeviceLeave = () => {
-        setTooltip({
-            visible: false,
-            x: 0,
-            y: 0,
-            data: null
-        });
-    };
-
+    const onDeviceHover = (deviceId: string, x: number, y: number) => {
+        handleHover(deviceId, x, y, showTooltip);
+    }
+    
      return (
         <div className='border border-white'> 
             <Stage width={width} height={height}>
@@ -98,9 +43,9 @@ export default function AreaCanvas({ areaId, width = 800, height = 500 }: AreaCa
                             x={device.x}
                             y={device.y}
                             status={device.status}
-                            onClick={handleDeviceClick}
-                            onHover={handleDeviceHover}
-                            onLeave={handleDeviceLeave}
+                            onClick={handleClick}
+                            onHover={onDeviceHover}
+                            onLeave={hideTooltip}
                         />
                     ))}
                     {/* 툴팁 */}

@@ -1,28 +1,22 @@
 'use client';
 
-import { ConveyorLineProps } from '@/types/deviceMonitoring';
-
-// 컨베이어 라인 (흰색 선)
+import { ConveyorLineProps } from '@/lib/konva/types';
+import { CONVEYOR_CONFIG } from '@/lib/konva/config';
+import { useConveyorHandlers } from '@/hooks/useKonva';
 import { Line } from 'react-konva';
 
 export default function ConveyorLine ({ points, onHover, onLeave }: ConveyorLineProps) {
-    const handleHover = (x: number, y: number) => {
-        onHover?.('conveyor', x, y); // 항상 conveyor
-    }
+    const { handleMouseEnter, handleMouseLeave } = useConveyorHandlers();
+
     return (
         <Line
             points={points}
-            stroke='#808080'
-            strokeWidth={50}
-            lineCap='square'
-            lineJoin='round'
-            onMouseEnter = {(e) => {
-                const pos = e.target.getStage()?.getPointerPosition();
-                if (pos) onHover?.('conveyor', pos.x, pos.y);
-            }}
-            onMouseLeave={() => {
-                onLeave?.(); // 툴팁 숨기기;
-            }}
+            stroke={CONVEYOR_CONFIG.stroke}
+            strokeWidth={CONVEYOR_CONFIG.strokeWidth}
+            lineCap={CONVEYOR_CONFIG.lineCap}
+            lineJoin={CONVEYOR_CONFIG.lineJoin}
+            onMouseEnter = {(e) => handleMouseEnter(e, onHover)}
+            onMouseLeave={() => handleMouseLeave(onLeave)}
         />
     )
 }
