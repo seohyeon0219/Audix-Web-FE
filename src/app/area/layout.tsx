@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import SidebarItem from "@/components/common/sidebarItem";
-import { NAV_ITEMS } from "@/constants/navItems";
+import { SIDEBAR_ITEMS } from "@/constants/sideBarItems";
 
 export default function AreaLayout({ children } : { children: React.ReactNode; }) {
+
     const router = useRouter();
 
     return (
@@ -28,7 +29,7 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                 {/* side bar 버튼 */}
                 <nav className="flex-1 mt-6">
                     <ul className="space-y-10">
-                        {NAV_ITEMS.map((item) => (
+                        {SIDEBAR_ITEMS.map((item) => (
                             <li key={item.label}>
                                 <SidebarItem href={item.href}>
                                     {item.label}
@@ -42,7 +43,9 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                 <div>
                     <SidebarItem 
                         href="/login"
-                    className="border-white">LOGOUT</SidebarItem>
+                        className="border-white"
+                        >LOGOUT
+                    </SidebarItem>
                 </div>
             </aside>
             {/* 메인 컨텐츠 */}
