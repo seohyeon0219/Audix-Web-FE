@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import SidebarItem from "@/components/common/sidebarItem";
-
+import { NAV_ITEMS } from "@/constants/navItems";
 
 export default function AreaLayout({ children } : { children: React.ReactNode; }) {
     const router = useRouter();
@@ -10,7 +10,7 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
     return (
         <div className="flex min-h-screen bg-main-900">
             {/* side bar */}
-            <aside className="flex flex-col items-center gap-8 min-h-screen w-48 bg-main-100 py-6">
+            <aside className="flex flex-col items-start gap-6 min-h-screen w-40 p-6">
                 {/* 상단 영역 : 로고 + 사용자 정보 */}
                 <img 
                     src="../../../../logos/logoWhite.png" 
@@ -21,33 +21,20 @@ export default function AreaLayout({ children } : { children: React.ReactNode; }
                 >
                 </img>
                 {/* 로그인한 회원 정보 */}
-                <div className="text-center space-y-2">
+                {/* <div className="text-center space-y-2">
                     <p className="text-sm text-white font-medium">김서현 님</p>
                     <p className="text-xs text-white">현대자동차</p>
-                </div>
-                {/* 네비게이션 버튼 */}
-                <nav className="flex-1 mt-8">
+                </div> */}
+                {/* side bar 버튼 */}
+                <nav className="flex-1 mt-6">
                     <ul className="space-y-10">
-                        <li>
-                            <SidebarItem
-                                href="/area"
-                            >홈</SidebarItem>
-                        </li>
-                        <li>
-                            <SidebarItem
-                                href="/"
-                            >마이크 확인</SidebarItem>
-                        </li>
-                        <li>
-                            <SidebarItem
-                                href="/"
-                            >문의하기</SidebarItem>
-                        </li>
-                        <li>
-                            <SidebarItem
-                                href="/"
-                            >마이페이지</SidebarItem>
-                        </li>
+                        {NAV_ITEMS.map((item) => (
+                            <li key={item.label}>
+                                <SidebarItem href={item.href}>
+                                    {item.label}
+                                </SidebarItem>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
                 {/* 로그아웃 버튼 */}

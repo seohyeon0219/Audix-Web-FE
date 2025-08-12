@@ -32,10 +32,16 @@ export default function LoginPage() {
                         {/* 로봇 이미지 */}
                         <img src="/images/login/robot.png" alt="robot" className="absolute w-36 h-36 bottom-10 left-14 z-20"></img>
                     </div>
-                    {/* 홍보웹 링크 */}
+                    {/* 홍보웹 이동 */}
                     <div>
-                        <p className="text-white text-xs">아래 링크로 문의바랍니다.</p>
-                        <p className="text-white text-xs">홍보웹 이동 링크</p>
+                        <a
+                            href="http://localhost:3000"
+                            className="text-white text-xs underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            홍보 웹 이동
+                        </a>
                     </div>
                 </div>
                 {/* 오른쪽 흰색 박스 */}

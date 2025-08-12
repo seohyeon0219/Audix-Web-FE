@@ -1,12 +1,13 @@
 'use client';
 
 import { use } from 'react';
-import { MockAreaData, MockDeviceData } from '@/mocks';
 import Info from "@/components/deviceMonitoring/info";
 import DevicePieChart from "@/components/recharts/pieChart";
 import AiText from '@/components/deviceMonitoring/aiText';
 import AlarmLinesChart from '@/components/recharts/AlarmLinesChart';
 import ValueLineChart from '@/components/recharts/valueLineChart';
+import { useSearchArea } from '@/hooks/konva/useSearchArea';
+import { useSearchDevice } from '@/hooks/konva/useSearchDevice';
 
 interface DevicePageProps {
     params: Promise<{ id: string, deviceId: string }>;
@@ -14,15 +15,10 @@ interface DevicePageProps {
 
 export default function DevicePage({ params }: DevicePageProps) {
     const { id: areaId, deviceId } = use(params);
-
     // 구역 정보 찾기
-    const area = MockAreaData.find(area => area.id === parseInt(areaId));
-
-    // 장비 정보 찾기
-    const device = MockDeviceData.find(device => 
-        device.areaId === parseInt(areaId) && 
-        device.deviceId === parseInt(deviceId)
-    )
+    const { area } = useSearchArea(areaId);
+    // 장비 정보 찾기 (1개)
+    const { device } = useSearchDevice(areaId, deviceId);
 
     return (
         <div>
@@ -47,8 +43,8 @@ export default function DevicePage({ params }: DevicePageProps) {
                         />
                     </div>
                 </div>
-                {/* 정상도 선그래프 */}
                 <div>
+                    {/* 정상도 선그래프 */}
                     <div className='px-4'>
                         <ValueLineChart />
                     </div>
