@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import SidebarItem from "@/components/common/sidebarItem";
-import { SIDEBAR_ITEMS } from "@/constants/sideBarItems";
+import { SIDEBAR_ITEMS } from "@/constants/sidebarItems";
 
 export default function AreaLayout({ children } : { children: React.ReactNode; }) {
 
