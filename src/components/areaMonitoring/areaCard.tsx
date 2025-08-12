@@ -3,13 +3,16 @@
 import { useAreaCard } from "@/hooks/useAreaCard";
 import { AreaCardProps } from "@/types/props/areaCard";
 
-export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
-    const { statusStyle, handleClick } = useAreaCard(data);
+export default function AreaCard ({ data, onClick }: AreaCardProps) {
+    
+    const { statusStyle, handleClick, handleMouseEnter, handleMouseLeave } = useAreaCard({ data , onClick });
 
     return (
         <div
             className="w-64 bg-main-100 cursor-pointer border-1 border-black p-4"
             onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             {/* 상단 : 구역명 + 상태 */}
             <div className="flex justify-between">
@@ -18,7 +21,7 @@ export default function AreaCard ({ data, index, onClick }: AreaCardProps) {
                     {statusStyle.label}
                 </div>
             </div>
-            {/* 하단 : 위치 + 장비수 */}
+            {/* 하단 : 위치 */}
             <div>
                 <p className="text-white text-sm">{data.address}</p>
             </div>

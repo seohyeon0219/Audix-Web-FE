@@ -1,4 +1,4 @@
-import { AreaLayout } from "@/config/konva"
+import { AreaLayout } from "@/types/konva"
 
 // 공정별 레이아웃 데이터
 export const DEVICE_POSITIONS: AreaLayout[] = [

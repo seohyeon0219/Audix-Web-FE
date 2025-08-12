@@ -4,9 +4,9 @@ import dynamic from "next/dynamic";
 import AreaList from "@/components/areaMonitoring/areaList";
 import RecentDashboard from "@/components/areaMonitoring/recentDashboard";
 import AlarmDashboard from "@/components/areaMonitoring/alarmDashboard";
-import FactoryCanvas from "@/components/konva/factoryCanvas";
 import { AreaHoverProvider } from "@/contexts/areaHover";
 
+// 동적 import로 FactoryCanvas 로드하기 (SSR 비활성화)
 const LoadingFactoryCanvas = dynamic(() => import("@/components/konva/factoryCanvas"), {
     ssr: false,
     loading: () => (
@@ -17,6 +17,7 @@ const LoadingFactoryCanvas = dynamic(() => import("@/components/konva/factoryCan
 })
 
 export default function AreaPage() {
+
     return (
         <AreaHoverProvider>
             {/* 윗 부분 */}
@@ -40,7 +41,7 @@ export default function AreaPage() {
                     </div>
                     {/* 공장 구조도 */}
                     <div className="flex-1 bg-main-100 p-4">
-                        <FactoryCanvas width={800} height={400} />
+                        <LoadingFactoryCanvas width={800} height={400} />
                     </div>
                 </div>
             </div>

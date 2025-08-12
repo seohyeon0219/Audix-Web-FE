@@ -16,7 +16,7 @@ export const layoutNodes: LayoutNode[] = [
         name: '3-1라인',
         x: 300,
         y: 50,
-        width: 450,
+        width: 500,
         height: 300,
         level: 'factory'
     }
@@ -51,7 +51,7 @@ export const processNodes: ProcessNode[] = [
     {
         id: 'process3',
         name: '도장공정',
-        x: 460,
+        x: 480,
         y: 100,
         width: 140,
         height: 200,
@@ -63,7 +63,7 @@ export const processNodes: ProcessNode[] = [
     {
         id: 'process4',
         name: '의장공정',
-        x: 600,
+        x: 640,
         y: 100,
         width: 140,
         height: 200,

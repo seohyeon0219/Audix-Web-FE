@@ -1,3 +1,4 @@
+// 상태에 따른 ai 텍스트 -> 직접 백엔드에서 가져오도록 수정할 예정
 export const getAiTextByStatus = (status: string): string => {
     switch(status) {
         case 'normal':

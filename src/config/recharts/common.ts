@@ -7,14 +7,20 @@ export const PERIOD_BUTTONS: readonly PeriodButtons[] = [
     { key: 'yearly', label: '년도별'},
 ] as const;
 
-// 기간 선택 버튼
 export const BUTTON_STYLES = {
     base: 'px-4 py-2 text-sm rounded transition-colors cursor-pointer',
     active: 'bg-main-500 text-white',
     inactive: 'text-white hover:bg-main-500 hover:text-white'
 }
 
-export const CHART_STYLES = {
+// 모든 차트 공용
+export const RESPONSIVE_CONTAINER = {
+    width: '100%',
+    height: '100%'
+}
+
+// 라인 차트 공용 스타일
+export const LINE_CHART_STYLES = {
     // 그리드 스타일
     grid: {
         strokeDasharray: "3 3",
@@ -64,14 +70,14 @@ export const CHART_STYLES = {
     }
 } as const;
 
-// y축 도메인 설정
-export const CHART_DOMAINS = {
+// 라인 차트 y축 도메인 설정
+export const LINE_CHART_DOMAINS = {
     value: [0, 'dataMax' as const],
     alarm: [0, 'dataMax' as const]
 } as const;
 
-// 차트 컨테이너 설정
-export const CHART_CONTAINER = {
+// 라인 차트 컨테이너 설정
+export const LINE_CHART_CONTAINER = {
     wrapper: 'bg-main-100 p-6 rounded-lg',
     headerWrapper: 'felx items-center justify-between mb-6',
     titleWrapper: 'div',
@@ -86,8 +92,3 @@ export const CHART_CONTAINER = {
     }
 } as const;
 
-// ResponsiceContainer
-export const RESPONSIVE_CONTAINER = {
-    width: '100%',
-    height: '100%'
-}

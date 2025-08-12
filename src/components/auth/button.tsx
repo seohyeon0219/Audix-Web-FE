@@ -1,4 +1,4 @@
-import { ButtonProps } from "@/types/auth"
+import { ButtonProps } from "@/types/props/button"
 
 export default function Button({
     children,

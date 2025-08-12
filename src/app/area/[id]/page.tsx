@@ -21,10 +21,10 @@ interface MapPageProps {
 }
 
 export default function MapPage({ params }: MapPageProps) {
+
     const { id: areaId } = use(params);
     // 구역 정보 찾기
     const { area } = useSearchArea(areaId);
-
     // 장비 정보 찾기 (여러 개)
     const { devices } = useSearchDevices(areaId);
 

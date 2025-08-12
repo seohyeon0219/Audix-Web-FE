@@ -1,4 +1,4 @@
-// conveyorLine
+// conveyorLine 기본 설정
 export const CONVEYOR_CONFIG = {
     stroke:'#808080',
     strokeWidth: 50,

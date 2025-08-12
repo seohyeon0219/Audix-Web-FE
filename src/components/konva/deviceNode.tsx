@@ -4,14 +4,12 @@
 import {Text, Group, Rect } from 'react-konva';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
 import { DeviceNodeProps } from '@/types/konva/index';
-import { useDeviceInteraction } from '@/hooks/konva';
 
 export default function DeviceNode({ id, x, y, status, name, areaId, onClick, onHover, onLeave }: DeviceNodeProps) {
+
     const width = 60;
     const height = 40;
-
     const statusStyle = getStatusStyleFromString(status);
-    const { handleClick, handleMouseEnter, handleMouseLeave} = useDeviceInteraction(areaId.toString());
 
     return (
         <Group x={x} y={y}>
@@ -23,9 +21,14 @@ export default function DeviceNode({ id, x, y, status, name, areaId, onClick, on
                 fill={statusStyle.hexColor}
                 strokeWidth={2}
                 cornerRadius={5}
-                onClick={() => handleClick(id)}
-                onMouseEnter={(e) => handleMouseEnter(e, id, onHover)}
-                onMouseLeave={() => handleMouseLeave(onLeave)}
+                onClick={() => onClick(id)}
+                onMouseEnter={(e) => {
+                    const pos = e.target.getStage()?.getPointerPosition();
+                    if (pos && onHover) {
+                        onHover(id, pos.x, pos.y)
+                    }
+               }}
+                onMouseLeave={onLeave}
                 style={{ cursor: 'pointer' }}
             />
             {/*  사각형 안에 장비 ID 표시 */}

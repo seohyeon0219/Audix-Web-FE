@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { SidebarItemProps } from "@/types/common";
+import { SidebarItemProps } from "@/types/props/sideBarItems";
 
 export default function SidebarItem({
     children,
     className = "",
     href
 }: SidebarItemProps) {
+    
     return (
         <Link 
             href={href}

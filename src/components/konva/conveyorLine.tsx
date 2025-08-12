@@ -6,6 +6,7 @@ import { useConveyorTooltip } from '@/hooks/konva/index';
 import { Line } from 'react-konva';
 
 export default function ConveyorLine ({ points, onHover, onLeave }: ConveyorLineProps) {
+    
     const { handleMouseEnter, handleMouseLeave } = useConveyorTooltip();
 
     return (

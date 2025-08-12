@@ -6,7 +6,7 @@ export default function AiText({ areaId, deviceId }: AiTextProps) {
     const { result, statusStyle } = useAiText({ areaId, deviceId });
 
     return (
-        <div className="bg-main-100 p-6 rounded-lg h-full flex flex-col">
+        <div className="flex flex-col bg-main-100 p-6 rounded-lg h-full">
             <div className="mb-4 flex-shrink-0">
                 <div className="flex items-center gap-2">
                     <span className="text-lg">{statusStyle.icon}</span>

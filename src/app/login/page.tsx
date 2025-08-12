@@ -13,6 +13,7 @@ export default function LoginPage() {
         console.log("로그인 버튼 클릭")
         router.push('/area')
     }
+    
     return (
         <div className="min-h-screen flex justify-center items-center bg-login-gray">
             <div className="flex w-[700px] h-[500px] bg-white rounded-3xl">

@@ -1,6 +1,7 @@
 import { alarms } from "@/mocks/alarmData";
 
 export default function AlarmDashboard() {
+    
     return (
         <div className="flex items-center gap-8 bg-main-100 min-w-96 w-fit rounded-lg px-6 py-4 h-full">
             <h3 className="text-white border-white">이번 달<br/> 알림 건수</h3>

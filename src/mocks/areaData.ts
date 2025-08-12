@@ -1,4 +1,4 @@
-import { AreaData } from '@/types/mocks';
+import { AreaData } from "@/types/models/area";
 
 // 구역별 장비 mock data
 export const MockAreaData: AreaData[] = [

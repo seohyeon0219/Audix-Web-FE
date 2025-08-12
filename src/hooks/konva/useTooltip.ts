@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TooltipState, ProcessNode } from "@/types/konva/index";
+import { TooltipState } from "@/types/konva/models/areaCanvas";
 import { AREA_CANVAS_CONFIG } from "@/config/konva/index";
 
 // areaCanvas tooltip 관리

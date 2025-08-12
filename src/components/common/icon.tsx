@@ -1,4 +1,4 @@
-import { IconProps } from "@/types/common"
+import { IconProps } from "@/types/props/icon";
 
 export default function Icon ({ 
     iconname, 
@@ -8,6 +8,7 @@ export default function Icon ({
     fill = 0, 
     className = ''
 }: IconProps) {
+    
     return (
         <span 
             className={`material-symbols-outlined ${className}`} 

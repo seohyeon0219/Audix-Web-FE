@@ -1,4 +1,4 @@
-// areaCanvas
+// areaCanvas 기본 설정
 export const AREA_CANVAS_CONFIG = {
     defaultWidth: 800,
     defaultHeight: 500,

@@ -1,10 +1,11 @@
 import Icon from '../common/icon';
-import { SearchBarProps } from '@/types/common';
+import { SearchBarProps } from '@/types/props/searchBar';
 
 export default function SearchBar({ 
     placeholder, 
     iconname 
 }: SearchBarProps) {
+    
     return (
         <div className="flex items-center bg-white w-80 h-12 rounded-3xl">
             <input 

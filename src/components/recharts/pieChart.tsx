@@ -1,22 +1,22 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { MockDeviceData } from '@/mocks/deviceData';
 import { DevicePieChartProps } from '@/types/recharts/pieChart';
 import { useDevicePieChart } from '@/hooks/recharts';
-import { RESPONSIVE_CONTAINER } from '@/config/recharts';
+import { RESPONSIVE_CONTAINER, PIE_CHART_STYLES, PIE_CHART_COLORS_GRAY, PIE_CHART_CONTAINER } from '@/config/recharts';
 
 const DevicePieChart: React.FC<DevicePieChartProps> = ({
     areaId,
     deviceId,
     title
 }) => {
+
     const { device, chartData } = useDevicePieChart(areaId, deviceId);
 
     // device이 없는 경우 처리
     if (!device) {
         return (
-            <div className='bg-main-100 p-6 rounded-lg'>
-                <h2 className='text-white text-lg font-medium mb-6'>
+            <div className={PIE_CHART_CONTAINER.wrapper}>
+                <h2 className={PIE_CHART_CONTAINER.titleStyle}>
                     {title || '장비 정상도'}
                 </h2>
                 <p className='text-white'>장비를 찾을 수 없습니다.</p>
@@ -27,8 +27,8 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
     // device.value가 없는 경우 처리
     if (device.normalScore === undefined) {
         return (
-            <div className='bg-main-100 p-6 rounded-lg'>
-                <h2 className='text-white text-lg rounded-lg'>
+            <div className={PIE_CHART_CONTAINER.wrapper}>
+                <h2 className={PIE_CHART_CONTAINER.titleStyle}>
                     {title || `${device.name} 정상도`}
                 </h2>
                 <p className='text-white'>데이터가 없습니다.</p>
@@ -39,35 +39,37 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
     const { data, colors, percentage } = chartData!;
 
     return (
-        <div className='flex gap-10 bg-main-100 p-6 rounded-lg'>
-            <h2 className='text-white text-lg font-medium mb-6'>
+        <div className={PIE_CHART_CONTAINER.wrapper}>
+            <h2 className={PIE_CHART_CONTAINER.titleStyle}>
                 {title || `${device.name} 정상도`}
             </h2>
             <div className='flex'>
-                <div className='relative w-32 h-32'>
-                <ResponsiveContainer width={RESPONSIVE_CONTAINER.width} height={RESPONSIVE_CONTAINER.height}>
-                        <PieChart>
-                            <Pie
-                                data={data}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={40}
-                                outerRadius={60}
-                                startAngle={90}
-                                endAngle={-270}
-                                dataKey="value"
-                                stroke="none"
-                                animationBegin={0}
-                                animationDuration={800}
-                            >
-                                {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={colors[index]} />
-                                ))}
-                            </Pie>
-                        </PieChart>
-                    </ResponsiveContainer>
-                    <div className='absolute inset-0 flex items-center justify-center'>
-                        <span className='text-white text-xl font-bold'>{percentage}%</span>
+                <div className={PIE_CHART_CONTAINER.chartSection}>
+                    <div className={PIE_CHART_CONTAINER.chartWrapper}>
+                        <ResponsiveContainer width={RESPONSIVE_CONTAINER.width} height={RESPONSIVE_CONTAINER.height}>
+                            <PieChart>
+                                <Pie
+                                    data={data}
+                                    cx={PIE_CHART_STYLES.pie.cx}
+                                    cy={PIE_CHART_STYLES.pie.cy}
+                                    innerRadius={PIE_CHART_STYLES.pie.innerRadius}
+                                    outerRadius={PIE_CHART_STYLES.pie.outerRadius}
+                                    startAngle={PIE_CHART_STYLES.pie.startAngle}
+                                    endAngle={PIE_CHART_STYLES.pie.endAngle}
+                                    dataKey={PIE_CHART_STYLES.pie.dataKey}
+                                    stroke={PIE_CHART_STYLES.pie.stroke}
+                                    animationBegin={PIE_CHART_STYLES.pie.animation.begin}
+                                    animationDuration={PIE_CHART_STYLES.pie.animation.duration}
+                                >
+                                    {data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={colors[index]} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+                        </ResponsiveContainer>
+                        <div className={PIE_CHART_STYLES.percentText.wrapper}>
+                            <span className={PIE_CHART_STYLES.percentText.text}>{percentage}%</span>
+                        </div>
                     </div>
                 </div>
             </div>

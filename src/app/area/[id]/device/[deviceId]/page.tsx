@@ -14,6 +14,7 @@ interface DevicePageProps {
 }
 
 export default function DevicePage({ params }: DevicePageProps) {
+
     const { id: areaId, deviceId } = use(params);
     // 구역 정보 찾기
     const { area } = useSearchArea(areaId);

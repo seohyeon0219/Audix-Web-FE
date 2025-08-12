@@ -1,7 +1,8 @@
 import { ProcessNode } from "@/types/konva/index";
+import { NodeStyle } from "@/types/konva/index";
 
-// 레벨별 스타일 정의 함수
-export const getNodeStyle = (level: ProcessNode['level']) => {
+// 공장 전체 맵에서 레벨 별로 색 지정
+export const getNodeStyle = (level: ProcessNode['level']): NodeStyle => {
     switch (level) {
         case 'factory':
             return {
@@ -14,7 +15,7 @@ export const getNodeStyle = (level: ProcessNode['level']) => {
             return {
                 fill: '#ffffff',
                 stroke: '#333333',
-                strokeWidth: 1,
+                strokeWidth: 3,
                 textColor: '#333333'
             };
         default:

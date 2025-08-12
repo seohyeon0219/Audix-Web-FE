@@ -1,4 +1,4 @@
-import { RecentDashboardData } from "@/types/mocks";
+import { RecentDashboardData } from "@/types/models/recentDashboard";
 
 // 최근 10일 대시보드 mock data
 export const mockRecentDashboardData: RecentDashboardData [] = [

@@ -1,25 +1,12 @@
 import { MockAreaData, MockDeviceData } from "@/mocks";
-
-import { DeviceInfoProps } from "@/types/deviceMonitoring";
-
-// areaId, machindId로 장비 데이터 찾기
-const getDeviceData = (areaId: string, deviceId: string) => {
-    // 구역 정보 찾기
-    const area = MockAreaData.find(area => area.id === parseInt(areaId));
-
-    // 장비 정보 찾기
-    const device = MockDeviceData.find(device => 
-        device.areaId === parseInt(areaId) && 
-        device.deviceId === parseInt(deviceId)
-    );
-
-    return { area, device };
-}
+import { DeviceInfoProps } from "@/types/props/deviceInfo";
+import { useSearchArea } from "@/hooks/konva/useSearchArea";
+import { useSearchDevice, useSearchDevices } from "@/hooks/konva/useSearchDevice";
 
 export default function Info({ areaId, deviceId, area: propsArea, device: propsDevice }: DeviceInfoProps) {
-    const { area, device } = propsArea && propsDevice
-        ? { area: propsArea, device: propsDevice }
-        : getDeviceData(areaId, deviceId);
+
+    const { area } = useSearchArea(areaId);
+    const { device } = useSearchDevice(areaId, deviceId);
 
     if (!area || !device) {
         return (
@@ -28,6 +15,7 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
             </div>
         )
     }
+    
         return (
         <div className="flex gap-14 bg-main-100 p-4 border border-t-white">
             {/* 왼쪽 장비 이미지 */}

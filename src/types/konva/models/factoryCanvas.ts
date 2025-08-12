@@ -25,12 +25,6 @@ export interface LayoutNode {
     level: 'factory' | 'process';
 }
 
-
-export interface FactoryCanvasProps {
-    width?: number;
-    height?: number;
-} 
-
 export interface FactoryTooltipState {
     visible: boolean;
     x: number;
@@ -41,4 +35,12 @@ export interface FactoryTooltipState {
 export interface Connection {
     from: { x: number; y: number };
     to: { x: number; y: number };
+}
+
+// 호버 시 효과용
+export interface NodeStyle {
+    fill?: string;
+    stroke?: string;
+    strokeWidth?: number;
+    textColor?: string;
 }
