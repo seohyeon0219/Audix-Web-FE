@@ -1,5 +1,4 @@
-import { PeriodType } from "@/types/recharts/common";
-import { PeriodButtons } from "@/types/recharts/common";
+import { PeriodButtons } from "@/types/recharts";
 
 // 기간 선택 버튼
 export const PERIOD_BUTTONS: readonly PeriodButtons[] = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { DevicePieChartProps } from '@/types/recharts/pieChart';
+import { DevicePieChartProps } from '@/types/recharts';
 import { useDevicePieChart } from '@/hooks/recharts';
 import { RESPONSIVE_CONTAINER, PIE_CHART_STYLES, PIE_CHART_COLORS_GRAY, PIE_CHART_CONTAINER } from '@/config/recharts';
 

@@ -1,10 +1,10 @@
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { LinesChartProps } from "@/types/recharts/common";
+import { LinesChartProps } from "@/types/recharts";
 import { PERIOD_BUTTONS, BUTTON_STYLES, LINE_CHART_STYLES, LINE_CHART_DOMAINS, LINE_CHART_CONTAINER, RESPONSIVE_CONTAINER } from "@/config/recharts";
 import { ALARM_LINES_CHART_LABELS } from "@/config/recharts";
 import { useChartPeriod } from "@/hooks/recharts";
 import { useAlarmLineChartData } from "@/hooks/recharts";
-import { PeriodButtons } from "@/types/recharts/common";
+import { PeriodButtons } from "@/types/recharts";
 import { STATUS_STYLES } from "@/constants/status";
 
 const AlarmLinesChart: React.FC<LinesChartProps> = ({
