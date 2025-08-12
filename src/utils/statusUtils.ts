@@ -19,6 +19,17 @@ export const getStatusStyleFromString = (status: string) => {
     }
 }
 
+// normalScore을 기반으로 해당되는 상태 스타일을 반환하는 함수
+export const getStatusByNormalScore = (normalScore: number) => {
+    if (normalScore >= 80) {
+        return STATUS_STYLES.NORMAL;
+    } else if (normalScore >= 40) {
+        return STATUS_STYLES.WARNING;
+    } else {
+        return STATUS_STYLES.DANGER;
+    }
+}
+
 // 상태 별 아이콘 설정
 export const getStatusStyle = (status: AiTextResult['status']): { icon: string } => {
     switch(status) {
@@ -49,15 +60,3 @@ export const getStatusStyle = (status: AiTextResult['status']): { icon: string }
     }
 }
 
-// pie chart
-// value를 percentage로 변환
-export const convertToPercentage = (normalScore: number): number => {
-    return Math.round(normalScore * 100);
-}
-
-// normalScore에 따른 색상
-export const getColorByValue = (value: number): string => {
-    if (value >= 80) return "#1CAA00";
-    if (value >= 40) return "#FFC525";
-    return "#FF2F16";
-}

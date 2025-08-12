@@ -1,9 +1,8 @@
-import { useState, useMemo } from 'react';
-import { PeriodType } from '@/types/recharts/common';
-import { convertToPercentage, generateAlarmChartData, generateValueChartData, getColorByValue } from '@/utils/recharts/index';
+import { useMemo } from 'react';
+import { convertToPercentage } from '@/utils/recharts/index';
 import { MockDeviceData } from '@/mocks';
 import { PIE_CHART_COLORS_GRAY } from '@/config/recharts';
-
+import { getStatusByNormalScore } from '@/utils/statusUtils';
 
 // pieChart 데이터 관리
 export const useDevicePieChart = (areaId: string, deviceId: string) => {
@@ -22,7 +21,8 @@ export const useDevicePieChart = (areaId: string, deviceId: string) => {
             { name: 'remaining', value: 100 - percentage }
         ];
 
-        const mainColor = getColorByValue(percentage);
+        const statusStyle = getStatusByNormalScore(percentage);
+        const mainColor = statusStyle.hexColor;
         const colors = [mainColor, PIE_CHART_COLORS_GRAY.background];
 
         return { data, colors, percentage };
