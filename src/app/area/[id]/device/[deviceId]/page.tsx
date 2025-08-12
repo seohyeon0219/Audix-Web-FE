@@ -8,6 +8,7 @@ import AlarmLinesChart from '@/components/recharts/AlarmLinesChart';
 import ValueLineChart from '@/components/recharts/valueLineChart';
 import { useSearchArea } from '@/hooks/konva/useSearchArea';
 import { useSearchDevice } from '@/hooks/konva/useSearchDevice';
+import { useAiText } from '@/hooks';
 
 interface DevicePageProps {
     params: Promise<{ id: string, deviceId: string }>;
@@ -20,6 +21,7 @@ export default function DevicePage({ params }: DevicePageProps) {
     const { area } = useSearchArea(areaId);
     // 장비 정보 찾기 (1개)
     const { device } = useSearchDevice(areaId, deviceId);
+    const { result, statusStyle } = useAiText({ areaId, deviceId });
 
     return (
         <div>
@@ -28,7 +30,7 @@ export default function DevicePage({ params }: DevicePageProps) {
                 <Info areaId={areaId} deviceId={deviceId} />
             </div>
             {/* 통계 섹션 */}
-            <div className='bg-main-500 gap-3 mt-4'>
+            <div className='bg-main-500 gap-3 mt-4 max-w-7xl'>
                 <div className='flex gap-6 p-4 items-stretch h-52'>
                     <div className='flex-[2.5] min-w-0'>
                         <DevicePieChart
@@ -39,8 +41,8 @@ export default function DevicePage({ params }: DevicePageProps) {
                     </div>
                     <div className='flex-[7.5] min-w-0'>
                         <AiText 
-                            areaId={areaId}
-                            deviceId={deviceId}
+                            aiText={result.message}
+                            status={result.status}
                         />
                     </div>
                 </div>

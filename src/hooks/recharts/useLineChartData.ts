@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
-import { PeriodType } from '@/types/recharts/common';
-import { convertToPercentage, generateAlarmChartData, generateValueChartData, getColorByValue } from '@/utils/recharts/index';
-
+import { PeriodType } from "@/types/recharts";
+import { generateAlarmChartData, generateValueChartData } from '@/utils/recharts/index';
 
 // valueLineChart 데이터 관리
 export const useValueLineChartData = (selectedPeriod: PeriodType) => {

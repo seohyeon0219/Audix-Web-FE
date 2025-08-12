@@ -1,9 +1,8 @@
 import { useState, useMemo } from "react";
 import { CartesianGrid, LineChart, ResponsiveContainer, XAxis, YAxis, Legend, Line } from "recharts";
-import { LinesChartProps } from "@/types/recharts/common";
 import { PERIOD_BUTTONS, BUTTON_STYLES, LINE_CHART_STYLES, LINE_CHART_DOMAINS, LINE_CHART_CONTAINER, RESPONSIVE_CONTAINER, VALUE_LINE_CHART_LABELS } from "@/config/recharts";
 import { useChartPeriod, useValueLineChartData } from "@/hooks/recharts";
-import { PeriodButtons } from "@/types/recharts/common";
+import { PeriodButtons, LinesChartProps } from "@/types/recharts";
 import { STATUS_STYLES } from "@/constants/status";
 
 const ValueLineChart: React.FC<LinesChartProps> = ({

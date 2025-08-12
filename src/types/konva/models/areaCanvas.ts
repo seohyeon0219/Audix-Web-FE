@@ -6,10 +6,17 @@ export interface DevicePosition {
     y: number;
 }
 
+export interface ArrowData {
+  x: number;
+  y: number;
+  angle: number;
+}
+
 export interface AreaLayout {
     areaId: number;
     devices: DevicePosition[];
     conveyors?: Array<{ points: number[] }>;
+    arrows?: ArrowData[];
 }
 
 export interface TooltipState {

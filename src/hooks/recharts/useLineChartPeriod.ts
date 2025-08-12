@@ -1,5 +1,5 @@
-import { PeriodType } from '@/types/recharts/common';
-import { useState, useMemo } from 'react';
+import { PeriodType } from "@/types/recharts";
+import { useState } from 'react';
 
 // 기간 선택 hook
 export const useChartPeriod = () => {

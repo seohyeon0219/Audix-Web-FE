@@ -9,8 +9,8 @@ export const mockRecentDashboardData: RecentDashboardData [] = [
     { date: '2025-01-05', status: 'danger' },
     { date: '2025-01-06', status: 'warning' },
     { date: '2025-01-07', status: 'normal' },
-    { date: '2025-01-08', status: 'normal' },
-    { date: '2025-01-09', status: 'normal' },
-    { date: '2025-01-10', status: 'warning' }
+    // { date: '2025-01-08', status: 'normal' },
+    // { date: '2025-01-09', status: 'normal' },
+    // { date: '2025-01-10', status: 'warning' }
 ]
 

@@ -10,6 +10,7 @@ export const useFactoryNodeRouter = () => {
     // 노드 클릭 시 ID에 맞는 경로로 페이지 이동
     const handleNodeClick = (nodeId: string) => {
         const route = getRouteByNodeId(nodeId);
+        console.log(`Node ID: ${nodeId}, Route Found: ${route}`);
         if (route) {
             router.push(route);
         }

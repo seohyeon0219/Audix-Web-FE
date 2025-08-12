@@ -17,7 +17,7 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
     }
     
         return (
-        <div className="flex gap-14 bg-main-100 p-4 border border-t-white">
+        <div className="flex gap-14 bg-main-100 p-4 border border-t-white max-w-7xl">
             {/* 왼쪽 장비 이미지 */}
             <div className="flex shrink-0">
                 <div className="w-32 h-32">

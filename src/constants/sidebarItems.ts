@@ -2,6 +2,6 @@
 export const SIDEBAR_ITEMS = [
     { href: '/area', label: '홈' },
     { href: '/', label: '마이크 확인' },
-    { href: '/', label: '문의하기' },
-    { href: '/', label: '마이페이지' },
+    { href: '/', label: '알람 내역' },
+    { href: '/', label: '정비 내역' },
 ]

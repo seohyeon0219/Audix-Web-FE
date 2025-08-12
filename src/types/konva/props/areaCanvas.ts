@@ -6,6 +6,7 @@ export interface DeviceNodeProps {
     status: string;
     areaId: number;
     name: string;
+    model: string;
     onClick: (id: string) => void;
     onHover?: (id: string, x: number, y: number) => void;
     onLeave?: () => void;

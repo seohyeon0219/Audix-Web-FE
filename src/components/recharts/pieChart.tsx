@@ -17,7 +17,7 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
         return (
             <div className={PIE_CHART_CONTAINER.wrapper}>
                 <h2 className={PIE_CHART_CONTAINER.titleStyle}>
-                    {title || '장비 정상도'}
+                    {title}
                 </h2>
                 <p className='text-white'>장비를 찾을 수 없습니다.</p>
             </div>
@@ -29,9 +29,9 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
         return (
             <div className={PIE_CHART_CONTAINER.wrapper}>
                 <h2 className={PIE_CHART_CONTAINER.titleStyle}>
-                    {title || `${device.name} 정상도`}
+                    {title}
                 </h2>
-                <p className='text-white'>데이터가 없습니다.</p>
+                <p className='text-white mt-1'>데이터가 없습니다.</p>
             </div>
         )
     }
@@ -41,7 +41,7 @@ const DevicePieChart: React.FC<DevicePieChartProps> = ({
     return (
         <div className={PIE_CHART_CONTAINER.wrapper}>
             <h2 className={PIE_CHART_CONTAINER.titleStyle}>
-                {title || `${device.name} 정상도`}
+                {title}
             </h2>
             <div className='flex'>
                 <div className={PIE_CHART_CONTAINER.chartSection}>

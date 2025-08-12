@@ -9,6 +9,7 @@ import { useDeviceInteraction } from '@/hooks/konva';
 import { useAreaData } from '@/hooks/konva';
 import { useAreaTooltip } from '@/hooks/konva';
 import { AreaCanvasProps } from '@/types/props/areaCanvas';
+import ConveyorArrows from './arrow';
 
 export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
 
@@ -27,12 +28,15 @@ export default function AreaCanvas({ areaId, width, height }: AreaCanvasProps) {
                             points={conveyor.points}
                     />
                     ))}
+                    {/* 화살표 */}
+                    <ConveyorArrows arrow={areaLayout?.arrows} />
                     {/* 장비 */}
                     {devicesWithPositions.map(device => (
                         <DeviceNode
                             key={device.deviceId}
                             id={device.deviceId.toString()}
                             name={device.name}
+                            model={device.model}
                             x={device.x}
                             y={device.y}
                             areaId={parseInt(areaId)}

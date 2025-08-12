@@ -41,11 +41,11 @@ export default function MapPage({ params }: MapPageProps) {
     return (
         <div>
             {/* 상단 구역명 */}
-            <header className="flex items-center w-full h-20">
+            <header className="flex items-center w-full h-20 border border-white bg-main-100 max-w-7xl">
                 <h1 className="border-l-2 border-white text-white text-xl ml-4 pl-8">{area.name}</h1>
             </header>
             {/* 하단 지도 */}
-            <div className="w-full mt-6">
+            <div className="w-full mt-6 max-w-7xl">
                 <AreaCanvas 
                     areaId={areaId}
                     width={1000}

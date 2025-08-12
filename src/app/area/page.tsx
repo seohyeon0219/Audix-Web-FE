@@ -28,7 +28,7 @@ export default function AreaPage() {
                 <AlarmDashboard />
             </div>
             {/* 아랫 부분 (전 구역 모니터링) */}
-            <div className="flex-1 bg-main-500 p-6 border border-t-white">
+            <div className="flex-1 bg-main-500 p-6 border border-t-white max-w-7xl">
                 {/* 전 구역 모니터링 제목 */}
                 <div className="mb-6">
                     <h1 className="text-white">전 구역 모니터링</h1>
@@ -40,8 +40,8 @@ export default function AreaPage() {
                         <AreaList />
                     </div>
                     {/* 공장 구조도 */}
-                    <div className="flex-1 bg-main-100 p-4">
-                        <LoadingFactoryCanvas width={800} height={400} />
+                    <div className="flex-1 bg-main-100 p-4 max-w-5xl">
+                        <LoadingFactoryCanvas width={900} height={400} />
                     </div>
                 </div>
             </div>

@@ -10,4 +10,5 @@ export interface DeviceData {
     normalScore?: number; // 정상도
     image?: string;
     status: string;
+    aiText: string;
 }

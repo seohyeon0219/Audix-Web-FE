@@ -2,13 +2,15 @@
 export type NodeLevel = 'factory' | 'line' | 'process';
 export type StatusType = 'normal' | 'warning' | 'danger';
 
+export interface Point {
+    x: number;
+    y: number;
+}
+
 export interface ProcessNode {
     id: string;
     name: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+    points: Point[];
     level: 'factory' | 'process';
     areaId: number;
     address: string;

@@ -5,7 +5,7 @@ import {Text, Group, Rect } from 'react-konva';
 import { getStatusStyleFromString } from '@/utils/statusUtils';
 import { DeviceNodeProps } from '@/types/konva/index';
 
-export default function DeviceNode({ id, x, y, status, name, areaId, onClick, onHover, onLeave }: DeviceNodeProps) {
+export default function DeviceNode({ id, x, y, status, name, model, areaId, onClick, onHover, onLeave }: DeviceNodeProps) {
 
     const width = 60;
     const height = 40;
@@ -35,8 +35,8 @@ export default function DeviceNode({ id, x, y, status, name, areaId, onClick, on
             <Text
                 text={id}
                 fontSize={15}
-                x={0}
-                y={6}
+                x={-2}
+                y={4}
                 align='center'
                 justify='center'
                 offsetX={id.length * 3}
@@ -44,15 +44,15 @@ export default function DeviceNode({ id, x, y, status, name, areaId, onClick, on
                 fill="white"
                 fontStyle='bold'
             />
-            {/* 사각형 아래에 장비 이름 라벨 */}
+            {/* 사각형 아래에 장비 모델명 라벨 */}
             <Text
-                text={name}
+                text={model}
                 fontSize={12}
-                x={0}
+                x={-7}
                 y={height/2 + 10}
                 fill="white"
                 align="center"
-                offsetX={name.length * 3}
+                offsetX={model.length * 3}
             />
         </Group>
     )

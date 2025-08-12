@@ -1,4 +1,4 @@
-import { ValueChartDataPoint } from "@/types/recharts/valueLineChart";
+import { ValueChartDataPoint } from "@/types/recharts";
 
 export const valueChartMockData = {
     monthly: (): ValueChartDataPoint[] => [

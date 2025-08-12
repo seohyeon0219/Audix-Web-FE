@@ -1,6 +1,6 @@
 // areaCanvas 기본 설정
 export const AREA_CANVAS_CONFIG = {
-    defaultWidth: 800,
+    defaultWidth: 900,
     defaultHeight: 500,
     container: {
         className: 'border border-white'

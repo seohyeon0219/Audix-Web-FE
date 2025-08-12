@@ -8,19 +8,21 @@ import { Group, Rect, Text } from 'react-konva';
 export default function NodeTooltip({ x, y, visible, data }: NodeTooltipProps) {
 
     return (
-        <Group x={x + 15} y={y + 15}>
+        <Group x={x + 10} y={y - 40}>
             <Rect
-                width={150}
-                height={50}
-                fill="white"
-                stroke="#ccc"
+                width={180}
+                height={55}
+                fill='rgba(0,0,0,0.8)'
+                stroke='#ffffff'
+                strokeWidth={1}
+                cornerRadius={5}
             />
             <Text 
                 text={`장비명: ${data.name}\n모델명: ${data.model}\n상태: ${data.status}`}
-                x={5}
-                y={5}
+                x={10}
+                y={8}
                 fontSize={12}
-                fill="#333"
+                fill="#ffffff"
             />
         </Group>
     )

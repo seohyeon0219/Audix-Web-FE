@@ -1,6 +1,10 @@
 import { alarms } from "@/mocks/alarmData";
+import { useCustomTooltip } from "@/hooks/useCustomTooltip";
+import CustomTooltip from "../common/customTooltip";
 
 export default function AlarmDashboard() {
+
+    const { tooltip, showTooltip, hideTooltip } = useCustomTooltip();
     
     return (
         <div className="flex items-center gap-8 bg-main-100 min-w-96 w-fit rounded-lg px-6 py-4 h-full">
@@ -13,7 +17,8 @@ export default function AlarmDashboard() {
                     <div key={index} className="flex items-center gap-3">
                         <div 
                             className={`w-14 h-14 text-xs font-black rounded-lg cursor-pointer border flex justify-center items-center whitespace-pre-line ${textColor} ${borderColor}`}
-                            title={`${data.label}: ${data.count}`}
+                            onMouseEnter={(e) => showTooltip(`${data.label}: ${data.count}건`, e)}
+                            onMouseLeave={hideTooltip}
                         >
                             {data.label}
                         </div>
@@ -21,6 +26,7 @@ export default function AlarmDashboard() {
                             className={`text-white`}>
                             {data.count}건
                         </div>
+                        <CustomTooltip {...tooltip} />
                     </div>
                 )
             })}
