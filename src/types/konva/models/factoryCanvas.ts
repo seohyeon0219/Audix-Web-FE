@@ -11,6 +11,8 @@ export interface ProcessNode {
     id: string;
     name: string;
     points: Point[];
+    textX: number;
+    textY: number;
     level: 'factory' | 'process';
     areaId: number;
     address: string;

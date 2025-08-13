@@ -8,6 +8,7 @@ import { processNodes } from "@/mocks/konva/index";
 import { getStatusStyleFromString } from "@/utils/statusUtils";
 import { useAreaHover } from "@/contexts/areaHover";
 import { useAreaHighlighted } from "@/hooks/konva/useAreaHighlighted";
+import CenteredText from '@/components/konva/centeredText';
 
 export default function FactoryCanvas({
     width = 900,
@@ -85,48 +86,20 @@ export default function FactoryCanvas({
         context.fillStrokeShape(shape);
     };
 
-    // 다각형의 중심점 계산
-    const getCenterPoint = (points: Point[]): Point => {
-        const sumX = points.reduce((sum, point) => sum + point.x, 0);
-        const sumY = points.reduce((sum, point) => sum + point.y, 0);
-        return {
-            x: sumX / points.length,
-            y: sumY / points.length 
-        };
-    };
-
     return (
         <div>
             <Stage width={width} height={height}>
                 <Layer>
-                    {/* 화살표 */}
-                    {/* {factoryConnections.map((connection, index) => (
-                        <Arrow
-                            key={index}
-                            points={[
-                                connection.from.x,
-                                connection.from.y,
-                                connection.to.x,
-                                connection.to.y
-                            ]}
-                            stroke="#ffffff"
-                            strokeWidth={3}
-                            fill="#ffffff"
-                            pointerLength={10}
-                            pointerWidth={8}
-                            opacity={hoveredAreaId !== null ? 0.5 : 1}
-                        />
-                    ))} */}
-                    
                     {/* 프로세스 노드들 - Shape로 불규칙한 다각형 그리기 */}
                     {processNodes.map((node) => {
                         const nodeStyle = nodeStyles[node.id];
-                        const statusStyle = getStatusStyleFromString(node.status);
                         const isHighlighted = hoveredAreaId === node.areaId;
-                        const centerPoint = getCenterPoint(node.points);
 
                         return (
-                            <Group key={node.id}>
+                            <Group 
+                                key={node.id}
+                                offsetY={isHighlighted ? -5 : 0}
+                            >
                                 <Shape
                                     sceneFunc={(context, shape) => {
                                         drawRoundedPolygon(context, shape, node.points, 15);
@@ -152,17 +125,13 @@ export default function FactoryCanvas({
                                     opacity={isHighlighted ? 0.9 : 0.8}
                                 />
 
-                                <Text
-                                    x={centerPoint.x}
-                                    y={centerPoint.y}
+                                <CenteredText
+                                    x={node.textX}
+                                    y={node.textY}
                                     text={node.name}
                                     fontSize={node.level === 'process' ? 14 : 16}
                                     fontStyle={node.level !== 'process' ? 'bold' : 'normal'}
                                     fill={nodeStyle.textColor}
-                                    align="center"
-                                    verticalAlign="middle"
-                                    offsetX={node.name.length * (node.level === 'process' ? 7 : 8)}
-                                    offsetY={isHighlighted ? 12 : 7}
                                     listening={false} // 텍스트는 마우스 이벤트 받지 않음
                                 />
                             </Group>
