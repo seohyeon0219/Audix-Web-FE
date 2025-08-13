@@ -21,7 +21,7 @@ export default function AreaPage() {
     return (
         <AreaHoverProvider>
             {/* 윗 부분 */}
-            <div className="flex items-start gap-10 mb-8 h-24">
+            <div className="flex items-start gap-10 mb-8 h-28">
                 {/* 최근 10일 대시보드 */}
                 <RecentDashboard />
                 {/* 이번 달 알람 건수 */}
