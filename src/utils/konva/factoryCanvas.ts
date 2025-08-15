@@ -26,9 +26,9 @@ export const getLevelLabel = (level: ProcessNode['level']): string => {
 export const getRouteByNodeId = (nodeId: string): string | null => {
     const routeMap: Record<string, string> = {
         process1: '/area/1',
-        process2: '/area/2',
-        process3: '/area/3',
-        process4: '/area/4'
+        process2: '/area/3',
+        process3: '/area/4',
+        process4: '/area/5'
     };
     return routeMap[nodeId] || null;
 }

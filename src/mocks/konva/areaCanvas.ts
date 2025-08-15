@@ -6,10 +6,10 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
         // 3공장 프레스 구역
         areaId: 1,
         devices: [
-            { deviceId: 1, x: 400, y: 170 }, // 프레스 머신
-            { deviceId: 2, x: 550, y: 310 }, // 코일 언코일러
-            { deviceId: 3, x: 700, y: 170 }, // 레벨러 & 피더
-            { deviceId: 4, x: 850, y: 310 }, // 블랭킹 프레스
+            { deviceId: 17, x: 400, y: 170 }, // 프레스 머신
+            { deviceId: 18, x: 550, y: 310 }, // 코일 언코일러
+            { deviceId: 19, x: 700, y: 170 }, // 레벨러 & 피더
+            { deviceId: 20, x: 850, y: 310 }, // 블랭킹 프레스
         ],
         conveyors: [
             { points: [300, 250, 950, 250] },
@@ -26,12 +26,12 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
         // 차체 31라인
         areaId: 3,
         devices: [
-            { deviceId: 5, x: 400, y: 70 }, // 스폿 용접기
-            { deviceId: 6, x: 700, y: 70 }, // 스폿 용접기
-            { deviceId: 7, x: 860, y: 220 }, // 용접 로봇
-            { deviceId: 8, x: 700, y: 360 }, // 용접 로봇
-            { deviceId: 9, x: 400, y: 360 }, // 용접 로봇
-            { deviceId: 10, x: 220, y: 300 }, // 리프터 & 컨베이어
+            { deviceId: 21, x: 400, y: 70 }, // 스폿 용접기
+            { deviceId: 22, x: 700, y: 70 }, // 스폿 용접기
+            { deviceId: 23, x: 860, y: 220 }, // 용접 로봇
+            { deviceId: 24, x: 700, y: 360 }, // 용접 로봇
+            { deviceId: 25, x: 400, y: 360 }, // 용접 로봇
+            { deviceId: 26, x: 220, y: 300 }, // 리프터 & 컨베이어
         ],
         conveyors: [
             { points: [300, 150, 950, 150] },
@@ -56,12 +56,12 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
         // 도장 31라인
         areaId: 4,
         devices: [
-            { deviceId: 11, x: 400, y: 70 }, // 스프레이 로봇
-            { deviceId: 12, x: 700, y: 70 }, // 스프레이 로봇
-            { deviceId: 13, x: 850, y: 220 }, // 전착 탱크
-            { deviceId: 14, x: 500, y: 360 }, // 건조로
-            { deviceId: 15, x: 330, y: 220 }, // 리프트 / 셔틀
-            { deviceId: 16, x: 330, y: 360 }, // 리프트 / 셔틀
+            { deviceId: 27, x: 400, y: 70 }, // 스프레이 로봇
+            { deviceId: 28, x: 700, y: 70 }, // 스프레이 로봇
+            { deviceId: 29, x: 850, y: 220 }, // 전착 탱크
+            { deviceId: 30, x: 500, y: 360 }, // 건조로
+            { deviceId: 31, x: 330, y: 220 }, // 리프트 / 셔틀
+            { deviceId: 32, x: 330, y: 360 }, // 리프트 / 셔틀
         ],
         conveyors: [
             { points: [300, 150, 950, 150] },
@@ -86,13 +86,13 @@ export const DEVICE_POSITIONS: AreaLayout[] = [
         // 의장 31라인
         areaId: 5,
         devices: [
-            { deviceId: 17, x: 400, y: 50 }, // 조립 로봇
-            { deviceId: 18, x: 650, y: 50 }, // 체결 공구
-            { deviceId: 19, x: 750, y: 180 }, // 체결 공구
-            { deviceId: 20, x: 500, y: 180 }, // 체결 공구
-            { deviceId: 21, x: 500, y: 410 }, // 체결 공구
-            { deviceId: 22, x: 210, y: 300 }, // 컨베이어 시스템
-            { deviceId: 23, x: 750, y: 410 }, // 냉각수 및 윤활 설비
+            { deviceId: 33, x: 400, y: 50 }, // 조립 로봇
+            { deviceId: 35, x: 650, y: 50 }, // 체결 공구
+            { deviceId: 36, x: 750, y: 180 }, // 체결 공구
+            { deviceId: 37, x: 500, y: 180 }, // 체결 공구
+            { deviceId: 38, x: 500, y: 410 }, // 체결 공구
+            { deviceId: 39, x: 210, y: 300 }, // 컨베이어 시스템
+            { deviceId: 40, x: 750, y: 410 }, // 냉각수 및 윤활 설비
         ],
         conveyors: [
             { points: [300, 130, 950, 130] },
