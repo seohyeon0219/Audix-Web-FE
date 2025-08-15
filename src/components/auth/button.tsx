@@ -3,12 +3,16 @@ import { ButtonProps } from "@/types/props/button"
 export default function Button({
     children,
     className = "",
-    onClick
+    onClick,
+    disabled = false
 }: ButtonProps) {
     return (
-        <button 
+        <button
             className={`w-72 h-12 btn-login-gray text-white cursor-pointer ${className}`}
-            onClick={onClick}    
+            onClick={onClick}
+            //
+            disabled={disabled}
+        //
         >
             {children}
         </button>
