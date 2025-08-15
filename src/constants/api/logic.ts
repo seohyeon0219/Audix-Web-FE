@@ -1,5 +1,12 @@
 import { API_BASE_URL, API_ENDPOINTS, tokenManager, type HttpMethod, type ApiResponse, type ApiError } from './config';
 
+// ✅ 추가: 서버 실제 응답 구조 타입 정의
+interface ServerResponse<T = any> {
+    statusCode: number;
+    message: string;
+    data: T;
+}
+
 // 기본 fetch 래퍼 함수
 class ApiClient {
     private baseURL: string;
@@ -99,18 +106,40 @@ const apiClient = new ApiClient();
 // 인증 관련 API 로직
 // ============================================
 export const authLogic = {
-    // 로그인
+    // ✅ 수정: 로그인 - 서버 응답 구조에 맞게 수정
     async login(credentials: { loginCode: string; password: string }) {
         try {
-            const response = await apiClient.post<{ accessToken: string; refreshToken?: string; user: any }>(
+            // ✅ 수정: 서버 응답 타입 정의
+            interface LoginResponse {
+                accessToken: string;
+                refreshToken: string;
+                user: {
+                    id: number;
+                    team_id: number;
+                    login_code: string;
+                    name: string;
+                    email: string;
+                    phone: string;
+                    position: string;
+                    is_active: boolean;
+                    created_at: string;
+                    updated_at: string;
+                };
+            }
+
+            const response = await apiClient.post<LoginResponse>(
                 API_ENDPOINTS.AUTH.LOGIN,
                 credentials,
                 false // 로그인은 토큰 불필요
             );
 
-            // 로그인 성공 시 토큰 저장
+            // ✅ 수정: 로그인 성공 시 토큰 저장
             if (response.accessToken) {
                 tokenManager.setTokens(response.accessToken, response.refreshToken);
+                console.log('🔑 토큰 저장 완료:', {
+                    accessToken: response.accessToken.substring(0, 20) + '...',
+                    refreshToken: response.refreshToken.substring(0, 20) + '...'
+                });
             }
 
             return {
@@ -119,7 +148,7 @@ export const authLogic = {
                 user: response.user
             };
         } catch (error) {
-            console.error('로그인 실패:', error);
+            console.error('❌ 로그인 실패:', error);
             return {
                 success: false,
                 error: error as ApiError
