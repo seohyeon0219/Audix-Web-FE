@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import LoginForm from "@/components/auth/loginForm";
 import Button from "@/components/auth/button";
 import { api } from "@/constants/api";
+import { updateMockAreaData } from "@/mocks/areaData"; // mocks 업데이트 함수
 
 export default function LoginPage() {
     const router = useRouter();
@@ -30,6 +31,30 @@ export default function LoginPage() {
         if (error) setError(null);
     };
 
+    // Area 데이터를 가져오는 함수
+    const fetchAreaData = async () => {
+        try {
+            console.log("🌐 토큰으로 Area 데이터 가져오는 중...");
+
+            const areaResult = await api.area.getList();
+
+            if (areaResult.success && areaResult.data) {
+                console.log("✅ Area 데이터 가져오기 성공:", areaResult.data);
+
+                // MockAreaData 업데이트
+                await updateMockAreaData();
+
+                return true;
+            } else {
+                console.warn("⚠️ Area 데이터 가져오기 실패:", areaResult.error);
+                return false;
+            }
+        } catch (error) {
+            console.error("❌ Area 데이터 가져오기 중 오류:", error);
+            return false;
+        }
+    };
+
     // 로그인 핸들러
     const handleLogin = async () => {
         // 입력값 검증
@@ -47,27 +72,36 @@ export default function LoginPage() {
         setError(null);
 
         try {
-            console.log("로그인 시도:", formData);
+            console.log("🔐 로그인 시도:", formData);
 
-            // API 호출
-            const result = await api.auth.login({
+            // 1. 로그인 API 호출
+            const loginResult = await api.auth.login({
                 loginCode: formData.loginCode.trim(),
                 password: formData.password.trim()
             });
 
-            if (result.success) {
-                console.log("로그인 성공:", result.user);
+            if (loginResult.success) {
+                console.log("✅ 로그인 성공:", loginResult.user);
 
-                // 성공 시 지역 페이지로 이동
-                router.push('/area');
+                // 2. 로그인 성공 후 토큰으로 Area 데이터 가져오기
+                console.log("📋 Area 데이터 로딩 중...");
+                const areaFetchSuccess = await fetchAreaData();
+
+                if (areaFetchSuccess) {
+                    console.log("🎉 모든 데이터 로드 완료! Area 페이지로 이동");
+                    router.push('/area');
+                } else {
+                    console.log("⚠️ Area 데이터 로드 실패했지만 Area 페이지로 이동 (fallback 데이터 사용)");
+                    router.push('/area');
+                }
             } else {
                 // 로그인 실패
-                const errorMessage = result.error?.message || '로그인에 실패했습니다.';
+                const errorMessage = loginResult.error?.message || '로그인에 실패했습니다.';
                 setError(errorMessage);
-                console.error("로그인 실패:", result.error);
+                console.error("❌ 로그인 실패:", loginResult.error);
             }
         } catch (error) {
-            console.error("로그인 중 오류:", error);
+            console.error("❌ 로그인 중 오류:", error);
             setError('서버와의 연결에 문제가 발생했습니다.');
         } finally {
             setIsLoading(false);
@@ -123,6 +157,13 @@ export default function LoginPage() {
                     {error && (
                         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-md text-sm w-72">
                             {error}
+                        </div>
+                    )}
+
+                    {/* 로딩 상태 표시 */}
+                    {isLoading && (
+                        <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-2 rounded-md text-sm w-72">
+                            {formData.loginCode ? '데이터를 불러오는 중...' : '로그인 중...'}
                         </div>
                     )}
 

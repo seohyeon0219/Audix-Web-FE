@@ -1,10 +1,12 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import AreaList from "@/components/areaMonitoring/areaList";
 import RecentDashboard from "@/components/areaMonitoring/recentDashboard";
 import AlarmDashboard from "@/components/areaMonitoring/alarmDashboard";
 import { AreaHoverProvider } from "@/contexts/areaHover";
+import { MockAreaData } from "@/mocks";
 
 // 동적 import로 FactoryCanvas 로드하기 (SSR 비활성화)
 const LoadingFactoryCanvas = dynamic(() => import("@/components/konva/factoryCanvas"), {
@@ -17,6 +19,10 @@ const LoadingFactoryCanvas = dynamic(() => import("@/components/konva/factoryCan
 })
 
 export default function AreaPage() {
+    // 페이지 로드 시 MockAreaData 확인 (로그용)
+    useEffect(() => {
+        console.log('📋 Area 페이지 로드 - 현재 MockAreaData:', MockAreaData);
+    }, []);
 
     return (
         <AreaHoverProvider>
