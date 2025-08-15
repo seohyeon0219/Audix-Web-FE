@@ -28,14 +28,14 @@ export default function FactoryCanvas({
     // 둥근 모서리를 가진 다각형을 그리는 함수
     const drawRoundedPolygon = (context: any, shape: any, points: Point[], radius: number = 20) => {
         if (points.length < 3) return;
-        
+
         context.beginPath();
-        
+
         for (let i = 0; i < points.length; i++) {
             const current = points[i];
             const next = points[(i + 1) % points.length];
             const prev = points[i === 0 ? points.length - 1 : i - 1];
-            
+
             // 현재 점에서 이전/다음 점으로의 벡터 계산
             const prevVector = {
                 x: current.x - prev.x,
@@ -45,11 +45,11 @@ export default function FactoryCanvas({
                 x: next.x - current.x,
                 y: next.y - current.y
             };
-            
+
             // 벡터 정규화
             const prevLength = Math.sqrt(prevVector.x * prevVector.x + prevVector.y * prevVector.y);
             const nextLength = Math.sqrt(nextVector.x * nextVector.x + nextVector.y * nextVector.y);
-            
+
             const prevUnit = {
                 x: prevVector.x / prevLength,
                 y: prevVector.y / prevLength
@@ -58,30 +58,30 @@ export default function FactoryCanvas({
                 x: nextVector.x / nextLength,
                 y: nextVector.y / nextLength
             };
-            
+
             // 둥근 모서리를 위한 제어점 계산
             const controlRadius = Math.min(radius, prevLength / 2, nextLength / 2);
-            
+
             const startPoint = {
                 x: current.x - prevUnit.x * controlRadius,
                 y: current.y - prevUnit.y * controlRadius
             };
-            
+
             const endPoint = {
                 x: current.x + nextUnit.x * controlRadius,
                 y: current.y + nextUnit.y * controlRadius
             };
-            
+
             if (i === 0) {
                 context.moveTo(startPoint.x, startPoint.y);
             } else {
                 context.lineTo(startPoint.x, startPoint.y);
             }
-            
+
             // 둥근 모서리 그리기
             context.quadraticCurveTo(current.x, current.y, endPoint.x, endPoint.y);
         }
-        
+
         context.closePath();
         context.fillStrokeShape(shape);
     };
@@ -96,7 +96,7 @@ export default function FactoryCanvas({
                         const isHighlighted = hoveredAreaId === node.areaId;
 
                         return (
-                            <Group 
+                            <Group
                                 key={node.id}
                                 offsetY={isHighlighted ? -5 : 0}
                             >
@@ -110,18 +110,18 @@ export default function FactoryCanvas({
                                     cursor={node.level === 'process' ? 'pointer' : 'default'}
                                     onClick={() => handleNodeClick(node.id)}
                                     onMouseEnter={(e) => {
-                                        handleMouseEnter(e, node, onNodeHover); 
-                                        setHoveredAreaId(node.areaId);          
+                                        handleMouseEnter(e, node, onNodeHover);
+                                        setHoveredAreaId(node.areaId);
                                     }}
                                     onMouseLeave={() => {
-                                        hideTooltip();                        
-                                        setHoveredAreaId(null);              
+                                        hideTooltip();
+                                        setHoveredAreaId(null);
                                     }}
                                     // 뜨는 효과
                                     offsetY={isHighlighted ? -5 : 0}
                                     shadowColor={isHighlighted ? '#0F0F0F' : 'transparent'}
                                     shadowBlur={isHighlighted ? 10 : 0}
-                                    shadowOffset={isHighlighted ? { x: 0, y: 5} : { x: 0, y: 0}}
+                                    shadowOffset={isHighlighted ? { x: 0, y: 5 } : { x: 0, y: 0 }}
                                     opacity={isHighlighted ? 0.9 : 0.8}
                                 />
 
