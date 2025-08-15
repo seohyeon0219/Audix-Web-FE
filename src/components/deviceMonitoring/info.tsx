@@ -15,8 +15,8 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
             </div>
         )
     }
-    
-        return (
+
+    return (
         <div className="flex gap-14 bg-main-100 p-4 border border-t-white max-w-7xl">
             {/* 왼쪽 장비 이미지 */}
             <div className="flex shrink-0">
@@ -32,12 +32,12 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
             </div>
             {/* 오른쪽 장비 설명 */}
             <div className="flex-1">
-                <h2 className="text-white text-xl font-bold mb-4">{device.name}</h2>
+                <h2 className="text-white text-xl font-bold mb-4">{device.model}</h2>
                 <table className="w-full text-sm">
                     <tbody>
                         <tr>
                             <td className="text-white p-1">모델</td>
-                            <td className="text-white p-1">{device.model}</td>
+                            <td className="text-white p-1">{device.name}</td>
                         </tr>
                         <tr>
                             <td className="text-white p-1">구역</td>

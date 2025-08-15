@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { ProcessNode } from "@/types/konva/index";
 import { getLevelLabel, getRouteByNodeId } from "@/utils/konva/index";
-import { api } from "@/constants/api";
+import { updateMockDeviceDataByArea } from "@/mocks";
 
 // factoryCanvas node 핸들러
 // 라우팅
@@ -14,18 +14,18 @@ export const useFactoryNodeRouter = () => {
         const areaId = nodeId.replace(/\D/g, ''); // 숫자가 아닌 문자를 모두 제거
 
         if (areaId) {
-            // API 호출: 해당 area의 device 목록 가져오기
+            // API 호출해서 MockDeviceData 업데이트
             try {
-                console.log(`🔄 Area ${areaId}의 장비 목록 가져오는 중...`);
-                const result = await api.device.getDevicesByArea(parseInt(areaId));
+                console.log(`🔄 Area ${areaId} 클릭 - 장비 데이터 업데이트 중...`);
+                const success = await updateMockDeviceDataByArea(parseInt(areaId));
 
-                if (result.success) {
-                    console.log(`✅ Area ${areaId} 장비 목록:`, result.data);
+                if (success) {
+                    console.log(`✅ Area ${areaId} 장비 데이터 업데이트 성공`);
                 } else {
-                    console.warn(`⚠️ Area ${areaId} 장비 목록 가져오기 실패:`, result.error);
+                    console.warn(`⚠️ Area ${areaId} 장비 데이터 업데이트 실패`);
                 }
             } catch (error) {
-                console.error(`❌ Area ${areaId} 장비 목록 API 호출 중 오류:`, error);
+                console.error(`❌ Area ${areaId} 장비 데이터 업데이트 중 오류:`, error);
             }
 
             // 페이지 이동

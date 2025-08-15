@@ -236,7 +236,6 @@ export const deviceLogic = {
             console.error(`지역 ${areaId}의 디바이스 목록 조회 실패:`, error);
             return {
                 success: false,
-                error: error as ApiError,
                 data: []
             };
         }
