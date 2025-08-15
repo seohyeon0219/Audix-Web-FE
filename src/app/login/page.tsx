@@ -20,6 +20,7 @@ export default function LoginPage() {
     // 로딩 및 에러 상태
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [loadingStep, setLoadingStep] = useState<string>(''); // ✅ 추가: 로딩 단계 표시용 상태
 
     // 입력값 변경 핸들러
     const handleInputChange = (field: 'loginCode' | 'password', value: string) => {
@@ -163,7 +164,10 @@ export default function LoginPage() {
                     {/* 로딩 상태 표시 */}
                     {isLoading && (
                         <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-2 rounded-md text-sm w-72">
-                            {formData.loginCode ? '데이터를 불러오는 중...' : '로그인 중...'}
+                            <div className="flex items-center space-x-2">
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-700"></div>
+                                <span>{loadingStep}</span>
+                            </div>
                         </div>
                     )}
 
@@ -192,7 +196,7 @@ export default function LoginPage() {
                         className={`${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                         disabled={isLoading}
                     >
-                        {isLoading ? '로그인 중...' : '로그인'}
+                        {isLoading ? loadingStep : '로그인'}
                     </Button>
                 </div>
             </div>
