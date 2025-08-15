@@ -215,95 +215,71 @@ export const areaLogic = {
             };
         }
     },
-
-    // 특정 지역 조회
-    async getById(id: number) {
-        try {
-            const area = await apiClient.get<any>(API_ENDPOINTS.AREA.DETAIL(id));
-            return {
-                success: true,
-                data: area
-            };
-        } catch (error) {
-            console.error(`지역 ${id} 조회 실패:`, error);
-            return {
-                success: false,
-                error: error as ApiError,
-                data: null
-            };
-        }
-    }
 };
 
 // ============================================
 // 디바이스 관련 API 로직
 // ============================================
+// Device 관련 API
 export const deviceLogic = {
-    // 특정 지역의 디바이스 목록 조회
-    async getListByAreaId(areaId: number) {
+    // 특정 구역의 모든 장비 목록 가져오기
+    async getDevicesByArea(areaId: number): Promise<ApiResponse<any[]>> {
         try {
-            const devices = await apiClient.get<any[]>(API_ENDPOINTS.DEVICE.LIST_BY_AREA(areaId));
+            // API 호출: /device/list/:areaId
+            const response = await apiClient.get<any>(`/device/list/${areaId}`);
+
+            // 서버 응답 구조에 맞춰 data 추출
+            const devices = response.data || [];
+
             return {
                 success: true,
-                data: devices
+                data: devices,
+                message: response.message || '장비 목록을 성공적으로 가져왔습니다.'
             };
-        } catch (error) {
-            console.error(`지역 ${areaId}의 디바이스 목록 조회 실패:`, error);
+        } catch (error: any) {
+            console.error('❌ 장비 목록 가져오기 실패:', error);
             return {
                 success: false,
-                error: error as ApiError,
-                data: []
+                data: [],
+                error: error.message || '장비 목록을 가져오는데 실패했습니다.'
             };
         }
     },
 
-    // 특정 디바이스 조회
-    async getById(id: number) {
+    // 특정 장비 상세 정보 가져오기  
+    async getDeviceDetail(deviceId: number): Promise<ApiResponse<any>> {
         try {
-            const device = await apiClient.get<any>(API_ENDPOINTS.DEVICE.DETAIL(id));
+            const data = await apiClient.get<any>(API_ENDPOINTS.DEVICE.DETAIL(deviceId));
             return {
                 success: true,
-                data: device
+                data: data,
+                message: '장비 정보를 성공적으로 가져왔습니다.'
             };
-        } catch (error) {
-            console.error(`디바이스 ${id} 조회 실패:`, error);
+        } catch (error: any) {
+            console.error('❌ 장비 정보 가져오기 실패:', error);
             return {
                 success: false,
-                error: error as ApiError,
-                data: null
+                data: null,
+                error: error.message || '장비 정보를 가져오는데 실패했습니다.'
             };
         }
     },
 
-    // 디바이스 수정
-    async update(id: number, updateData: any) {
+    // 장비 상태 업데이트
+    async updateDevice(deviceId: number, updateData: any): Promise<ApiResponse<any>> {
         try {
-            const device = await apiClient.put<any>(API_ENDPOINTS.DEVICE.UPDATE(id), updateData);
+            const data = await apiClient.put<any>(API_ENDPOINTS.DEVICE.UPDATE(deviceId), updateData);
             return {
                 success: true,
-                data: device
+                data: data,
+                message: '장비 정보가 성공적으로 업데이트되었습니다.'
             };
-        } catch (error) {
-            console.error(`디바이스 ${id} 수정 실패:`, error);
+        } catch (error: any) {
+            console.error('❌ 장비 정보 업데이트 실패:', error);
             return {
                 success: false,
-                error: error as ApiError
-            };
-        }
-    },
-
-    // 디바이스 삭제
-    async delete(id: number) {
-        try {
-            await apiClient.delete(API_ENDPOINTS.DEVICE.DELETE(id));
-            return {
-                success: true
-            };
-        } catch (error) {
-            console.error(`디바이스 ${id} 삭제 실패:`, error);
-            return {
-                success: false,
-                error: error as ApiError
+                data: null,
+                error: error.message || '장비 정보 업데이트에 실패했습니다.'
             };
         }
     }
