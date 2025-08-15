@@ -108,7 +108,7 @@ export default function FactoryCanvas({
                                     stroke={nodeStyle.stroke}
                                     strokeWidth={nodeStyle.strokeWidth}
                                     cursor={node.level === 'process' ? 'pointer' : 'default'}
-                                    onClick={() => handleNodeClick(node.id)}
+                                    onClick={() => handleNodeClick(node.areaId.toString())}
                                     onMouseEnter={(e) => {
                                         handleMouseEnter(e, node, onNodeHover);
                                         setHoveredAreaId(node.areaId);

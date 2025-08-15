@@ -225,23 +225,19 @@ export const deviceLogic = {
     // 특정 구역의 모든 장비 목록 가져오기
     async getDevicesByArea(areaId: number): Promise<ApiResponse<any[]>> {
         try {
-            // API 호출: /device/list/:areaId
-            const response = await apiClient.get<any>(`/device/list/${areaId}`);
-
-            // 서버 응답 구조에 맞춰 data 추출
-            const devices = response.data || [];
-
+            console.log(`🔍 API 호출 전: /device/list/${areaId}`);
+            const devices = await apiClient.get<any[]>(API_ENDPOINTS.DEVICE.LIST_BY_AREA(areaId));
+            console.log(`🔍 API 응답 후:`, devices);
             return {
                 success: true,
-                data: devices,
-                message: response.message || '장비 목록을 성공적으로 가져왔습니다.'
+                data: devices
             };
-        } catch (error: any) {
-            console.error('❌ 장비 목록 가져오기 실패:', error);
+        } catch (error) {
+            console.error(`지역 ${areaId}의 디바이스 목록 조회 실패:`, error);
             return {
                 success: false,
-                data: [],
-                error: error.message || '장비 목록을 가져오는데 실패했습니다.'
+                error: error as ApiError,
+                data: []
             };
         }
     },
@@ -264,25 +260,6 @@ export const deviceLogic = {
             };
         }
     },
-
-    // 장비 상태 업데이트
-    async updateDevice(deviceId: number, updateData: any): Promise<ApiResponse<any>> {
-        try {
-            const data = await apiClient.put<any>(API_ENDPOINTS.DEVICE.UPDATE(deviceId), updateData);
-            return {
-                success: true,
-                data: data,
-                message: '장비 정보가 성공적으로 업데이트되었습니다.'
-            };
-        } catch (error: any) {
-            console.error('❌ 장비 정보 업데이트 실패:', error);
-            return {
-                success: false,
-                data: null,
-                error: error.message || '장비 정보 업데이트에 실패했습니다.'
-            };
-        }
-    }
 };
 
 // ============================================
