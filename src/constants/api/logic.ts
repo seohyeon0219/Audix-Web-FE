@@ -55,17 +55,19 @@ class ApiClient {
                 throw apiError;
             }
 
-            const result: ApiResponse<T> = await response.json();
+            const result: ServerResponse<T> = await response.json();
 
-            if (!result.success) {
+            // statusCode가 200-299 범위면 성공
+            if (result.statusCode >= 200 && result.statusCode < 300) {
+                return result.data;
+            } else {
                 throw {
-                    status: 400,
-                    message: result.error || result.message || 'API call failed',
+                    status: result.statusCode,
+                    message: result.message,
                     details: result
                 } as ApiError;
             }
 
-            return result.data;
         } catch (error) {
             if (error instanceof Error) {
                 throw {
