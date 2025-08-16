@@ -245,12 +245,6 @@ export const deviceLogic = {
     async getDeviceDetail(deviceId: number): Promise<ApiResponse<any>> {
         try {
             const data = await apiClient.get<any>(API_ENDPOINTS.DEVICE.DETAIL(deviceId));
-
-            // 이미지 경로에 API_BASE_URL 추가
-            if (data.image && !data.image.startsWith('http')) {
-                data.image = API_BASE_URL + data.image;
-            }
-
             return {
                 success: true,
                 data: data,

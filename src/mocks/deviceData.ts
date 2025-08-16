@@ -109,7 +109,7 @@ const transformApiToDeviceData = (apiData: any[]): DeviceData[] => {
         deviceManager: item.deviceManager,
         normalScore: item.normalScore || 0.8,
         aiText: item.aiText || 'AI 분석 결과가 없습니다.',
-        image: item.image,
+        image: item.image && !item.image.startsWith('http') ? API_BASE_URL + item.image : item.image,
         parts: item.parts || {}
     }));
 };
