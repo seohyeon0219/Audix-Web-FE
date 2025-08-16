@@ -36,7 +36,7 @@ export default function Info({ areaId, deviceId, area: propsArea, device: propsD
                 <table className="w-full text-sm">
                     <tbody>
                         <tr>
-                            <td className="text-white p-1">모델</td>
+                            <td className="text-white p-1">ID</td>
                             <td className="text-white p-1">{device.name}</td>
                         </tr>
                         <tr>
