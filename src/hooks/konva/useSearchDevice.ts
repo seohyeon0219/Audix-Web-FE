@@ -5,9 +5,9 @@ import { MockDeviceData } from "@/mocks";
 export const useSearchDevice = (areaId: string, deviceId: string) => {
     const device = useMemo(() => {
         return MockDeviceData.find(
-            device => 
-            device.areaId === parseInt(areaId) &&
-            device.deviceId === parseInt(deviceId)
+            device =>
+                device.areaId === parseInt(areaId) &&
+                device.deviceId === parseInt(deviceId)
         )
     }, [areaId, deviceId]);
 
