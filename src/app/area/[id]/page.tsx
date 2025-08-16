@@ -7,7 +7,7 @@ import { useSearchArea } from "@/hooks/konva/useSearchArea";
 import { useSearchDevices } from "@/hooks/konva/useSearchDevice";
 
 // 동적 import로 AreaCanvas 로드하기 (SSR 비활성화)
-const AreaCanvas = dynamic(() => import ("@/components/konva/areaCanvas"), {
+const AreaCanvas = dynamic(() => import("@/components/konva/areaCanvas"), {
     ssr: false,
     loading: () => (
         <div className="flex items-center justify-center h-96 rounded-lg">
@@ -46,7 +46,7 @@ export default function MapPage({ params }: MapPageProps) {
             </header>
             {/* 하단 지도 */}
             <div className="w-full mt-6 max-w-7xl">
-                <AreaCanvas 
+                <AreaCanvas
                     areaId={areaId}
                     width={1000}
                     height={500}

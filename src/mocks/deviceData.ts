@@ -114,8 +114,7 @@ const transformApiToDeviceData = (apiData: any[]): DeviceData[] => {
 };
 
 // 동기적으로 사용할 수 있는 MockDeviceData (초기값은 정적 데이터)
-export let MockDeviceData: DeviceData[];
-// export let MockDeviceData: DeviceData[] = [...staticMockDeviceData];
+export let MockDeviceData: DeviceData[] = [...staticMockDeviceData];
 
 // 특정 구역의 장비 데이터를 API로 가져와서 기존 데이터에 병합
 export const updateMockDeviceDataByArea = async (areaId: number): Promise<boolean> => {
