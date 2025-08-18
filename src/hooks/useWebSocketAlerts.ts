@@ -22,7 +22,9 @@ export const useWebSocketAlerts = () => {
         console.log('🎭 웹 모달 표시:', {
             alarmId: alarmData.alarmId,
             regionName: alarmData.regionName,
-            status: alarmData.status
+            status: alarmData.status,
+            type: alarmData.type,
+            isSafety: alarmData.type === 'safety'
         });
 
         setCurrentAlert(alarmData);
@@ -46,53 +48,6 @@ export const useWebSocketAlerts = () => {
         setIsConnected(connected);
         return connected;
     }, []);
-
-    // 모바일과 동일한 상태 매핑 함수
-    const mapDeviceStatusToCardState = useCallback((status: string): AlarmData['status'] => {
-        const statusMap: Record<string, AlarmData['status']> = {
-            'danger': 'danger',
-            'warning': 'warning',
-            'normal': 'normal',
-            'repair': 'repair',
-            'offline': 'offline',
-            // 추가 매핑 (모바일과 동일)
-            'error': 'danger',
-            'alert': 'warning',
-            'ok': 'normal',
-            'maintenance': 'repair',
-            'disconnected': 'offline'
-        };
-        return statusMap[status.toLowerCase()] || 'offline';
-    }, []);
-
-    // 모바일과 동일한 데이터 변환 함수
-    const convertDeviceToAlarmData = useCallback((deviceData: DeviceAlertData): AlarmData => {
-        const now = Date.now();
-
-        // 메시지 우선순위: aiText > message > 기본 메시지 (모바일과 동일)
-        const displayMessage = deviceData.aiText ||
-            deviceData.message ||
-            '디바이스 알림이 발생했습니다.';
-
-        console.log('🎭 웹 데이터 변환:', {
-            deviceId: deviceData.deviceId,
-            originalStatus: deviceData.status,
-            mappedStatus: mapDeviceStatusToCardState(deviceData.status),
-            messageSource: deviceData.aiText ? 'aiText' :
-                deviceData.message ? 'message' : 'default'
-        });
-
-        return {
-            alarmId: `alarm-${deviceData.deviceId}-${now}`,
-            regionName: deviceData.name || 'Unknown Device',
-            regionLocation: deviceData.address || '위치 정보 없음',
-            status: mapDeviceStatusToCardState(deviceData.status),
-            type: 'machine' as const,
-            createdAt: new Date(),
-            message: displayMessage,
-            model: deviceData.model || 'Unknown Model',
-        };
-    }, [mapDeviceStatusToCardState]);
 
     // WebSocket 초기화 및 알림 처리 (모바일과 동일한 로직)
     useEffect(() => {
@@ -133,10 +88,13 @@ export const useWebSocketAlerts = () => {
                         timeSinceLastAlert: now - lastAlertTimeRef.current
                     });
 
-                    // DeviceAlertData를 AlarmData로 변환 (모바일과 동일한 로직)
-                    const alarmData = convertDeviceToAlarmData(deviceData);
+                    // DeviceAlertData를 AlarmData로 변환 (Safety 판별 로직 포함)
+                    const alarmData = convertToAlarmData(deviceData);
 
-                    console.log('🎭 웹 변환된 알람 데이터:', alarmData);
+                    console.log('🎭 웹 변환된 알람 데이터:', {
+                        ...alarmData,
+                        isSafetyAlarm: alarmData.type === 'safety'
+                    });
 
                     // 자동 닫기 제거 - 오직 새 모달만 표시 (모바일과 동일)
                     console.log('🎭 웹 새 모달 표시');
@@ -144,13 +102,25 @@ export const useWebSocketAlerts = () => {
                     lastAlertTimeRef.current = now;
 
                     // 브라우저 알림도 표시 (웹 전용 기능)
-                    if (typeof window !== 'undefined' && Notification.permission === 'granted') {
-                        new Notification(`Audix Alert - ${deviceData.name}`, {
+                    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+                        // Safety 알람인 경우 더 긴급한 알림
+                        const notificationTitle = alarmData.type === 'safety'
+                            ? `🚨 긴급 안전 알람 - ${deviceData.name}`
+                            : `⚠️ Audix Alert - ${deviceData.name}`;
+
+                        const notificationOptions: NotificationOptions = {
                             body: alarmData.message,
-                            icon: '/favicon.ico',
+                            icon: alarmData.type === 'safety' ? '/emergency-icon.ico' : '/favicon.ico',
                             tag: `alert-${deviceData.deviceId}`, // 중복 알림 방지
-                            requireInteraction: alarmData.type === 'safety' // 안전 알람은 사용자 상호작용 필요
-                        });
+                            requireInteraction: alarmData.type === 'safety', // 안전 알람은 사용자 상호작용 필요
+                        };
+
+                        // vibrate는 일부 브라우저에서만 지원
+                        if (alarmData.type === 'safety' && 'vibrate' in navigator) {
+                            (notificationOptions as any).vibrate = [200, 100, 200];
+                        }
+
+                        new Notification(notificationTitle, notificationOptions);
                     }
                 });
 
@@ -176,7 +146,7 @@ export const useWebSocketAlerts = () => {
         }, 1000);
 
         // 브라우저 알림 권한 요청 (웹 전용)
-        if (typeof window !== 'undefined' && Notification.permission === 'default') {
+        if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
             Notification.requestPermission().then(permission => {
                 console.log('📱 브라우저 알림 권한:', permission);
             });
@@ -199,7 +169,7 @@ export const useWebSocketAlerts = () => {
             // WebSocket 연결 해제
             webSocketClient.disconnect();
         };
-    }, [showAlert, checkConnectionStatus, convertDeviceToAlarmData, isModalVisible]);
+    }, [showAlert, checkConnectionStatus, isModalVisible]);
 
     // 수동 재연결 함수 (웹 전용 추가 기능)
     const reconnect = useCallback(async () => {
@@ -225,70 +195,19 @@ export const useWebSocketAlerts = () => {
             lastAlertTime: lastAlertTimeRef.current,
             modalVisible: isModalVisible,
             currentAlert: currentAlert?.alarmId || null,
+            currentAlertType: currentAlert?.type || null,
+            isSafetyAlert: currentAlert?.type === 'safety',
             timeSinceLastAlert: Date.now() - lastAlertTimeRef.current,
-            connectionDetails: webSocketClient.getDetailedConnectionStatus ?
-                webSocketClient.getDetailedConnectionStatus() : null
         };
     }, [isConnected, isModalVisible, currentAlert]);
 
-    // 테스트 알림 발송 (개발용)
-    const sendTestAlert = useCallback(() => {
-        console.log('🧪 테스트 알림 발송');
-        if (webSocketClient.createTestAlert) {
-            webSocketClient.createTestAlert();
-        } else {
-            console.warn('⚠️ createTestAlert 메서드가 없습니다');
-        }
-    }, []);
-
-    // 알림 히스토리 관리 (웹 전용)
-    const [alertHistory, setAlertHistory] = useState<AlarmData[]>([]);
-
-    // 알림이 표시될 때 히스토리에 추가
-    useEffect(() => {
-        if (currentAlert) {
-            setAlertHistory(prev => {
-                // 중복 방지
-                const exists = prev.some(alert => alert.alarmId === currentAlert.alarmId);
-                if (exists) return prev;
-
-                // 최대 50개까지만 유지
-                return [currentAlert, ...prev.slice(0, 49)];
-            });
-        }
-    }, [currentAlert]);
-
-    // 히스토리에서 알림 제거
-    const removeFromHistory = useCallback((alarmId: string) => {
-        setAlertHistory(prev => prev.filter(alert => alert.alarmId !== alarmId));
-    }, []);
-
-    // 히스토리 전체 삭제
-    const clearHistory = useCallback(() => {
-        setAlertHistory([]);
-    }, []);
-
     return {
-        // 기본 상태 (모바일과 동일)
         currentAlert,
         isModalVisible,
         isConnected,
-
-        // 모달 제어 (모바일과 동일)
         showAlert,
         hideAlert,
-
-        // 연결 관리 (모바일과 동일)
-        checkConnectionStatus,
-
-        // 웹 전용 추가 기능
         reconnect,
-        getConnectionDebugInfo,
-        sendTestAlert,
-
-        // 알림 히스토리 (웹 전용)
-        alertHistory,
-        removeFromHistory,
-        clearHistory
+        getConnectionDebugInfo
     };
 };
