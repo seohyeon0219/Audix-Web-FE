@@ -1,6 +1,7 @@
-// src/utils/websocket/client.ts
+// src/constants/websocket/client.ts
 import { io, Socket } from 'socket.io-client';
 
+// 모바일과 동일한 인터페이스
 export interface DeviceAlertData {
     deviceId: number;
     areaId?: number;
@@ -17,6 +18,7 @@ export interface DeviceAlertData {
     timestamp: string;
 }
 
+// 모바일과 동일한 인터페이스
 export interface AlarmData {
     alarmId: string;
     regionName: string;
@@ -31,111 +33,200 @@ export interface AlarmData {
 class WebSocketClient {
     private socket: Socket | null = null;
     private onAlertCallback?: (data: DeviceAlertData) => void;
-    private reconnectAttempts = 0;
+    private connectionAttempts = 0;
     private maxReconnectAttempts = 5;
-    private reconnectInterval = 5000;
+    private reconnectDelay = 1000; // 시작 지연시간 (ms)
+    private isManuallyDisconnected = false;
+
+    constructor() {
+        // 브라우저 환경에서만 실행
+        if (typeof window !== 'undefined') {
+            // 페이지 언로드 시 정리
+            window.addEventListener('beforeunload', () => {
+                this.disconnect();
+            });
+        }
+    }
 
     connect() {
         if (this.socket?.connected) {
-            console.log('🔌 이미 연결됨');
+            console.log('🔌 이미 WebSocket에 연결되어 있습니다');
             return;
         }
 
-        console.log('🔌 Socket.IO 연결 중...');
+        console.log('🚀 웹 WebSocket 연결 시도...', {
+            attempt: this.connectionAttempts + 1,
+            maxAttempts: this.maxReconnectAttempts
+        });
 
-        this.socket = io('http://165.246.116.18:3000', {
-            transports: ['polling', 'websocket'],
+        this.isManuallyDisconnected = false;
+
+        // Socket.IO 클라이언트 생성
+        this.socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'http://localhost:3000', {
+            transports: ['websocket', 'polling'], // 폴링 백업 추가
+            timeout: 20000,
             autoConnect: true,
             reconnection: true,
+            reconnectionDelay: this.reconnectDelay,
             reconnectionAttempts: this.maxReconnectAttempts,
-            reconnectionDelay: this.reconnectInterval,
         });
 
+        // 연결 이벤트 핸들러
         this.socket.on('connect', () => {
-            console.log('✅ Socket.IO 연결 성공');
-            this.reconnectAttempts = 0;
-            this.setupListener();
+            console.log('✅ 웹 WebSocket 연결 성공:', this.socket?.id);
+            this.connectionAttempts = 0; // 성공 시 카운터 리셋
         });
 
-        this.socket.on('connect_error', (error) => {
-            console.error('❌ 연결 실패:', error.message);
-            this.reconnectAttempts++;
-        });
-
+        // 연결 해제 이벤트 핸들러  
         this.socket.on('disconnect', (reason) => {
-            console.log('🔌 연결 해제:', reason);
+            console.log('🔌 웹 WebSocket 연결 해제:', reason);
+
+            // 수동 연결 해제가 아닌 경우 재연결 시도
+            if (!this.isManuallyDisconnected && reason !== 'io client disconnect') {
+                this.handleReconnection();
+            }
         });
 
-        this.socket.on('reconnect', (attemptNumber) => {
-            console.log('🔄 재연결 성공:', attemptNumber);
+        // 연결 오류 이벤트 핸들러
+        this.socket.on('connect_error', (error) => {
+            console.error('❌ 웹 WebSocket 연결 오류:', error);
+            this.handleReconnection();
         });
 
-        this.socket.on('reconnect_error', (error) => {
-            console.error('❌ 재연결 실패:', error.message);
-        });
-    }
-
-    private setupListener() {
-        if (!this.socket) return;
-
+        // 디바이스 알림 이벤트 핸들러 (모바일과 동일한 이벤트명)
         this.socket.on('device-alert', (data: DeviceAlertData) => {
-            console.log('📡 알림 수신:', data.name);
+            console.log('📨 웹 WebSocket 알림 수신:', {
+                deviceId: data.deviceId,
+                name: data.name,
+                status: data.status,
+                message: data.message || data.aiText
+            });
+
             if (this.onAlertCallback) {
                 this.onAlertCallback(data);
             }
         });
+
+        // 일반 메시지 이벤트 핸들러
+        this.socket.on('message', (data) => {
+            console.log('💬 웹 WebSocket 메시지:', data);
+        });
+
+        // 커스텀 이벤트 핸들러들
+        this.socket.on('server-status', (data) => {
+            console.log('📊 서버 상태:', data);
+        });
     }
 
-    setOnAlert(callback: (data: DeviceAlertData) => void) {
-        this.onAlertCallback = callback;
+    private handleReconnection() {
+        if (this.connectionAttempts < this.maxReconnectAttempts && !this.isManuallyDisconnected) {
+            this.connectionAttempts++;
+            const delay = this.reconnectDelay * Math.pow(2, this.connectionAttempts - 1); // 지수 백오프
+
+            console.log(`🔄 웹 WebSocket 재연결 시도 (${this.connectionAttempts}/${this.maxReconnectAttempts}) ${delay}ms 후...`);
+
+            setTimeout(() => {
+                if (!this.isManuallyDisconnected) {
+                    this.connect();
+                }
+            }, delay);
+        } else {
+            console.error('❌ 웹 WebSocket 최대 재연결 시도 횟수 초과 또는 수동 연결 해제');
+        }
     }
 
     disconnect() {
+        console.log('🔌 웹 WebSocket 연결 해제 요청');
+        this.isManuallyDisconnected = true;
+
         if (this.socket) {
             this.socket.disconnect();
             this.socket = null;
         }
+
+        this.connectionAttempts = 0;
     }
 
+    // 알림 콜백 설정 (모바일과 동일한 인터페이스)
+    setOnAlert(callback: (data: DeviceAlertData) => void) {
+        this.onAlertCallback = callback;
+        console.log('🎯 웹 알림 콜백 설정 완료');
+    }
+
+    // 연결 상태 확인 (모바일과 동일한 인터페이스)
     isConnected(): boolean {
         return this.socket?.connected || false;
     }
+
+    // 연결 상태 상세 정보 (웹 전용 추가 기능)
+    getConnectionStatus() {
+        return {
+            connected: this.isConnected(),
+            socketId: this.socket?.id || null,
+            connectionAttempts: this.connectionAttempts,
+            isManuallyDisconnected: this.isManuallyDisconnected,
+            transport: this.socket?.io.engine?.transport?.name || null
+        };
+    }
+
+    // 메시지 전송 (테스트용)
+    sendMessage(event: string, data: any) {
+        if (this.socket?.connected) {
+            this.socket.emit(event, data);
+            console.log(`📤 웹 WebSocket 메시지 전송 [${event}]:`, data);
+        } else {
+            console.warn('⚠️ WebSocket이 연결되지 않아 메시지를 전송할 수 없습니다');
+        }
+    }
+
+    // 서버 핑 테스트 (웹 전용 디버깅 기능)
+    ping(): Promise<number> {
+        return new Promise((resolve, reject) => {
+            if (!this.socket?.connected) {
+                reject(new Error('WebSocket이 연결되지 않았습니다'));
+                return;
+            }
+
+            const startTime = Date.now();
+
+            this.socket.emit('ping', startTime, (response: number) => {
+                const latency = Date.now() - startTime;
+                console.log(`🏓 웹 WebSocket 핑: ${latency}ms`);
+                resolve(latency);
+            });
+
+            // 5초 타임아웃
+            setTimeout(() => {
+                reject(new Error('핑 타임아웃'));
+            }, 5000);
+        });
+    }
 }
 
-// 싱글톤 인스턴스
+// 싱글톤 인스턴스 생성 (모바일과 동일)
 export const webSocketClient = new WebSocketClient();
 
-// 상태 매핑 함수
-export const mapDeviceStatusToCardState = (status: string): AlarmData['status'] => {
-    const statusLowerCase = status.toLowerCase();
-
-    switch (statusLowerCase) {
-        case 'danger':
-        case 'critical':
-        case 'error':
-            return 'danger';
-        case 'warning':
-        case 'caution':
-            return 'warning';
-        case 'normal':
-        case 'ok':
-        case 'good':
-            return 'normal';
-        case 'repair':
-        case 'maintenance':
-        case 'fixing':
-            return 'repair';
-        case 'offline':
-        case 'disconnected':
-        case 'mic_issue':
-            return 'offline';
-        default:
-            return 'warning';
-    }
-};
-
-// DeviceAlertData를 AlarmData로 변환
+// 모바일과 동일한 데이터 변환 함수
 export const convertToAlarmData = (deviceData: DeviceAlertData): AlarmData => {
+    // 상태 매핑 (모바일과 동일)
+    const mapDeviceStatusToCardState = (status: string): AlarmData['status'] => {
+        const statusMap: Record<string, AlarmData['status']> = {
+            'danger': 'danger',
+            'warning': 'warning',
+            'normal': 'normal',
+            'repair': 'repair',
+            'offline': 'offline',
+            // 추가 매핑
+            'error': 'danger',
+            'alert': 'warning',
+            'ok': 'normal',
+            'maintenance': 'repair',
+            'disconnected': 'offline'
+        };
+        return statusMap[status.toLowerCase()] || 'offline';
+    };
+
+    // 메시지 우선순위 (모바일과 동일)
     const displayMessage = deviceData.aiText ||
         deviceData.message ||
         '디바이스 알림이 발생했습니다.';
@@ -151,3 +242,6 @@ export const convertToAlarmData = (deviceData: DeviceAlertData): AlarmData => {
         model: deviceData.model || 'Unknown Model',
     };
 };
+
+// 기본 export (모바일과 동일)
+export default webSocketClient;
