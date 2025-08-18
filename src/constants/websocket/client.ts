@@ -61,7 +61,7 @@ class WebSocketClient {
 
         this.isManuallyDisconnected = false;
 
-        // Socket.IO 클라이언트 생성
+        // Socket.IO 클라이언트 생성 (모바일과 동일한 서버 주소)
         this.socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'http://localhost:3000', {
             transports: ['websocket', 'polling'], // 폴링 백업 추가
             timeout: 20000,
@@ -116,6 +116,11 @@ class WebSocketClient {
         this.socket.on('server-status', (data) => {
             console.log('📊 서버 상태:', data);
         });
+
+        // 에러 처리
+        this.socket.on('error', (error) => {
+            console.error('❌ WebSocket 에러:', error);
+        });
     }
 
     private handleReconnection() {
@@ -159,7 +164,12 @@ class WebSocketClient {
     }
 
     // 연결 상태 상세 정보 (웹 전용 추가 기능)
-    getConnectionStatus() {
+    getConnectionStatus(): boolean {
+        return this.isConnected();
+    }
+
+    // 상세 연결 정보 (웹 전용 디버깅 기능)
+    getDetailedConnectionStatus() {
         return {
             connected: this.isConnected(),
             socketId: this.socket?.id || null,
@@ -200,6 +210,48 @@ class WebSocketClient {
                 reject(new Error('핑 타임아웃'));
             }, 5000);
         });
+    }
+
+    // 테스트 알림 생성 (개발용)
+    createTestAlert() {
+        if (!this.socket?.connected) {
+            console.warn('⚠️ WebSocket이 연결되지 않았습니다');
+            return;
+        }
+
+        const testAlert: DeviceAlertData = {
+            deviceId: Math.floor(Math.random() * 1000),
+            name: `테스트 장비 ${Math.floor(Math.random() * 100)}`,
+            model: 'TEST-MODEL-001',
+            address: '테스트 구역',
+            deviceManager: 'TestManager',
+            parts: {},
+            normalScore: Math.random(),
+            image: '',
+            status: ['danger', 'warning', 'normal'][Math.floor(Math.random() * 3)],
+            aiText: '테스트 AI 메시지입니다.',
+            message: '이것은 테스트 알림입니다.',
+            timestamp: new Date().toISOString()
+        };
+
+        this.socket.emit('test-alert', testAlert);
+        console.log('📤 테스트 알림 전송:', testAlert);
+    }
+
+    // 알림 제거 (테스트용)
+    removeAlarm(timestamp: string) {
+        if (this.socket?.connected) {
+            this.socket.emit('remove-alarm', { timestamp });
+            console.log('🗑️ 알림 제거 요청:', timestamp);
+        }
+    }
+
+    // 모든 알림 제거 (테스트용)
+    clearAllAlarms() {
+        if (this.socket?.connected) {
+            this.socket.emit('clear-alarms');
+            console.log('🗑️ 모든 알림 제거 요청');
+        }
     }
 }
 
