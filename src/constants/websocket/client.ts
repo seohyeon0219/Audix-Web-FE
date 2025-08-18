@@ -81,155 +81,67 @@ class WebSocketClient {
         this.socket.on('disconnect', (reason) => {
             console.log('🔌 웹 WebSocket 연결 해제:', reason);
 
-            // 수동 연결 해제가 아닌 경우 재연결 시도
-            if (!this.isManuallyDisconnected && reason !== 'io client disconnect') {
-                this.handleReconnection();
+            if (!this.isManuallyDisconnected) {
+                this.connectionAttempts++;
+                if (this.connectionAttempts < this.maxReconnectAttempts) {
+                    const delay = Math.min(this.reconnectDelay * Math.pow(2, this.connectionAttempts), 30000);
+                    console.log(`🔄 ${delay}ms 후 재연결 시도... (${this.connectionAttempts}/${this.maxReconnectAttempts})`);
+                } else {
+                    console.error('❌ 최대 재연결 시도 횟수 초과');
+                }
             }
         });
 
-        // 연결 오류 이벤트 핸들러
-        this.socket.on('connect_error', (error) => {
-            console.error('❌ 웹 WebSocket 연결 오류:', error);
-            this.handleReconnection();
-        });
-
-        // 디바이스 알림 이벤트 핸들러 (모바일과 동일한 이벤트명)
+        // 알림 이벤트 핸들러 (모바일과 동일)
         this.socket.on('device-alert', (data: DeviceAlertData) => {
-            console.log('📨 웹 WebSocket 알림 수신:', {
-                deviceId: data.deviceId,
-                name: data.name,
-                status: data.status,
-                message: data.message || data.aiText
-            });
-
+            console.log('🔔 웹 알림 수신:', data);
             if (this.onAlertCallback) {
                 this.onAlertCallback(data);
             }
         });
 
-        // 일반 메시지 이벤트 핸들러
-        this.socket.on('message', (data) => {
-            console.log('💬 웹 WebSocket 메시지:', data);
+        // 에러 핸들러
+        this.socket.on('connect_error', (error) => {
+            console.error('🔴 웹 WebSocket 연결 에러:', error.message);
         });
-
-        // 커스텀 이벤트 핸들러들
-        this.socket.on('server-status', (data) => {
-            console.log('📊 서버 상태:', data);
-        });
-
-        // 에러 처리
-        this.socket.on('error', (error) => {
-            console.error('❌ WebSocket 에러:', error);
-        });
-    }
-
-    private handleReconnection() {
-        if (this.connectionAttempts < this.maxReconnectAttempts && !this.isManuallyDisconnected) {
-            this.connectionAttempts++;
-            const delay = this.reconnectDelay * Math.pow(2, this.connectionAttempts - 1); // 지수 백오프
-
-            console.log(`🔄 웹 WebSocket 재연결 시도 (${this.connectionAttempts}/${this.maxReconnectAttempts}) ${delay}ms 후...`);
-
-            setTimeout(() => {
-                if (!this.isManuallyDisconnected) {
-                    this.connect();
-                }
-            }, delay);
-        } else {
-            console.error('❌ 웹 WebSocket 최대 재연결 시도 횟수 초과 또는 수동 연결 해제');
-        }
     }
 
     disconnect() {
-        console.log('🔌 웹 WebSocket 연결 해제 요청');
         this.isManuallyDisconnected = true;
-
         if (this.socket) {
+            console.log('🔌 웹 WebSocket 연결 종료');
             this.socket.disconnect();
             this.socket = null;
         }
-
-        this.connectionAttempts = 0;
     }
 
-    // 알림 콜백 설정 (모바일과 동일한 인터페이스)
-    setOnAlert(callback: (data: DeviceAlertData) => void) {
-        this.onAlertCallback = callback;
-        console.log('🎯 웹 알림 콜백 설정 완료');
-    }
-
-    // 연결 상태 확인 (모바일과 동일한 인터페이스)
     isConnected(): boolean {
         return this.socket?.connected || false;
     }
 
-    // 연결 상태 상세 정보 (웹 전용 추가 기능)
-    getConnectionStatus(): boolean {
-        return this.isConnected();
+    setOnAlert(callback: (data: DeviceAlertData) => void) {
+        this.onAlertCallback = callback;
     }
 
-    // 상세 연결 정보 (웹 전용 디버깅 기능)
-    getDetailedConnectionStatus() {
-        return {
-            connected: this.isConnected(),
-            socketId: this.socket?.id || null,
-            connectionAttempts: this.connectionAttempts,
-            isManuallyDisconnected: this.isManuallyDisconnected,
-            transport: this.socket?.io.engine?.transport?.name || null
-        };
-    }
-
-    // 메시지 전송 (테스트용)
-    sendMessage(event: string, data: any) {
-        if (this.socket?.connected) {
-            this.socket.emit(event, data);
-            console.log(`📤 웹 WebSocket 메시지 전송 [${event}]:`, data);
-        } else {
-            console.warn('⚠️ WebSocket이 연결되지 않아 메시지를 전송할 수 없습니다');
-        }
-    }
-
-    // 서버 핑 테스트 (웹 전용 디버깅 기능)
-    ping(): Promise<number> {
-        return new Promise((resolve, reject) => {
-            if (!this.socket?.connected) {
-                reject(new Error('WebSocket이 연결되지 않았습니다'));
-                return;
-            }
-
-            const startTime = Date.now();
-
-            this.socket.emit('ping', startTime, (response: number) => {
-                const latency = Date.now() - startTime;
-                console.log(`🏓 웹 WebSocket 핑: ${latency}ms`);
-                resolve(latency);
-            });
-
-            // 5초 타임아웃
-            setTimeout(() => {
-                reject(new Error('핑 타임아웃'));
-            }, 5000);
-        });
-    }
-
-    // 테스트 알림 생성 (개발용)
-    createTestAlert() {
+    // 테스트 알림 발송 (개발용)
+    sendTestAlert() {
         if (!this.socket?.connected) {
-            console.warn('⚠️ WebSocket이 연결되지 않았습니다');
+            console.warn('⚠️ WebSocket이 연결되어 있지 않습니다');
             return;
         }
 
         const testAlert: DeviceAlertData = {
             deviceId: Math.floor(Math.random() * 1000),
-            name: `테스트 장비 ${Math.floor(Math.random() * 100)}`,
-            model: 'TEST-MODEL-001',
-            address: '테스트 구역',
-            deviceManager: 'TestManager',
+            areaId: 1,
+            name: 'Test Device',
+            model: 'TEST-001',
+            address: '테스트 위치',
+            deviceManager: 'Test Manager',
             parts: {},
-            normalScore: Math.random(),
+            normalScore: Math.random() * 100,
             image: '',
-            status: ['danger', 'warning', 'normal'][Math.floor(Math.random() * 3)],
-            aiText: '테스트 AI 메시지입니다.',
+            status: 'warning',
+            aiText: '',
             message: '이것은 테스트 알림입니다.',
             timestamp: new Date().toISOString()
         };
@@ -258,7 +170,7 @@ class WebSocketClient {
 // 싱글톤 인스턴스 생성 (모바일과 동일)
 export const webSocketClient = new WebSocketClient();
 
-// 모바일과 동일한 데이터 변환 함수
+// 모바일과 동일한 데이터 변환 함수 - Safety 타입 판별 로직 추가
 export const convertToAlarmData = (deviceData: DeviceAlertData): AlarmData => {
     // 상태 매핑 (모바일과 동일)
     const mapDeviceStatusToCardState = (status: string): AlarmData['status'] => {
@@ -278,19 +190,62 @@ export const convertToAlarmData = (deviceData: DeviceAlertData): AlarmData => {
         return statusMap[status.toLowerCase()] || 'offline';
     };
 
-    // 메시지 우선순위 (모바일과 동일)
-    const displayMessage = deviceData.aiText ||
-        deviceData.message ||
-        '디바이스 알림이 발생했습니다.';
+    // 메시지 내용으로 safety 타입 판별 (모바일과 동일한 로직)
+    const determineAlarmType = (): AlarmData['type'] => {
+        const combinedMessage = `${deviceData.message || ''} ${deviceData.aiText || ''}`.toLowerCase();
+
+        // safety 타입으로 분류할 키워드들
+        const safetyKeywords = [
+            '비명',
+            '도움',
+            '살려',
+            '구조',
+            '화재',
+            '불',
+            '폭발',
+            '사고',
+            '부상',
+            '응급'
+        ];
+
+        // 키워드가 포함되어 있으면 safety 타입으로 분류
+        const isSafety = safetyKeywords.some(keyword => combinedMessage.includes(keyword));
+
+        return isSafety ? 'safety' : 'machine';
+    };
+
+    // 최종 메시지 결정 (safety 타입일 경우 특별 처리)
+    const getFinalMessage = (): string => {
+        const combinedMessage = `${deviceData.message || ''} ${deviceData.aiText || ''}`;
+
+        // "비명" 키워드가 있으면 특별 메시지
+        if (combinedMessage.includes('비명')) {
+            return '비명 소리가 감지되었습니다.\n즉시 현장 확인이 필요합니다.';
+        }
+
+        // 다른 안전 관련 키워드들에 대한 메시지
+        if (combinedMessage.includes('화재') || combinedMessage.includes('불')) {
+            return '화재 경보가 감지되었습니다.\n즉시 대피 및 확인이 필요합니다.';
+        }
+
+        if (combinedMessage.includes('사고') || combinedMessage.includes('부상')) {
+            return '안전 사고가 발생했을 가능성이 있습니다.\n즉시 확인이 필요합니다.';
+        }
+
+        // 기존 메시지 로직 유지
+        return deviceData.aiText || deviceData.message || '디바이스 알림이 발생했습니다.';
+    };
+
+    const alarmType = determineAlarmType();
 
     return {
         alarmId: `alarm-${deviceData.deviceId}-${Date.now()}`,
         regionName: deviceData.name || 'Unknown Device',
         regionLocation: deviceData.address || '위치 정보 없음',
         status: mapDeviceStatusToCardState(deviceData.status),
-        type: 'machine' as const,
+        type: alarmType,
         createdAt: new Date(),
-        message: displayMessage,
+        message: getFinalMessage(),
         model: deviceData.model || 'Unknown Model',
     };
 };
